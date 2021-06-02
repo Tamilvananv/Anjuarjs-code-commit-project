@@ -1,0 +1,939 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+        <div class="card-body" style="padding-top: 29px; padding-left: 0%; padding-right: 0%;" >
+      <ngb-tabset #tabset class="tabset1" (tabChange)="tabChanged($event)">
+        <ngb-tab id="tab-Master" title="Master" [ngClass]="{ active: tab_Master }">
+          <ng-template ngbTabContent>
+            <form class="form-horizontal" [formGroup]='EQSAddEquipmentform' autocomplete="off">
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-6"></div>
+                      <div class="col-md-6">
+                        <div class="form-actions pull-right">
+                          <div class="d-flex no-block align-items-center">
+                            <div class="ml-auto">
+                              <div class="custom-control custom-checkbox">
+                                <button type="submit" *ngIf="isEQSEdit === false" class="btn_frmsubmit"
+                                  (click)="addEqsMaster()" ejs-button>
+                                  <!-- <i class="fa fa-check"></i> &nbsp; -->
+                                  Save
+                                </button>
+                                <button type="submit" *ngIf="isEQSEdit === true" class="btn_frmsubmit"
+                                  (click)="UpdateEqsMaster()" ejs-button>
+                                  <!-- <i class="fa fa-check"></i> &nbsp; -->
+                                  Update
+                                </button>
+                                <button type="submit" class="btn_frmsubmit" (click)="tabset.select('tab-Qualification')"
+                                  ejs-button>
+                                  Next
+                                  <!-- &nbsp; -->
+                                  <!-- <i class="ti-arrow-right"> </i> -->
+                                </button>
+                                <button type="button" class="btn_frmcancel" (click)="gotoEqsMaster('tab-Master')" *ngIf="!isEQSEdit"
+                                  ejs-button>
+                                  Cancel
+                                </button>
+                                <button type="button" class="btn_frmcancel" (click)="gotoEqsMaster('tab-Master')" *ngIf="isEQSEdit"
+                                  ejs-button>
+                                  Close
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12" style="height: 30px;">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="EquipmentID">Equipment ID:</label><span class="text-danger">*</span>
+                      </div>
+                      <div class="col-md-7" print-error [control]="EQSAddEquipmentform.get('EquipmentId')">
+                        <!-- <input formControlName="EquipmentId" class="form-control" name="EquipmentId"
+                          required /> -->
+                          <ejs-autocomplete id='equipmentId' #remote [dataSource]='equipmentList' [suggestionCount]='suggestionCount' filterType='StartsWith' [fields]='remoteFields'
+                      [autofill]='true' [query]='query'  sortOrder='Ascending'  formControlName="EquipmentId"  required></ejs-autocomplete>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="EquipmentType">Equipment Name:</label> <span class="text-danger">*</span>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-dropdownlist id="EquipmentName" [dataSource]="objEquipmentType" [fields]="fields"
+                          [popupHeight]="height" [allowFiltering]="true"
+                          [placeholder]="watermark" name="EquipmentTypeId"
+                          formControlName="EquipmentTypeId"></ejs-dropdownlist>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="Make">Manufacturer:</label>
+                      </div>
+                      <div class="col-md-7">
+                          <ejs-autocomplete id='equipmentMake' #remote [dataSource]='manufacturerList' [suggestionCount]='suggestionCount' filterType='StartsWith' [fields]='remoteFields'
+                      [autofill]='true' [query]='query'  sortOrder='Ascending'  formControlName="EquipmentMake"></ejs-autocomplete>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="Model">Model:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <input type="text" name="EquipmentModel" formControlName="EquipmentModel"
+                          class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="StorageLoc"> Location:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-dropdownlist id="StorageLoc" [dataSource]="objEqsStorageLocationList" [fields]="fields"
+                          [popupHeight]="height" [allowFiltering]="true"
+                          [placeholder]="watermark" name="EqsStorageLocationId" formControlName="EqsStorageLocationId"></ejs-dropdownlist>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  style="padding-top: 20px;" for="Image">Image:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-uploader
+                          #defaultupload
+                          [autoUpload]="false"
+                          [dropArea]="dropEle"
+                          formControlName='Image'
+                          (selected)="onImageFileSelect($event)"
+                          multiple = 'false'
+                        ></ejs-uploader>
+                        <div>
+                          <label class="link" (click)="DownLoadFile(EQSImagePath)">{{EQSImageName}}</label>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="URSNo">URS No.:</label>
+                      </div>
+                      <div class="col-md-7">
+                          <ejs-autocomplete id='ursNo' #remote [dataSource]='ursList' [suggestionCount]='suggestionCount' filterType='StartsWith' [fields]='remoteFields'
+                      [autofill]='true' [query]='query'  sortOrder='Ascending'  formControlName="URSNO"></ejs-autocomplete>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label style="padding-top:20px;" for="URSLink">URS Link:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-uploader
+                          #defaultupload
+                          [autoUpload]="false"
+                          [dropArea]="dropEle"
+                          formArrayName='URSAttachmet'
+                          (selected)="onURSFileSelect($event)"
+                        ></ejs-uploader>
+                        <div *ngFor="let item of URSAttachmentList">
+                          <label class="link" (click)="DownLoadFile(item.AttachmentPath)">{{item.ImageName}}</label>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="PONO">PO No.:</label>
+                      </div>
+                      <div class="col-md-7">
+                          <ejs-autocomplete id='poNo' #remote [dataSource]='poList' [suggestionCount]='suggestionCount' filterType='StartsWith' [fields]='remoteFields'
+                      [autofill]='true' [query]='query'  sortOrder='Ascending'  formControlName="PONO" ></ejs-autocomplete>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label style="padding-top: 20px;" for="polink">PO Link:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-uploader
+                          #defaultupload
+                          [autoUpload]="false"
+                          [dropArea]="dropEle"
+                          formArrayName='POAttachment'
+                          (selected)="onPOFileSelect($event)"
+                        ></ejs-uploader>
+                        <div *ngFor="let item of POAttachmentList">
+                          <label class="link" (click)="DownLoadFile(item.AttachmentPath)">{{item.ImageName}}</label>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="EquipmentInCharge">Equipment incharge:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-dropdownlist id="EquipmentInCharge" [dataSource]="objUserList" [fields]="UserListfields"
+                           [popupHeight]="height" [allowFiltering]="true" formControlName='EquipmentInChargeId'
+                          [placeholder]="watermark"></ejs-dropdownlist>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="ServiceEngineerContact">Service Engineer Contact:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control frm_tabtxtbox" id="ServiceEngineerContact" placeholder=""
+                          name="EquipmentServiceEngContact"  formControlName="EquipmentServiceEngContact" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="DeliveryDate">Delivery Date:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-datepicker [value]="dateValue" placeholder="Enter date" name="EquipmentDeliveryDate"
+                          formControlName="EquipmentDeliveryDate"></ejs-datepicker>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="ManufacturersSrNo">Manufacturer’s Sr. No.:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control frm_tabtxtbox" id="ManufacturersSrNo" placeholder=""
+                          name="EquipmentMfgSrNo" formControlName="EquipmentMfgSrNo" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="Criticality Level">Criticality Level:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-dropdownlist id="Criticality" [dataSource]="objEqsCriticality" [fields]="fields"
+                           [popupHeight]="height" [allowFiltering]="true"
+                          [placeholder]="watermark" name="CriticalityId"
+                          formControlName="CriticalityId"></ejs-dropdownlist>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="BackupInCharge">Backup incharge:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-dropdownlist id="BackupInCharge" [dataSource]="objUserList" [fields]="UserListfields"
+                           [popupHeight]="height" [allowFiltering]="true" formControlName='EquipmentBackupInChargeId'
+                          [placeholder]="watermark"></ejs-dropdownlist>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="PODate">PO Date:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-datepicker [value]="dateValue" placeholder="Enter date" name="PODate"
+                          formControlName="PODate"></ejs-datepicker>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label for="Availability">Availability:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-switch onLabel="ON" name='Availability' offLabel="OFF"
+                          formControlName='Availability' [checked]="true"></ejs-switch>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label  class="frmlabel" for="Department">Department:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-dropdownlist id="Department" [dataSource]="objDepartmentList" [fields]="fields"
+                           [popupHeight]="height" [allowFiltering]="true"
+                          [placeholder]="watermark" name="DepartmentId" formControlName="DepartmentId">
+                        </ejs-dropdownlist>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6" *ngIf="EQSAddEquipmentform.get('Availability').value === false">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label for="UnavailableReason" >Reason:</label><span class="text-danger">*</span>
+                      </div>
+                      <div class="col-md-7">
+                        <textarea class="form-control frm_tabtxtarea cye-lf-tag" formControlName="EqsUnAvailabilityReason" name="EqsUnAvailabilityReason" rows="5"></textarea>
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+
+                </div>
+              </div>
+            </form>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-Qualification">
+          <ng-template ngbTabTitle>Qualification</ng-template>
+          <ng-template ngbTabContent>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <button class="addbtn_style" ejs-button (click)="openAddModal(qualificationModal)">
+                    <!-- <i class="fas fa-plus-circle"></i>&nbsp; -->
+                    Add
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-actions pull-right">
+                    <div class="d-flex no-block align-items-center">
+                      <div class="ml-auto">
+                        <div class="custom-control custom-checkbox">
+                          <button type="submit" class="btn_frmsubmit" ejs-button (click)="tabset.select('tab-Master')">
+                            <!-- <i class="ti-arrow-left"></i> &nbsp;  -->
+                            Back
+                          </button>
+                          <button type="submit" class="btn_frmsubmit" (click)="tabset.select('tab-Calibration')" ejs-button>
+                            Next
+                             <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+                          </button>
+
+                          <button type="button" class="btn_frmcancel" (click)="gotoEqsMaster('tab-Master')" *ngIf="!isEQSEdit" ejs-button>
+                            Cancel
+                          </button>
+                          <button type="button" class="btn_frmcancel" (click)="gotoEqsMaster('tab-Master')" *ngIf="isEQSEdit" ejs-button>
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ng-template #qualificationModal let-modal>
+              <div class="modal_header">
+                  <div class="col-md-12">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <h5 class="modal-title">Add Qualification</h5>
+                          </div>
+                          <div class="col-md-6" class="Close_Popup">
+                                  <i class="fas fa-times" (click)="modal.dismiss('Cross click')" ></i>
+                          </div>
+
+                      </div>
+                  </div>
+                <!-- <h5 class="modal-title">Add Qualification</h5>
+                <button type="button" class="close" aria-label="close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+              </div>
+              <div class="modal-body">
+                <form [formGroup]='EqsQualificationForm'>
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label for="QualificationType" class="control-label col-form-label">Qualification
+                              Type:</label><span class="text-danger">*</span>
+                          </div>
+                          <div class="col-md-6" print-error [control]="EqsQualificationForm.get('EqsQualificationTypeId')">
+                            <ejs-dropdownlist id="QualificationType" [dataSource]="objEqsQualificationTypeList"
+                              [fields]="fields"  [popupHeight]="height"
+                              [allowFiltering]="true" [placeholder]="watermark"
+                              formControlName="EqsQualificationTypeId" name='EqsQualificationTypeId'>
+                            </ejs-dropdownlist>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label for="PerformedBy" class="control-label col-form-label">Performed By:</label><span
+                              class="text-danger">*</span>
+                          </div>
+                          <div class="col-md-6" print-error [control]="EqsQualificationForm.get('EqsQualificationPerformedByName')">
+                            <input type="text" class="form-control frm_tabtxtbox" id="PerformedBy" placeholder=""
+                              formControlName="EqsQualificationPerformedByName"
+                              name='EqsQualificationPerformedByName' />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr style="background-color: #a9a9a9;" />
+                  <div class="col-md-12" style="margin-top: 10px;">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label for="DateOfQualification" class="control-label col-form-label">Date of
+                              Qualification:</label><span class="text-danger">*</span>
+                          </div>
+                          <div class="col-md-6" print-error [control]="EqsQualificationForm.get('EqsQualificationDate')">
+                            <ejs-datepicker [value]="dateValue" placeholder="Enter date"
+                              formControlName="EqsQualificationDate" name='EqsQualificationDate'>
+                            </ejs-datepicker>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label for="Attachment" style="padding-top: 20px;" class="control-label col-form-label">Attachment:</label>
+                          </div>
+                          <div class="col-md-9">
+                            <ejs-uploader
+                              #defaultupload
+                              [autoUpload]="false"
+                              [dropArea]="dropEle"
+                              formArrayName='AttachmentList'
+                              (selected)="onQualificationFileSelect($event)"
+                            ></ejs-uploader>
+                            <small class="form-text text-cyan">* multiple attachment</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12" style="margin-top: 10px;">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="col-md-12">
+                            <label for="Description" class="control-label col-form-label">Description:</label>
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="col-md-12">
+                            <textarea class="form-control frm_tabtxtarea cye-lf-tag" rows="5"
+                              formControlName="EqsQualificationDescription"
+                              name="EqsQualificationDescription" ngDefaultControl></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" ejs-button (click)="SaveQualification()">
+                  Add
+                </button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+             <!--<h6>*These are the initial qualification dates</h6>-->
+             <div style="padding-top: 2px;">
+                <ejs-grid height="273px" [dataSource]="objEqsQualificationList" [allowSelection]="true" [gridLines]="lines"
+              [enableHover]="false" [allowSorting]="true" e-gridheader="">
+              <e-columns>
+                <e-column field="EqsQualificationTypeName" headerText="Qualification Type" width="20"  headerTextAlign="center" textAlign="left" ></e-column>
+                <e-column field="EqsQualificationDate" headerText="Date" width="20"  headerTextAlign="center" textAlign="left"  type="date" format="dd-MMM-yyyy"></e-column>
+                <e-column field="EqsQualificationLink" headerText="Attachment" textAlign="center" width="20" format="C2">
+                  <ng-template #template let-data>
+                      <div><a (click)="openAddModal(content4);setRowId(data);"><i [ngClass]="(data.HasAttachments===true)?'far fa-folder-open':'far fa-folder'"></i></a></div>
+                  </ng-template>
+                </e-column>
+                <e-column field="EqsQualificationDescription" headerText="Description"  headerTextAlign="center" textAlign="left" width="40"
+                  format="C2"></e-column>
+                <e-column field="EqsQualificationPerformedByName" headerText="Performed By"  headerTextAlign="center" textAlign="left"
+                  width="30" format="C2"></e-column>
+              </e-columns>
+            </ejs-grid>
+            </div>
+
+
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-Calibration" >
+          <ng-template ngbTabTitle>Calibration</ng-template>
+          <ng-template ngbTabContent>
+            <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6"></div>
+                  <div class="col-md-6">
+                    <div class="form-actions pull-right">
+                      <div class="d-flex no-block align-items-center">
+                        <div class="ml-auto">
+                          <div class="custom-control custom-checkbox">
+                            <button type="submit" class="btn_frmsubmit" *ngIf="isEQSEdit === false"
+                              (click)="SaveCalibration()" ejs-button>
+                              <!-- <i class="fa fa-check"></i> &nbsp; -->
+                              Save
+                            </button>
+                            <button type="submit" *ngIf="isEQSEdit === true" class="btn_frmsubmit"
+                              (click)="SaveCalibration()" ejs-button>
+                              <!-- <i class="fa fa-check"></i> &nbsp; -->
+                              Update
+                            </button>
+                            <button type="submit" class="btn_frmsubmit" ejs-button
+                              (click)="tabset.select('tab-Qualification')">
+                              <!-- <i class="ti-arrow-left"></i> &nbsp;  -->
+                              Back
+                            </button>
+                            <button type="submit" class="btn_frmsubmit" (click)="tabset.select('tab-Maintenance')"
+                              ejs-button>
+                              Next
+                            </button>
+
+                            <button type="button" class="btn_frmcancel" *ngIf="!isEQSEdit" (click)="gotoEqsMaster('tab-Calibration')"
+                              ejs-button>
+                              Cancel
+                            </button>
+                            <button type="button" class="btn_frmcancel" (click)="gotoEqsMaster('tab-Calibration')" *ngIf="isEQSEdit"
+                              ejs-button>
+                              Close
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+
+            <div class="rectangle" >
+                <div class="col-md-12 frm_tabpanel" style="padding-top: 16%;">
+                    <form [formGroup]='EqsCalibrationForm'>
+                    <div class="row" >
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-6">
+                              <label for="CalibrationReq">Calibration Required:</label>
+                          </div>
+
+                          <div class="col-md-3">
+                              <input type="radio" id="customRadio1" name="IsEquipmentCalibrationRequired" class="custom-control-input"
+                              [value]="true" formControlName="IsEquipmentCalibrationRequired"
+                              (click)='EnableFrequency()' />
+                            <label class="custom-control-label" for="customRadio1">Yes</label>
+                          </div>
+                          <div class="col-md-3">
+                              <input type="radio" id="customRadio2" name="IsEquipmentCalibrationRequired" class="custom-control-input"
+                              [value]='false' formControlName="IsEquipmentCalibrationRequired"
+                              (change)='DisableFrequency($event)'/>
+                            <label class="custom-control-label" for="customRadio2">
+                              No</label>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                      <div class="col-md-12 frm_tabpanel">
+                          <div class="row" >
+
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-5" style="padding-left: 1px;">
+                                <label for="frequencyInMonths">Frequency In Months:</label>
+                            </div>
+                            <div class="col-md-7" style="padding-right: 15%;">
+                                <ejs-dropdownlist id="InstName" [dataSource]="itemsmonths" [fields]="fields"
+                                [popupHeight]="height" [allowFiltering]="true"
+                               [placeholder]="watermark" name="FrequencyInMonths"
+                               formControlName="EquipmentCalibrationFrequency" [disableControl]="isFreqDisabled">
+                             </ejs-dropdownlist>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                        </div>
+                      </form>
+                      </div>
+            </div>
+            <!-- <div class="col-md-12" style="height: 30px;">
+            </div> -->
+            <!-- <div class="col-md-12 frm_tabpanel">
+                <form [formGroup]='EqsCalibrationForm'>
+              <div class="row" style="height: 300px;">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="CalibrationReq">Calibration Required:</label>
+                    </div>
+                    <div class="col-md-1">
+                      <input type="radio" id="customRadio1" name="IsEquipmentCalibrationRequired" class="custom-control-input"
+                        [value]="true" formControlName="IsEquipmentCalibrationRequired"
+                        (click)='EnableFrequency()' />
+                      <label class="custom-control-label" for="customRadio1">Yes</label>
+                    </div>
+                    <div class="col-md-3">
+                      <input type="radio" id="customRadio2" name="IsEquipmentCalibrationRequired" class="custom-control-input"
+                        [value]='false' formControlName="IsEquipmentCalibrationRequired"
+                        (change)='DisableFrequency($event)'/>
+                      <label class="custom-control-label" for="customRadio2">
+                        No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="frequencyInMonths">Frequency In Months:</label>
+                    </div>
+                    <div class="col-md-3">
+                      <ejs-dropdownlist id="InstName" [dataSource]="itemsmonths" [fields]="fields"
+                         [popupHeight]="height" [allowFiltering]="true"
+                        [placeholder]="watermark" name="FrequencyInMonths"
+                        formControlName="EquipmentCalibrationFrequency" [disableControl]="isFreqDisabled">
+                      </ejs-dropdownlist>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                </form>
+            </div> -->
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-Maintenance">
+          <ng-template ngbTabTitle>Maintenance</ng-template>
+          <ng-template ngbTabContent>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <button class="addbtn_style" ejs-button (click)="openAddMaintenanceModal(content3)">
+                    <!-- <i class="fas fa-plus-circle"></i>&nbsp; -->
+                    Add
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-actions pull-right">
+                    <div class="d-flex no-block align-items-center">
+                      <div class="ml-auto">
+                        <div class="custom-control custom-checkbox">
+                          <button type="submit" class="btn_frmsubmit" ejs-button (click)="tabset.select('tab-Calibration')">
+                            <!-- <i class="ti-arrow-left"></i> &nbsp; -->
+                            Back
+                          </button>
+                          <button type="submit" class="btn_frmsubmit" (click)="tabset.select('tab-CustomHeader')" ejs-button>
+                            Next
+                             <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+                          </button>
+
+                          <button type="button" class="btn_frmcancel" (click)="gotoEqsMaster()" *ngIf="!isEQSEdit" ejs-button>
+                            Cancel
+                          </button>
+                          <button type="button" class="btn_frmcancel" (click)="gotoEqsMaster()" *ngIf="isEQSEdit" ejs-button>
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ng-template #content3 let-modal>
+              <div class="modal_header">
+                  <div class="col-md-12">
+                      <div class="row">
+                          <div class="col-md-6">
+                                  <h5 class="modal-title" *ngIf="!IsMaintenanceEdit" >Add Maintenance</h5>
+                                  <h5 class="modal-title" *ngIf="IsMaintenanceEdit">Edit Maintenance</h5>
+                          </div>
+                          <div class="col-md-6" class="Close_Popup">
+                                  <i class="fas fa-times" (click)="modal.dismiss('Cross click');" ></i>
+                          </div>
+
+                      </div>
+                  </div>
+                <!-- <h5 class="modal-title">Add Maintenance</h5>
+                <button type="button" class="close" aria-label="close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+              </div>
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <form [formGroup]='EqsMaintenenceForm'>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label for="MaintenanceType" class="control-label col-form-label">Maintenance Type:</label><span class="text-danger">*</span>
+                        </div>
+                        <div class="col-md-6">
+                          <ejs-dropdownlist id="MaintenanceType" [dataSource]="objEqsMaintenanceTypeList" [fields]="fields"
+                            [popupHeight]="height" [allowFiltering]="true"
+                            [placeholder]="watermark" formControlName='MaintenenceTypeMasterId'
+                            (change)="GetMaintenacceType($event)">
+                          </ejs-dropdownlist>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label for="FrequencyInMonths" class="control-label col-form-label">
+                            Frequency In Months:</label><span class="text-danger">*</span>
+                        </div>
+                        <div class="col-md-6">
+                          <ejs-dropdownlist id="FrequencyInMonths" [dataSource]="itemsmonthsWithNA" [fields]="fields"
+                           [popupHeight]="height" [allowFiltering]="true"
+                            [placeholder]="watermark" formControlName='FrequencyInMonth'
+                            [disableControl]="isMaintenanceFreqDisabled">
+                          </ejs-dropdownlist>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" (click)='SaveMaintenence()' *ngIf="!IsMaintenanceEdit" ejs-button>
+                  Add
+                </button>
+                <button class="addmodal_style" (click)='SaveMaintenence()' *ngIf="IsMaintenanceEdit" ejs-button>
+                  Update
+                </button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+            <div class="table-responsive" style="padding-top: 10px; padding-left: 30%">
+            <ejs-grid  height="300px" [dataSource]="objEqsMaintenenceList" width=60%
+              [allowSelection]="true" [gridLines]="lines" [enableHover]="false" [allowSorting]="true" e-gridheader=""
+              (commandClick)="editMaintenance($event);openAddMaintenanceModal(content3)"
+              >
+              <e-columns>
+
+               <e-column headerText='Action' textAlign='center' [commands]="commands" width='5'>
+            </e-column>
+
+                <e-column field="MaintenenceTypeName" headerText="Maintenance Type" textAlign="center"
+                 width="10"></e-column>
+
+                <e-column field="FrequencyInMonth" headerText="Frequency In Months" textAlign="center"
+                  width="10"></e-column>
+              </e-columns>
+            </ejs-grid>
+            </div>
+
+          </ng-template>
+        </ngb-tab>
+        <br />
+        <ngb-tab id="tab-CustomHeader">
+          <ng-template ngbTabTitle>Custom Header</ng-template>
+          <ng-template ngbTabContent>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                  <div class="form-actions pull-right">
+                    <div class="d-flex no-block align-items-center">
+                      <div class="ml-auto">
+                        <div class="custom-control custom-checkbox">
+                          <button type="submit" class="btn_frmsubmit" (click)='SaveCustomHeader()' *ngIf="!isEQSEdit"  ejs-button>
+                            <!-- <i class="fa fa-check"></i> &nbsp; -->
+                            Save
+                          </button>
+                          <button type="submit" class="btn_frmsubmit" (click)='SaveCustomHeader()' *ngIf="isEQSEdit" ejs-button>
+                            <!-- <i class="fa fa-check"></i> &nbsp; -->
+                            Update
+                          </button>
+                          <button type="submit" class="btn_frmsubmit" ejs-button (click)="tabset.select('tab-Maintenance')">
+                            <!-- <i class="ti-arrow-left"></i> &nbsp; -->
+                             Back
+                          </button>
+                          <button type="submit" class="btn_frmsubmit" (click)="tabset.select('tab-Reports')" ejs-button>
+                            Next
+                            <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+                          </button>
+
+                          <button type="button" class="btn_frmcancel" (click)="gotoEqsMaster()"  *ngIf="!isEQSEdit"  ejs-button>
+                            Cancel
+                          </button>
+                          <button type="button" class="btn_frmcancel" (click)="gotoEqsMaster()"  *ngIf="isEQSEdit"  ejs-button>
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive" style="padding-top: 10px; padding-left: 30%">
+              <ejs-grid [dataSource]="objCustomHeaderList" [allowSelection]="true" [gridLines]="lines"
+                [enableHover]="false" [allowSorting]="true" e-gridheader="" height="250px" width=60%>
+                <e-columns>
+                  <e-column field="CustomHeaderFieldName" headerText="Name" textAlign="center" format="C2" width="50">
+                  </e-column>
+                  <e-column field="Cvalue" headerText="Value" textAlign="center" format="yMd" width="50">
+                    <ng-template #template let-data>
+                      <div class="loc">
+                        <div class="col-md-7">
+                          <input name="CustomHeaderValue" style="width: 170px;" [(ngModel)]="data.CustomHeaderValue"  class="form-control"  (change)="SetHeaderList($event, data) "/>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </e-column>
+                </e-columns>
+              </ejs-grid>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-Reports">
+          <ng-template ngbTabTitle>Documents</ng-template>
+          <ng-template ngbTabContent>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                  <div class="form-actions pull-right">
+                    <div class="d-flex no-block align-items-center">
+                      <div class="ml-auto">
+                        <div class="custom-control custom-checkbox">
+                          <button type="submit" class="btn_frmsubmit" ejs-button (click)="tabset.select('tab-CustomHeader')">
+                            <!-- <i class="ti-arrow-left"></i> &nbsp;  -->
+                            Back
+                          </button>
+                          <button type="button" class="btn_frmcancel" ejs-button (click)="gotoEqsMaster()">
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="height: 400px;  padding: 15px;">
+              <ejs-filemanager id='document' #fileManagerDocumentCtrl [ajaxSettings]='ajaxSettingsDocument' [searchSettings]='searchSettings' (beforeDownload)="beforeSendDocument($event)"
+                  (beforeImageLoad)="beforeSendDocument($event)" [toolbarSettings]='toolbarSettings' [rootAliasName]="'Attachments'" (beforeSend)="beforeSendDocument($event)" [contextMenuSettings]='contextMenuSettings' [showHiddenItems]="showHiddenItems" view='Details'>
+              </ejs-filemanager>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content4 let-modal>
+  <div class="modal_header">
+      <div class="col-md-12">
+          <div class="row">
+              <div class="col-md-6">
+                  <h5 class="modal-title">Attachments</h5>
+              </div>
+              <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')" ></i>
+              </div>
+
+          </div>
+      </div>
+    <!-- <h5 class="modal-title">Attachments</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <div class="modal-body">
+    <ejs-filemanager id='overview' #fileManagerCtrl [ajaxSettings]='ajaxSettings' [searchSettings]='searchSettings' (beforeDownload)="beforeSend($event)"
+        (beforeImageLoad)="beforeSend($event)" [rootAliasName]="'Attachments'" (beforeSend)="beforeSend($event)" [toolbarSettings]='toolbarSettingsQualification' [contextMenuSettings]='contextMenuSettings' view='Details'>
+    </ejs-filemanager>
+  </div>
+</ng-template>

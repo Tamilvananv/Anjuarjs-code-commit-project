@@ -1,0 +1,55 @@
+<!-- <ejs-tooltip id='tooltip' cssClass="{{(control && control.errors && control.invalid && control.dirty)?'':'hidetooltip'}}" [content]='content'>
+    <ng-content id="demo"></ng-content>
+</ejs-tooltip>
+<ng-template #content>
+    <div *ngIf="(control && control.errors && control.invalid && control.dirty)">
+        <div *ngIf="control.errors.required">This field is required</div>
+        <div *ngIf="control.errors.unique"><small>{{control.errors.unique}}</small></div>
+        <div *ngIf="control.errors.lessThen"><small>{{control.errors.lessThen}}</small></div>
+        <div *ngIf="control.errors.greaterThan"><small>{{control.errors.greaterThan}}</small></div>
+        <div *ngIf="control.errors.email"><small>{{control.errors.email}}</small></div>
+        <div *ngIf="control.errors.mobile"><small>{{control.errors.mobile}}</small></div>
+        <div *ngIf="control.errors.confirmPassword"><small>{{control.errors.confirmPassword}}</small></div>
+    </div>
+</ng-template> -->
+
+<div [ngbTooltip]="content" #errorTooltip="ngbTooltip" triggers="focus" tooltipClass="{{(control && control.errors && control.invalid && control.dirty)?'my-custom-class':'hidetooltip'}}">
+    <ng-content></ng-content>
+</div>
+<ng-template #content>
+    <div *ngIf="control && control.errors && control.invalid && control.dirty">
+        <div *ngIf="control.errors.required">This field is required</div>
+        <div *ngIf="control.errors.unique"><small>{{control.errors.unique}}</small></div>
+        <div *ngIf="control.errors.minlength"><small>required length is {{control.errors.minlength.requiredLength}},actual entered length is {{control.errors.minlength.actualLength}}  </small></div>
+        <div *ngIf="control.errors.greaterThan"><small>{{control.errors.greaterThan}}</small></div>
+        <div *ngIf="control.errors.email"><small>{{control.errors.email}}</small></div>
+        <div *ngIf="control.errors.mobile"><small>{{control.errors.mobile}}</small></div>
+        <div *ngIf="control.errors.confirmPassword"><small>{{control.errors.confirmPassword}}</small></div>
+    </div>
+</ng-template>
+<style>
+    .hidetooltip {
+        display: none !important;
+    }
+    
+    .my-custom-class .tooltip-inner {
+        background-color: #e60b31;
+        color: white;
+        font-size: 125%;
+    }
+    
+    .bs-tooltip-top .arrow::before,
+    .bs-tooltip-auto[x-placement^="top"] .arrow::before {
+        border-top-color: #e60b31;
+    }
+</style>
+<!-- <ng-content></ng-content>
+<div class="text-danger" *ngIf="control && control.errors && control.invalid && !control.pristine">
+    <div *ngIf="control.errors.required">This field is required</div>
+    <div *ngIf="control.errors.unique"><small>{{control.errors.unique}}</small></div>
+    <div *ngIf="control.errors.lessThen"><small>{{control.errors.lessThen}}</small></div>
+    <div *ngIf="control.errors.greaterThan"><small>{{control.errors.greaterThan}}</small></div>
+    <div *ngIf="control.errors.email"><small>{{control.errors.email}}</small></div>
+    <div *ngIf="control.errors.mobile"><small>{{control.errors.mobile}}</small></div>
+    <div *ngIf="control.errors.confirmPassword"><small>{{control.errors.confirmPassword}}</small></div>
+</div> -->

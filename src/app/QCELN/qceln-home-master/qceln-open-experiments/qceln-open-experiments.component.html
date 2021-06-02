@@ -1,0 +1,39 @@
+<div class="row" style="padding-top: 30px;overflow: scroll;">
+    <div class="col-lg-12">
+        <div class="table-responsive" style="width: 2200px;">
+            <ejs-grid id="grid" #grid [dataSource]="ExperimentList" (rowDataBound)="rowDataBound($event)"
+                (toolbarClick)="toolbarClick($event)" [toolbar]="toolbar" [editSettings]="editSettings"
+                (commandClick)="commandClick($event)" (actionBegin)="actionBegin($event)" [allowSorting]="true"
+                [allowPaging]="true" [allowExcelExport]='true' [allowGrouping]="true" clipMode="EllipsisWithTooltip"
+                [groupSettings]="groupOptions" [showColumnMenu]="true" [allowFiltering]='true' [filterSettings]="filterOptions">
+                <e-columns>
+                    <e-column headerText="Action" allowGrouping="false" textAlign="center" [commands]="commands"  width="80">
+                    </e-column>
+                    <e-column field="ExperimentNo" headerText="Experiment No" textAlign="Center">
+                        <ng-template #groupSettingsCaptionTemplate let-data>
+                            <span class="groupHeader">{{data. headerText}} : {{ data.key }}</span>&nbsp;
+                            <span class="groupItems">- {{ data.count }} Version(s)</span>
+                        </ng-template>
+                    </e-column>
+                    <e-column field="VersionNo" headerText="Version No" textAlign="Center" width="120">
+                    </e-column>
+                    <e-column field="Title" allowGrouping="false" headerText="Title" textAlign="Center" width="150">
+                    </e-column>
+                    <e-column field="CreatedBy" headerText="Created By" textAlign="Center"></e-column>
+                    <e-column field="CreatedDate" headerText="Created Date" type="date" format="dd-MMM-yyyy"
+                    [enableGroupByFormat]='true' textAlign="Center" width="140">
+                    </e-column>
+                    <e-column field="ExperimentDate" headerText="Date" type="date" format="dd-MMM-yyyy"
+                        [enableGroupByFormat]='true' textAlign="Center" width="140"></e-column>
+                    <e-column field="StatusName" headerText="Status" textAlign="Center" width="150"></e-column>
+                    <e-column headerText="Witness" [columns]="witnessColumns" textAlign="Center">
+                    </e-column>
+                    <e-column headerText="Reviewer " [columns]="reviewerColumns" textAlign="Center">
+                    </e-column>
+                    <e-column headerText="Approver " [columns]="approverColumns" textAlign="Center">
+                    </e-column>
+                </e-columns>
+            </ejs-grid>
+        </div>
+    </div>
+</div>

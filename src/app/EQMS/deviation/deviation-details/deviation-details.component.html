@@ -1,0 +1,307 @@
+<div class="col-md-12 text-right">
+        <div class="custom-control " style="padding-bottom: 5px;">
+                <button type="submit" class="btn_frmsubmit" ejs-button>
+                        Save
+                    </button>
+            <button type="submit" class="btn_frmsubmit" ejs-button>
+                Back
+            </button>
+            <button type="button" class="btn_frmsubmit"  ejs-button>
+                Next 
+            </button>
+            <button type="button" class="btn_frmcancel" ejs-button >
+                Cancel
+            </button>
+        </div>
+    </div>
+  
+<div class="col-md-12 frm_tabpanel">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="Tools">CAPA Needed:</label>
+                </div>
+                <div class="col-md-7">
+                    <div class="col-md-1">
+                        <input type="radio" id="customRadio1" 
+                            class="custom-control-input"   (click)="gotoCAPA()"/>
+                        <label class="custom-control-label" for="customRadio1" >
+                               
+                          Yes</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="radio" id="customRadio2"
+                            class="custom-control-input" />
+                        <label class="custom-control-label" for="customRadio2">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Browse">Comment:</label>
+                </div>
+                <div class="col-md-7">
+                        <ejs-textbox [multiline]='true' value= 'Mr. Dodsworth Dodsworth, System Analyst, Studio 103, The Business Center' ></ejs-textbox>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="col-md-12 frm_tabpanel">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="Tools">RCA Tools:</label>
+                </div>
+                <div class="col-md-7">
+                    <ejs-dropdownlist id='tools' #sample [dataSource]='Tools' [value]='value' [fields]='fields'
+                        [placeholder]='waterMark' [popupHeight]='height'>
+                    </ejs-dropdownlist>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Browse">Browse:</label>
+                </div>
+                <div class="col-md-7">
+                    <ejs-uploader #defaultupload [autoUpload]="false" [dropArea]="dropEle" [asyncSettings]="path"
+                        (success)="onUploadSuccess($event)" (failure)="onUploadFailure($event)"></ejs-uploader>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-7">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-actions pull-right">
+                <div class="d-flex no-block align-items-center">
+                    <div class="ml-auto">
+                        <button type="submit" class="btn_frmsubmit" (click)="OpenModal(addModal)" ejs-button>
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #addModal let-modal>
+    <div class="modal_header">
+            <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 class="modal-title">Add </h5>
+                        </div>
+                        <div class="col-md-6" class="Close_Popup">
+                                <i class="fas fa-times" (click)="modal.dismiss('Cross click')" ></i>
+                        </div>
+          
+                    </div>
+                </div>
+      
+       
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12 frm_tabpanel">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="ProposedCAPA">Proposed CAPA:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea name="ProposedCAPA" rows="5" cols="75">Type here </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 frm_tabpanel">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="CAPA">CAPA:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <p>Read Only [ Auto]</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="DeptList">Department:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <ejs-dropdownlist id='dept' #sample [dataSource]='DeptName' [value]='value'
+                                [fields]='fields1' [placeholder]='' [popupHeight]='height'>
+                            </ejs-dropdownlist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 frm_tabpanel">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="CAPA">CAPA Owner:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <ejs-dropdownlist id='dept' #sample [dataSource]='DeptName' [value]='value'
+                                [fields]='fields1' [placeholder]='' [popupHeight]='height'>
+                            </ejs-dropdownlist>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="Date">Target Date:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <ejs-datepicker [value]='dateValue' placeholder='Enter date'>
+                            </ejs-datepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Browse">Browse:</label>
+                </div>
+                <div class="col-md-7">
+                    <ejs-uploader #defaultupload [autoUpload]="false" [dropArea]="dropEle" [asyncSettings]="path"
+                        (success)="onUploadSuccess($event)" (failure)="onUploadFailure($event)"></ejs-uploader>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="addmodal_style" ejs-button>
+            Add
+        </button>
+
+        <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+            cancel
+        </button>
+    </div>
+</ng-template>
+<div class="table-responsive">
+    <ejs-grid #grid id="Grid" [dataSource]="data" allowFiltering="true" [filterSettings]="filterOptions"
+        [gridLines]="lines" [enableHover]="false" [allowSorting]="true" e-gridheader="" height="100px"
+        allowTextWrap='true' [textWrapSettings]='wrapSettings' [toolbar]="toolbarOptions" [allowExcelExport]="true"
+        (toolbarClick)="toolbarClick($event)">
+        <e-columns>
+            <e-column headerText="Action" textAlign="center" width="140">
+                <ng-template #template let-data>
+                    <div class="loc1 ">
+                         <i class="fa fa-expand" [routerLink]="['raisedevextension']"
+                            title="Raise Extension"></i>
+                    </div>
+                </ng-template>
+
+            </e-column>
+            <e-column field="ProposedCapa" headerText="Proposed CAPA" textAlign="center" width="300">
+            </e-column>
+            <e-column field="CAPA" headerText="CAPA" textAlign="center" width="210"></e-column>
+            <e-column field="Dept" headerText="Department" textAlign="center" width="210">
+            </e-column>
+            <e-column field="CAPAOwner" headerText="CAPA Owner" textAlign="center" width="210"></e-column>
+            <e-column field="TargetDate" headerText="Target Date" textAlign="center" width="210"></e-column>
+            <e-column field="Attach" headerText="Attach" textAlign="center" width="210">
+                <ng-template #template let-data>
+                    <div class="loc">
+                        <a> <i class="far fa-folder"></i></a>
+                    </div>
+                </ng-template>
+            </e-column>
+
+        </e-columns>
+    </ejs-grid>
+</div>
+
+<div class="col-md-12 frm_tabpanel">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-5">
+                    <label for="CheckRequired">Effectiveness Check Required:</label>
+                </div>
+
+                <div class="col-md-1">
+
+                    <input type="radio" id="customRadio1" name="IsCalibrationRequired" class="custom-control-input"
+                        [value]="true" formControlName="IsCalibrationRequired" (click)="EnableFrequency()" />
+                    <label class="custom-control-label" for="customRadio1">Yes</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="radio" id="customRadio2" name="IsCalibrationRequired" class="custom-control-input"
+                        [value]="false" formControlName="IsCalibrationRequired" (change)="DisableFrequency($event)" />
+                    <label class="custom-control-label" for="customRadio2">No</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Comments">Comments:</label>
+                </div>
+                <div class="col-md-7">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="InitiatedBy">Initiated By:</label>
+                </div>
+                <div class="col-md-7">
+                    <input ype="text" name="InitiatedBy" class="form-control" placeholder="Login Name /Auto Audit " />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-actions pull-right">
+                <div class="d-flex no-block align-items-center">
+                    <div class="ml-auto">
+                        
+
+                        <button type="button" class="btn_frmsubmit" ejs-button>
+                            Sign and Submit 
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,26 @@
+<div class="col-md-12 text-right">
+    <div class="custom-control custom-checkbox" style="padding-bottom: 5px;">
+        <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabSOP')" ejs-button>
+            <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+            Back
+        </button>
+        <button type="submit" class="btn_frmsubmit" *ngIf="elnPrecautionForm.dirty" (click)="SavePrecaution()" ejs-button>
+            <!-- <i class="fa fa-check"></i> &nbsp; -->
+            Save
+        </button>
+        <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabProcedure')" ejs-button>
+            Next 
+            <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+        </button>
+        <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/elnhome'">
+            <!-- <i class="fas fa-times"></i> &nbsp; -->
+            Cancel
+        </button>
+    </div>
+</div>
+<div class="col-md-12">
+    <div id="default_title_barPrecaution" class="e-de-ctn-title"></div>
+    <div *ngIf="IsRefreshView">
+        <app-document-editor [id]="'docPrecaution'" #documentEditor [title]="'Precaution'" (onContentChange)="onContentChanged($event)" [content]="this.elnPrecautionForm.get('ContentBody').value" [configuration]="configSetting"></app-document-editor>
+    </div>
+</div>

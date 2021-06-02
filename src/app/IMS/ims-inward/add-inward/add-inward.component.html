@@ -1,0 +1,263 @@
+<div class="row" style="padding-top: 30px;">
+  <div class="col-lg-12">
+    <div class="card">
+      <form [formGroup]="ImsAddInwardForm">
+        <div class="form-actions">
+          <div class="d-flex no-block align-items-center">
+            <div class="ml-auto">
+              <div class="custom-control custom-checkbox">
+                  <button type="submit" *ngIf="isInwardEdit === false" class="btn_frmsubmit"
+                  (click)="addInwardMaster()" ejs-button>
+                 Save
+                </button>
+                <button type="submit" *ngIf="isInwardEdit" class="btn_frmsubmit"
+                  (click)="UpdateInwardMaster()" ejs-button>
+                 Update
+                </button>
+
+
+              
+                <button type="button" class="btn_frmcancel"  (click)="gotoInwardMaster()" ejs-button> 
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 frm_tabpanel">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="ImsMaterialId">
+                    Material ID:
+                  </label>
+                  <span class="text-danger">*</span>
+                </div>
+                <div class="col-md-6"  print-error [control]="ImsAddInwardForm.get('ImsMaterialId')">
+                  <ejs-combobox [dataSource]=' objMaterialIdList' name='ImsInventoryMasterId'
+                  [fields]='fields' (filtering)='onFiltering($event)'  id="ImsInventoryMasterId"
+                  formControlName="ImsInventoryMasterId"
+                    [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark'
+                    (change)="Check($event)"
+                    >
+                  </ejs-combobox>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="ManufacturingDate">
+                    Manufacturing Date:
+                  </label>
+                </div>
+                <div class="col-md-6">
+
+                    <ejs-datepicker [value]="dateValue" placeholder="Enter date" name="ImsInwardManufacturingDate"
+                    id="ImsInwardManufacturingDate"
+                    formControlName="ImsInwardManufacturingDate" ></ejs-datepicker>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 frm_tabpanel">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="ImsInventoryCategoryMaterialId">
+                    Material Name:
+                  </label>
+                </div>
+                <div class="col-md-6">
+  <label class="col-form-label"> {{ImsInventoryMaterialName}}</label>
+
+               <!--    <ejs-combobox [dataSource]='objMaterialName' name='ImsInventoryCategoryMaterialId'
+                 [fields]='fields'   id="ImsInventoryCategoryMaterialId"
+                 formControlName="ImsInventoryCategoryMaterialId"
+                    (filtering)='onFiltering($event)' [popupHeight]='height' [allowFiltering]='true'
+                    [placeholder]='watermark'> 
+                  </ejs-combobox>  -->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="ExpiryDate">
+                    Expiry Date:
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <ejs-datepicker [value]="dateValue" placeholder="Enter date" name="ImsInwardExpiryDate"
+                  id="ImsInwardExpiryDate"
+                  formControlName="ImsInwardExpiryDate" ></ejs-datepicker>
+                </div>
+              </div>
+            </div>
+            <!--  <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                    <label for="DeliveryDate">
+                                                  Delivery Date:
+                                                </label> 
+                </div>
+                <div class="col-md-6">
+                    <ejs-datepicker 
+                                              [value]='dateValue'
+                                               placeholder='Enter date'>
+                                            </ejs-datepicker> 
+                </div>
+              </div>
+            </div> -->
+
+          </div>
+        </div>
+        <div class="col-md-12 frm_tabpanel">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="ImsVendorMasterId">
+                    Vendor:
+                  </label>
+                </div>
+                <div class="col-md-6">
+                   <label class="col-form-label"> {{ImsVendorName}}</label>
+               <!--    <ejs-combobox [dataSource]='objVendorName' name='ImsVendorMasterId'
+                  id="ImsVendorMasterId"
+                  formControlName="ImsVendorMasterId"[fields]='fields' (filtering)='onFiltering($event)'
+                    [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark1'>
+                  </ejs-combobox> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="ImsStorageLocationId">Storage Location:</label>
+                </div>
+                <div class="col-md-6">
+                    <label class="col-form-label"> {{ImsStorageLocationName}}</label>
+
+              <!--     <ejs-combobox [dataSource]='objStorageLocation' name='ImsStorageLocationId' id="ImsStorageLocationId"
+                  formControlName="ImsStorageLocationId"
+                   [fields]='fields' (filtering)='onFiltering($event)'
+                    [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark'>
+                  </ejs-combobox> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 frm_tabpanel">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="ImsManufacturerId">
+                    Manufacturer:
+                  </label>
+                </div>
+                <div class="col-md-6">
+                   <label class="col-form-label">{{ImsManufacturerName}}</label>
+                 <!--  <ejs-combobox id="Vendor" [dataSource]="objManufacturer" [fields]="fields"
+                    (filtering)="onFiltering($event)" [popupHeight]="height" [allowFiltering]="true"
+                    name="ImsManufacturerId"  id="ImsManufacturerId"
+                    formControlName="ImsManufacturerId" [placeholder]="watermark">
+                  </ejs-combobox> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="ImsInwardStorageTemperature">Storage Temperature:</label>
+                </div>
+                <div class="col-md-6">
+                    <label class="col-form-label">{{ImsInwardStorageTemperature}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 frm_tabpanel">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="ImsLotNumber">
+                    LOT Number:
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="ImsLotNumber"
+                  id="ImsLotNumber"
+                  formControlName="ImsLotNumber"  placeholder="">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="ImsOrderQuantity">Quantity:</label>
+                </div>
+                <div class="col-md-6">
+
+                  <input type="text" class="form-control" name="ImsOrderQuantity"
+                  id="ImsOrderQuantity"
+                  formControlName="ImsOrderQuantity" placeholder="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 frm_tabpanel">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <!-- <label for="ReceivedBy">Received By:</label> -->
+                </div>
+                <div class="col-md-6">
+                  <!--   <ejs-combobox id='ReceivedBy' [dataSource]='data' [fields]='fields' (filtering)='onFiltering($event)' [popupHeight]='height' [allowFiltering]='true'
+                                                                                          [placeholder]='watermark'></ejs-combobox> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <!-- <label for="COA">COA:</label> -->
+                </div>
+                <div class="col-md-6">
+                  <!-- <ejs-uploader #defaultupload [autoUpload]='false' [dropArea]='dropEle' [asyncSettings]='path' (success)="onUploadSuccess($event)" (failure)="onUploadFailure($event)"></ejs-uploader> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 frm_tabpanel">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <!-- <label for="GRN">GRN:</label> -->
+                </div>
+                <div class="col-md-6">
+                  <!-- <ejs-uploader #defaultupload [autoUpload]='false' [dropArea]='dropEle' [asyncSettings]='path' (success)="onUploadSuccess($event)" (failure)="onUploadFailure($event)"></ejs-uploader> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- </div> -->
+      </form>
+    </div>
+  </div>
+</div>

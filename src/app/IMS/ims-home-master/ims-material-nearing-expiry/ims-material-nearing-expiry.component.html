@@ -1,0 +1,43 @@
+<div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="">
+                        <!-- <button type="submit" class="btn-btn-info mr-2 float-right btn_style">  
+                                  Approve </button> -->
+                                  <button class=" mr-2 float-right btn_position addbtn_style"ejs-button >Approve</button>
+                    <!-- <h4>Material Nearing Expiry</h4> -->
+                                    </div>
+                                    
+                <!-- <div class="card-body"> -->
+    
+    <br>
+    
+                    <div class="table-responsive">
+                      
+                        <ejs-grid [dataSource]='data' [allowSelection]='true'allowFiltering='true'[filterSettings]='filterOptions' [gridLines]="lines"  [enableHover]='false'  [allowSorting]='true' e-gridheader=''height='400px'>
+                            <e-columns>
+                              
+                          <e-column field='SrNo' headerText='Sr. No.' textAlign='center' width=200></e-column>
+                          <e-column field='MaterialId' headerText='Material ID' textAlign='center' width=200></e-column>
+                          <e-column field='MaterialName' headerText='Material Name' textAlign='center' format='C2' width=200></e-column>
+                          <e-column field='StorageLocation' headerText='Storage Location' textAlign='center' format='yMd' width=200></e-column>
+                          <e-column field='StockQuantity' headerText='Stock Quantity' textAlign='center' width=200></e-column>
+                          <e-column field='ManufacturingDate' headerText='Manufacturing Date' textAlign='center' width=250></e-column>
+                          <e-column field='ExpiryDate' headerText='Expiry Date' textAlign='center' width=200></e-column>
+                          <e-column field='PresetDuration' headerText='Preset Duration ' textAlign='center' width=200></e-column>
+                        
+                        </e-columns>
+                          </ejs-grid>
+                  </div>
+    
+    
+    
+    
+    
+                    
+                    <!-- </div> -->
+            </div></div></div>
+    
+    
+    
+    

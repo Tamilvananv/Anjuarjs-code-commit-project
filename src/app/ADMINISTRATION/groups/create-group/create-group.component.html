@@ -1,0 +1,151 @@
+<div style="padding-top: 28px;">
+<ejs-tab #tab id="tab_wizard" heightAdjustMode="None" height=700 showCloseButton=false (select)="tabSelected($event)">
+  <e-tabitems>
+    <e-tabitem [header]='headerText[0]'>
+      <ng-template #content>
+        <form class="form-horizontal" [formGroup]='GroupForm' autocomplete="off">
+          <div id='booking'>
+            <div class="wizard-title"></div>
+            <div class="responsive-align">
+              <div class="row">
+                <div class="col-md-12" style="margin-top: 10px;">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="col-md-12">
+                        <label for="GroupName" class="control-label col-form-label">Name:</label>
+                         <span class="text-danger">*</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="col-md-12">
+                        <div class="col-sm-8" print-error [control]="GroupForm.get('PermissionName')">
+                          <input type="text" class="form-control" name="PermissionName" formControlName="PermissionName"
+                            placeholder="" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class=" row">
+                <div class="col-md-12" style="margin-top: 10px;">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="col-md-12">
+                        <label for="Description" class="control-label col-form-label">Description:</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6" style="padding-left: 20px;">
+                      <div class="col-md-12">
+                        <textarea class="form-control frm_tabtxtarea cye-lf-tag" rows="5" name="PermissionDescription"
+                          formControlName="PermissionDescription"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="form-actions">
+          <div class="d-flex no-block align-items-center">
+            <div class="ml-auto">
+              <div class="custom-control custom-checkbox">
+                <button type="button" id='searchNext' class="addbtn_style" *ngIf="isGroupEdit === false"
+                  (click)='SaveGroupForm()' ejs-button>
+                  <i class="fa fa-arrow-right"></i>
+                  &nbsp;Save & Next
+                </button>
+                <button type="button" id='searchNext' class="addbtn_style" *ngIf="isGroupEdit === true"
+                  (click)='UpdateGroup()' ejs-button>
+                  <i class="fa fa-arrow-right"></i>
+                  &nbsp;Update & Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </ng-template>
+    </e-tabitem>
+
+    <e-tabitem [header]='headerText[1]' disabled=true>
+
+      <ng-template #content>
+        <div id='selectTrain'>
+          <div class="wizard-title"></div>
+
+          <ejs-treegrid #Treegrid [dataSource]="topMenus" [gridLines]="lines" childMapping='SubFeatureList' height=391
+            [editSettings]="editSettings"  >
+            <e-columns>       
+              <e-column field="FeatureName" headerText="  Feature Name "  headerTextAlign="center" textAlign="left" width="350"></e-column>
+              <e-column  textAlign="center">
+                <ng-template #headerTemplate > 
+                  <div> 
+                      <div> 
+                          Read 
+                          Select All
+                          <input type="checkbox" [checked]="checked" (change)="GridReadHeaderClicked($event)"> 
+                  </div> 
+                      </div> 
+              </ng-template> 
+                <ng-template #template let-data>
+                  <div class="loc">                
+                    <input type="checkbox" [(ngModel)]="data.FeatureRead" (change)=" MarkFeatureRead($event, data)" >
+                  </div>
+                </ng-template>
+              </e-column>
+              <e-column textAlign="center">
+                <ng-template #headerTemplate > 
+                  <div> 
+                      <div> 
+                          Write 
+                          Select All
+                          <input type="checkbox" [checked]="checked" (change)="GridWriteHeaderClicked($event)"> 
+                  </div> 
+                      </div> 
+              </ng-template> 
+                <ng-template #template let-data>
+                  <div class="loc">
+                    <input type="checkbox"  [(ngModel)]="data.FeatureWrite" (change)="MarkFeatureWrite($event, data)" [disabled]= "!data.HasWriteAccess" > 
+                  </div>
+                </ng-template>
+              </e-column>
+            </e-columns>
+          </ejs-treegrid>
+
+          <div class="form-actions">
+            <div class="d-flex no-block align-items-center">
+              <div class="ml-auto">
+                <div class="custom-control custom-checkbox">
+                  <button type="submit" id='goBackDetails' class="addbtn_style" (click)='btnClicked($event)'
+                    ejs-button>
+                    <i class=" fa fa-arrow-left"></i> &nbsp;Back
+                  </button>
+                  <button type="button" id='SaveGroupPermission' *ngIf="isGroupEdit === false" class=" addbtn_style"
+                    (click)='SaveGroupPermission()' ejs-button>
+                    <i class="fa fa-check"></i>
+                    &nbsp;Save
+                  </button>
+                  <button type="button" id='UpdateGroupPermission' *ngIf="isGroupEdit === true" class="addbtn_style"
+                    (click)='UpdateGroupPermission()' ejs-button>
+                    <i class="fa fa-check"></i>
+                    &nbsp;Update
+                  </button>
+                  <button type="button" class="addbtn_style" *ngIf="isGroupEdit === true" ejs-button (click)="gotoGroup(false)">
+                    <i class="fas fa-times"></i> &nbsp;Close
+                  </button>
+                    <button type="button" class="addbtn_style" *ngIf="isGroupEdit === false" ejs-button (click)="gotoGroup(true)">
+                    <i class="fas fa-times"></i> &nbsp;Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </e-tabitem>
+
+
+  </e-tabitems>
+</ejs-tab>
+</div>

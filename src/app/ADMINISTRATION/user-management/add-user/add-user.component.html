@@ -1,0 +1,737 @@
+<ejs-tab
+  #tab
+  id="tab_wizard"
+  heightAdjustMode="None"
+  height="700"
+  showCloseButton="false"
+  (select)="tabSelected($event)"
+
+  style="padding-top: 28px"
+>
+  <e-tabitems>
+    <e-tabitem [header]="headerText[0]" *ngIf="!isUserEdit">
+      <ng-template #content>
+        <div id="booking">
+          <div class="wizard-title"></div>
+          <div class="responsive-align">
+            <br />
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="row mr-2">
+                    <div class="col-md-5">
+                      <label class="control-label col-form-label"
+                        >Select User:</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12 control-section">
+              <div class="control-section">
+                <ejs-grid
+                  #grid
+                  id="grid"
+                  [dataSource]="ObjAzureUserNameList"
+                  [allowSelection]="true"
+                  height="370"
+                  [gridLines]="lines"
+                  (rowSelecting)="rowSelecting($event)"
+                  (rowSelected)="rowSelected($event)"
+                  (headerCellInfo)="headerCellInfo($event)"
+                  (rowDeselected)="rowDeselected($event)"
+                  [toolbar]="toolbar"
+                  [allowPaging]="true"
+                  [pageSettings]="initialPage"
+                   (created)="created($event)"
+                >
+                  <e-columns>
+                    <e-column type="checkbox" width="40"></e-column>
+                     <e-column
+                      field="employeeId"
+                      headerText="Employee Id "
+                      width="80"
+                      headerTextAlign="center"
+                      textAlign="left"
+                    ></e-column>
+                    <e-column
+                      field="givenName"
+                      headerText="First Name "
+                      width="100"
+                      headerTextAlign="center"
+                      textAlign="left"
+                    ></e-column>
+                    <e-column
+                      field="surname"
+                      headerText="Last Name"
+                      headerTextAlign="center"
+                      textAlign="left"
+                      width="100"
+                    >
+                    </e-column>
+                    <e-column
+                      field="userPrincipalName"
+                      headerText="Email Id"
+                      headerTextAlign="center"
+                      textAlign="left"
+                      width="160"
+                      format="yMd"
+                    ></e-column>
+                    <e-column
+                      field="jobTitle"
+                      headerText="Job Title"
+                      headerTextAlign="center"
+                      textAlign="left"
+                      width="100"
+                    >
+                    </e-column>
+                  </e-columns>
+                </ejs-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="d-flex no-block align-items-center">
+            <div class="ml-auto">
+              <div class="custom-control custom-checkbox">
+                <button
+                  type="button"
+                  id="searchNext"
+                  *ngIf="isUserEdit === false"
+                  class="addbtn_style"
+                  (click)="SaveUser()"
+                  ejs-button
+                >
+                  <i class="fa fa-arrow-right"></i>
+                  &nbsp;Save & Next
+                </button>
+                <button
+                  type="button"
+                  id="searchNext"
+                  *ngIf="isUserEdit === true"
+                  class="addbtn_style"
+                  (click)="UpdateUser()"
+                  ejs-button
+                >
+                  <i class="fa fa-arrow-right"></i>
+                  &nbsp;Update & Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span id="err1"></span>
+      </ng-template>
+    </e-tabitem>
+
+    <e-tabitem [header]="headerText[1]" disabled="true">
+      <ng-template #content>
+        <div id="selectTrain">
+          <div class="wizard-title"></div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-7">
+                    <label
+                      id="lblName"
+                      style="font-size: 18px; color: #00000050"
+                      >User Name :
+                      {{ Username }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <br />
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6 control-section">
+                  <ejs-listbox
+                    [dataSource]="DepartmentList"
+                    #listbox1
+                    [toolbarSettings]="toolbarSettings"
+                    height="330px"
+                    scope="#connected-list"
+                    [fields]="Deptfields"
+                  ></ejs-listbox>
+                </div>
+                <div class="col-md-6 control-section">
+                  <ejs-listbox
+                    id="connected-list"
+                    #listbox2
+                    [dataSource]="ObjUserDepartmentList"
+                    height="330px"
+                    [fields]="Deptfields"
+                  ></ejs-listbox>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <div class="d-flex no-block align-items-center">
+              <div class="ml-auto">
+                <div class="custom-control custom-checkbox">
+                  <button
+                    type="submit"
+                    id="goBackToUser"
+                    class="addbtn_style"
+                    (click)="btnClicked($event)"
+                    *ngIf="!isUserEdit"
+                    ejs-button
+                  >
+                    <i class="fa fa-arrow-left"></i> &nbsp;Back
+                  </button>
+
+                  <button
+                    type="button"
+                    id="Save"
+                    *ngIf="isUserEdit === false"
+                    class="addbtn_style"
+                    (click)="SaveDepartMent()"
+                    ejs-button
+                  >
+                    <i class="fa fa-arrow-right"></i>
+                    &nbsp;Save & Next
+                  </button>
+                  <button
+                    type="button"
+                    id="searchNext"
+                    *ngIf="isUserEdit === true"
+                    class="addbtn_style"
+                    (click)="UpdateUserDepartment()"
+                    ejs-button
+                  >
+                      <i class="fa fa-check"></i>
+                    &nbsp;Update 
+                  </button>
+
+                   <button
+                    type="button"
+                    id="goToManager"
+                    *ngIf="isUserEdit === true"
+                    class="addbtn_style"
+                    (click)="NextbtnClicked($event)"
+                    ejs-button
+                  >
+                    <i class="fa fa-arrow-right"></i>
+                    &nbsp;Next 
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span id="err2"></span>
+        </div>
+      </ng-template>
+    </e-tabitem>
+
+    <e-tabitem [header]="headerText[2]" disabled="true">
+      <ng-template #content>
+        <div id="manager">
+          <div class="wizard-title"></div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-7">
+                    <label
+                      id="lblName"
+                      style="font-size: 18px; color: #00000050"
+                      >User Name :
+                      {{ Username }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="responsive-align">
+           
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="row mr-2">
+                    <div class="col-md-5">
+                      <label class="control-label col-form-label"
+                        >Select Manager:</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12 control-section">
+              <div class="control-section">
+                <ejs-grid
+                  #managergrid
+                  id="grid"
+                  [dataSource]="ObjManagerList"
+                  [allowSelection]="true"
+                  height="370"
+                  [gridLines]="lines"
+                  (rowSelecting)="ManagerRowSelecting($event)"
+                  (rowSelected)="ManagerRowSelected($event)"
+                  (headerCellInfo)="headerCellInfo($event)"
+                  (rowDeselected)="ManagerRowDeselected($event)"
+                  (rowDataBound)="rowDataBound($event)"
+                  [toolbar]="toolbar"
+                  [allowPaging]="true"
+                  [pageSettings]="initialPage"
+                   (created)="createdManager($event)"
+                >
+                  <e-columns>
+                    <e-column type="checkbox" width="50"></e-column>
+                    <e-column
+                      field="FirstName"
+                      headerText="First Name "
+                      width="120"
+                      textAlign="Center"
+                    ></e-column>
+                    <e-column
+                      field="LastName"
+                      headerText="Last Name"
+                      textAlign="center"
+                      width="150"
+                    >
+                    </e-column>
+                    <e-column
+                      field="EmailId"
+                      headerText="Email Id"
+                      textAlign="center"
+                      width="160"
+                      format="yMd"
+                    ></e-column>
+                  </e-columns>
+                </ejs-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="d-flex no-block align-items-center">
+            <div class="ml-auto">
+              <div class="custom-control custom-checkbox">
+                <button
+                  type="submit"
+                  id="goBackToDepartment"
+                  *ngIf="isUserEdit === false"
+                  class="addbtn_style"
+                  (click)="btnClicked($event)"
+                  ejs-button
+                >
+                  <i class="fa fa-arrow-left"></i> &nbsp;Back
+                </button>
+                <button
+                  type="submit"
+                  id="goBackToDepartment"
+                  *ngIf="isUserEdit === true"
+                  class="addbtn_style"
+                  (click)="EditbtnClicked($event)"
+                  ejs-button
+                >
+                  <i class="fa fa-arrow-left"></i> &nbsp;Back
+                </button>
+                <button
+                  type="button"
+                  id="selectmanager"
+                  *ngIf="isUserEdit === false"
+                  class="addbtn_style"
+                  (click)="SaveUserManager()"
+                  ejs-button
+                >
+                  <i class="fa fa-arrow-right"></i>
+                  &nbsp;Save & Next
+                </button>
+                <button
+                  type="button"
+                  id="selectmanager"
+                  *ngIf="isUserEdit === true"
+                  class="addbtn_style"
+                  (click)="UpdateUserManager()"
+                  ejs-button
+                >
+                   <i class="fa fa-check"></i>
+                  &nbsp;Update
+                </button>
+
+                  <button
+                    type="button"
+                    id="goToUserInformation"
+                    *ngIf="isUserEdit === true"
+                    class="addbtn_style"
+                    (click)="NextbtnClicked($event)"
+                    ejs-button
+                  >
+                    <i class="fa fa-arrow-right"></i>
+                    &nbsp;Next 
+                  </button>
+
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </e-tabitem>
+
+ <!-- 
+    <e-tabitem [header]="headerText[4]" disabled="true">
+      <ng-template #content>
+        <div id="information">
+          <div class="details-page wizard-title"></div>
+          <div class="rectangle">
+            <form [formGroup]="UserInfoForm">
+              <div class="col-md-12 frm_tabpanel" style="padding-top: 16%">
+                <div class="col-md-12 frm_tabpanel">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-5" style="padding-left: 1px">
+                          <label for="empid">Employee ID:</label>
+                          <span class="text-danger">*</span>
+                        </div>
+                       
+                        <div
+                class="col-md-7"
+                print-error
+                [control]="UserInfoForm.get('Employee Id')"
+              >
+                          <input
+                            type="text"
+                            class="form-control frm_tabtxtbox"
+                            id="EmployeeId"
+                            placeholder=""
+                            formControlName="EmployeeId"
+                            name="EmployeeId"
+                          />
+                          </div>
+                       
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 frm_tabpanel">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-5" style="padding-left: 1px">
+                          <label for="JoiningDate">Date of Joining:</label>
+                          <span class="text-danger">*</span>
+                        </div>
+                      
+                          <div
+                class="col-md-7"
+                print-error
+                [control]="UserInfoForm.get('Date Of Joining')"
+              >
+                          <ejs-datepicker                         
+                            [value]="dateValue"
+                            placeholder="Enter date"
+                            formControlName="DateOfJoining"
+                            name="DateOfJoining"
+                          ></ejs-datepicker>
+                        </div>
+                       
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="">
+            <div class="d-flex no-block align-items-center">
+              <div class="ml-auto">
+                <div class="custom-control custom-checkbox">
+                  <button
+                    type="submit"
+                    id="goBackToManager"
+                    *ngIf="isUserEdit === false"
+                    class="addbtn_style"
+                    (click)="btnClicked($event)"
+                    ejs-button
+                  >
+                    <i class="fa fa-arrow-left"></i> &nbsp;Back
+                  </button>
+
+                  <button
+                    type="submit"
+                    id="goBackToManager"
+                    *ngIf="isUserEdit === true"
+                    class="addbtn_style"
+                    (click)="EditbtnClicked($event)"
+                    ejs-button
+                  >
+                    <i class="fa fa-arrow-left"></i> &nbsp;Back
+                  </button>
+                  <button
+                    type="button"
+                    id="SaveUserPermission"
+                    class="addbtn_style"
+                    *ngIf="isUserEdit === false"
+                    (click)="SaveUserAdditionalInformation()"
+                    ejs-button
+                  >
+                    <i class="fa fa-check"></i>
+                    &nbsp;Save & Next
+                  </button>
+                  <button
+                    type="button"
+                    id="AdditionalUserInfo"
+                    class="addbtn_style"
+                    *ngIf="isUserEdit === true"
+                    (click)="UpdateUserAdditionalInformation()"
+                    ejs-button
+                  >
+                    <i class="fa fa-check"></i>
+                    &nbsp;Update
+                  </button>
+
+                     <button
+                    type="button"
+                    id="goToUserPermission"
+                    *ngIf="isUserEdit === true"
+                    class="addbtn_style"
+                    (click)="NextbtnClicked($event)"
+                    ejs-button
+                  >
+                    <i class="fa fa-arrow-right"></i>
+                    &nbsp;Next 
+                  </button>
+
+
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </e-tabitem>
+-->
+    <e-tabitem [header]="headerText[3]" disabled="true">
+      <ng-template #content>
+        <div id="Permissions">
+          <div class="details-page wizard-title"></div>
+
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="row mr-2">
+                  <div class="col-md-5">
+                    <label class="control-label col-form-label"
+                      >Email: {{ UserEmail }}</label
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="row mr-2 float-right">
+                  <div class="col-md-5">
+                    <label for="GroupId" class="control-label col-form-label"
+                      >Select Permissions Group :</label
+                    >
+                  </div>
+                  <div class="col-md-3">
+                    <ejs-dropdownlist
+                      id="GroupData"
+                      width="250%"
+                      [allowFiltering]="true"
+                      [dataSource]="ObjGroupNameList"
+                      placeholder="Select "
+                      [fields]="setfields"
+                      (change)="OnChangeGetGroupId($event)"
+                    >
+                    </ejs-dropdownlist>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr style="background-color: #a9a9a9" />
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="Permissions" class="control-label col-form-label"
+                    >Permissions:</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ejs-treegrid
+            #Treegrid
+            [dataSource]="topMenus"
+            [gridLines]="lines"
+            childMapping="SubFeatureList"
+            height="391"
+            [editSettings]="editSettings"
+          >
+            <e-columns>
+              <e-column
+                field="FeatureName"
+                headerText="Feature Name"
+                headerTextAlign="center"
+                textAlign="left"
+                width="350"
+              ></e-column>
+              <e-column textAlign="center">
+                <ng-template #headerTemplate>
+                  <div>
+                    <div>
+                      Read Select All
+                      <input
+                        type="checkbox"
+                        [checked]="checked"
+                        (change)="GridReadHeaderClicked($event)"
+                      />
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #template let-data>
+                  <div class="loc">
+                    <input
+                      type="checkbox"
+                      [(ngModel)]="data.FeatureRead"
+                      (change)="MarkFeatureRead($event, data)"
+                    />
+                  </div>
+                </ng-template>
+              </e-column>
+              <e-column textAlign="center">
+                <ng-template #headerTemplate>
+                  <div>
+                    <div>
+                      Write Select All
+                      <input
+                        type="checkbox"
+                        [checked]="checked"
+                        (change)="GridWriteHeaderClicked($event)"
+                      />
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #template let-data>
+                  <div class="loc">
+                    <input
+                      type="checkbox"
+                      [(ngModel)]="data.FeatureWrite"
+                      (change)="MarkFeatureWrite($event, data)"
+                      [disabled]="!data.HasWriteAccess"
+                    />
+                  </div>
+                </ng-template>
+              </e-column>
+            </e-columns>
+          </ejs-treegrid>
+        </div>
+
+        <div class="">
+          <div class="d-flex no-block align-items-center">
+            <div class="ml-auto">
+              <div class="custom-control custom-checkbox">
+               <!--  <button
+                  type="submit"
+                  id="goBackToUserInformation" 
+                  *ngIf="isUserEdit === false"
+                  class="addbtn_style"
+                  (click)="btnClicked($event)"
+                  ejs-button
+                >
+                  <i class="fa fa-arrow-left"></i> &nbsp;Back
+                </button>
+                <button
+                  type="submit"
+                  id="goBackToUserInformation"
+                  *ngIf="isUserEdit === true"
+                  class="addbtn_style"
+                  (click)="EditbtnClicked($event)"
+                  ejs-button
+                >
+                  <i class="fa fa-arrow-left"></i> &nbsp;Back
+                </button> -->
+
+
+                <button
+                  type="submit"
+                  id="goBackToManager" 
+                  *ngIf="isUserEdit === false"
+                  class="addbtn_style"
+                  (click)="btnClicked($event)"
+                  ejs-button
+                >
+                  <i class="fa fa-arrow-left"></i> &nbsp;Back
+                </button>
+                <button
+                  type="submit"
+                  id="goBackToManager"
+                  *ngIf="isUserEdit === true"
+                  class="addbtn_style"
+                  (click)="EditbtnClicked($event)"
+                  ejs-button
+                >
+                  <i class="fa fa-arrow-left"></i> &nbsp;Back
+                </button>
+
+
+
+
+
+
+
+                <button
+                  type="button"
+                  id="SaveUserPermission"
+                  class="addbtn_style"
+                  *ngIf="isUserEdit === false"
+                  (click)="SaveUserPermission()"
+                  ejs-button
+                >
+                  <i class="fa fa-check"></i>
+                  &nbsp;Save 
+                </button>
+                <button
+                  type="button"
+                  id="searchNext"
+                  *ngIf="isUserEdit === true"
+                  class="addbtn_style"
+                  (click)="UpdateUserPermission()"
+                  ejs-button
+                >
+                  <i class="fa fa-check"></i>
+                  &nbsp;Update
+                </button>
+                <button
+                  type="button"
+                  class="addbtn_style"                
+                  ejs-button
+                  (click)="gotoUserHome()"
+                >
+                  <i class="fas fa-times"></i> &nbsp;Close
+                </button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </e-tabitem>
+  </e-tabitems>
+</ejs-tab>

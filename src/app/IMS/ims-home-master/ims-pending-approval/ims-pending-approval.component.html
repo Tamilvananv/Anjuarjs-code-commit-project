@@ -1,0 +1,74 @@
+
+ <ngb-tabset >
+                           
+    <ngb-tab id="tab-selectbyid1" title="Pending" >
+        
+      <ng-template ngbTabContent>
+         
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="">
+                       <!-- <div class="">  -->
+                          <button class=" mr-2 float-right btn_position export_style"ejs-button >Rejected</button>
+                          <button class=" mr-2 float-right btn_position addbtn_style"ejs-button >Approve</button>
+                          <!-- <h4>Pending Approval</h4> -->
+                                           <!-- </div>  -->
+                                          
+                      <!-- <div class="card-body"> -->
+          
+          
+          <br><br>
+                          <div class="table-responsive">
+                            
+                              <ejs-grid [dataSource]='data' [allowSelection]='true'allowFiltering='true'[filterSettings]='filterOptions' [gridLines]="lines"  [enableHover]='false'  [allowSorting]='true' e-gridheader=''height='400px'>
+                                  <e-columns>
+                                    
+                                <e-column field='SrNo' headerText='Sr. No.' textAlign='center' width=200></e-column>
+                                <e-column field='ReqId' headerText='Request ID' textAlign='center' width=200></e-column>
+                                <e-column field='MaterialId' headerText='Material ID' textAlign='center' width=200></e-column>
+                                <e-column field='MaterialName' headerText='Material Name' textAlign='center' format='C2' width=200></e-column>
+                                <e-column field='LotNo' headerText='Lot No.' textAlign='center' format='yMd' width=200></e-column>
+                                <e-column field='ManufacturingDate' headerText='Manufacturing Date' textAlign='center' width=250></e-column>
+                                <e-column field='ExpiryDate' headerText='Expiry Date' textAlign='center' width=200></e-column>
+                                <e-column field='StorageLocation' headerText='Storage Location' textAlign='center' format='yMd' width=220></e-column>
+                                <e-column field='Quantity' headerText=' Quantity' textAlign='center' width=200></e-column>
+                                <e-column field='RequestRaisedBy' headerText='Request Raised By' textAlign='center' width=250></e-column>
+                                <e-column field='RequestRaisedDate' headerText='Request Raised Date ' textAlign='center' width=250></e-column>
+                                <e-column field='ReceiverName' headerText='Receiver Name' textAlign='center' width=200></e-column>
+                                <e-column field='Status' headerText='Status ' textAlign='center' width=150></e-column>
+                                <e-column field='PurposeOfUse' headerText='Purpose of Use ' textAlign='center' width=220></e-column>
+                              </e-columns>
+                                </ejs-grid>
+                        </div>
+          
+          
+          
+          
+          
+                          
+                          <!-- </div> -->
+                  </div></div></div>
+          
+
+      </ng-template></ngb-tab>
+   
+
+      <ngb-tab id="tab-selectbyid2" title="History">
+        
+          <ng-template ngbTabContent>
+             
+                  
+    
+          </ng-template></ngb-tab>
+
+</ngb-tabset>
+
+
+
+
+
+
+    
+    
+    
+

@@ -1,0 +1,189 @@
+<div class="row" style="padding-top: 28px">
+  <div class="col-md-12">
+    <div class="row" *ngIf="PageAccessRight.HasWriteAccess">
+      <div class="col-md-6 control-section">
+        <button
+          type="submit"
+          class="addbtn_style"
+          (click)="adddepartment(addDepartmentModal)"
+          ejs-button
+        >
+          <i class="fa fa-plus"></i> &nbsp;Add Department
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="padding-top: 6px;">
+<ejs-grid
+  #grid
+  id="Grid"
+  [dataSource]="ObjDepartmentList"
+  [gridLines]="lines"
+  height="370px"
+  [allowResizing]="true"
+  allowFiltering="true"
+  [toolbar]="toolbarOptions"
+  [allowExcelExport]="true"
+  (toolbarClick)="toolbarClick($event)"
+  [filterSettings]="filterOptions"
+  [gridLines]="lines"
+  [enableHover]="false"
+  [allowSorting]="true"
+  (commandClick)="EditDepartment($event); adddepartment(addDepartmentModal)"
+  [allowGrouping]="true"
+  [showColumnMenu]="true"
+  [groupSettings]="groupOptions"
+  [allowPdfExport]="true"
+  (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)'
+  [allowPaging]='true'
+  [pageSettings]='pageSettings'
+    (created)="created($event)"
+>
+  <e-columns>
+    
+      <e-column            
+        headerText="Action"
+        [commands]="commands"
+       textAlign="center"
+        width="30"
+       
+      ></e-column>
+  
+    <e-column
+      field="RowNumber"
+      headerText="Sr. No."
+      headerTextAlign="center" textAlign="left"
+            width="50"
+    ></e-column>
+
+
+    <e-column
+      field="DepartmentName"
+      headerText="Department Name"
+      headerTextAlign="center" textAlign="left"
+    ></e-column>
+
+    <e-column
+      field="DepartmentHeadName"
+      headerText="Department Head "
+      headerTextAlign="center" textAlign="left"
+      width="100"
+    ></e-column> 
+
+  </e-columns>
+</ejs-grid>
+</div>
+<ng-template #addDepartmentModal let-modal>
+  <div class="modal_header">
+
+      <div class="col-md-12">
+          <div class="row">
+              <div class="col-md-6">
+                  <h5 class="modal-title" *ngIf="!IsDepartmentEdit">Add Department</h5>
+                  <h5 class="modal-title" *ngIf="IsDepartmentEdit">Edit Department</h5>
+              </div>
+              <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')" ></i>
+              </div>
+
+          </div>
+      </div>
+    <!-- <h5 class="modal-title" *ngIf="!IsDepartmentEdit">Add Department</h5>
+    <h5 class="modal-title" *ngIf="IsDepartmentEdit">Edit Department</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="DepartmentForm">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="DepartmentName" class="control-label col-form-label"
+                >Enter Department:</label
+              ><span class="text-danger">*</span>
+            </div>
+            <div class="col-md-6">
+              <div
+                class="col-md-7"
+                print-error
+                [control]="DepartmentForm.get('DepartmentName')"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="DepartmentName"
+                  placeholder="Enter Department Here"
+                  formControlName="DepartmentName"
+                  name="DepartmentName"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="ManagerId" class="control-label col-form-label"
+                >Select Department Head:</label
+              ><span class="text-danger">*</span>
+            </div>
+            <div class="col-md-6">
+              <div
+                class="col-md-7"
+                print-error
+                [control]="DepartmentForm.get('Department Head')"
+              >
+                <ejs-dropdownlist
+                  id="Manager"
+                  [dataSource]="ObjManagerNameList"
+                  [fields]="fields"
+                 
+                  [popupHeight]="height"
+                  [allowFiltering]="true"
+                  [placeholder]="watermark"
+                  name="DepartmentHead"
+                  formControlName="DepartmentHead"
+                > </ejs-dropdownlist>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="addmodal_style"
+      (click)="SaveDepartment()"
+      *ngIf="!IsDepartmentEdit"
+      ejs-button
+    >
+      Add
+    </button>
+    <button
+      class="addmodal_style"
+      (click)="UpdateDepartment()"
+      *ngIf="IsDepartmentEdit"
+      ejs-button
+    >
+      Update
+    </button>
+    <button
+      class="cancel_style"
+      (click)="modal.close('Close click')"
+      ejs-button
+    >
+      cancel
+    </button>
+  </div>
+</ng-template>

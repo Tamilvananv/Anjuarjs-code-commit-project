@@ -1,0 +1,557 @@
+<div class="row">
+  <div class="col-md-12" style="padding-top: 30px">
+    <div class="card">
+      <ngb-tabset #t="ngbTabset" class="tabset1">
+        <ngb-tab id="tab-single" title="Single">
+          <ng-template ngbTabContent>
+            <div style="padding-top: 28px"></div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="BarcodeType">Barcode Type:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <ejs-combobox
+                        id="BarcodeTypeId"
+                        [dataSource]="Barcodetype"
+                        [fields]="fields"
+                        (filtering)="onFiltering($event)"
+                        [popupHeight]="height"
+                        [allowFiltering]="true"
+                        [placeholder]="watermark"
+                        name="BarcodeTypeId"
+                      ></ejs-combobox>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="ParentSampleId">Parent Sample Id:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <ejs-combobox
+                        id="ParentSampleId"
+                        [dataSource]="ParentSampleId"
+                        [fields]="fields"
+                        (filtering)="onFiltering($event)"
+                        [popupHeight]="height"
+                        [allowFiltering]="true"
+                        [placeholder]="watermark"
+                        name="ParentSampleId"
+                      ></ejs-combobox>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="BarcodeSeries">Barcode Series:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <ejs-combobox
+                        id="BarcodeSeries"
+                        [dataSource]="BarcodeSeries"
+                        [fields]="fields"
+                        (filtering)="onFiltering($event)"
+                        [popupHeight]="height"
+                        [allowFiltering]="true"
+                        [placeholder]="watermark"
+                        name="BarcodeSeries"
+                      ></ejs-combobox>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="SampleId">Sample Id:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <ejs-combobox
+                        id="SampleId"
+                        [dataSource]="SampleId"
+                        [fields]="fields"
+                        (filtering)="onFiltering($event)"
+                        [popupHeight]="height"
+                        [allowFiltering]="true"
+                        [placeholder]="watermark"
+                        name="SampleId"
+                      ></ejs-combobox>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="Department">Department:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <ejs-combobox
+                        id="Department"
+                        [dataSource]="DeptName"
+                        [fields]="fields"
+                        (filtering)="onFiltering($event)"
+                        [popupHeight]="height"
+                        [allowFiltering]="true"
+                        [placeholder]="watermark"
+                        name="Department"
+                      ></ejs-combobox>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="SampleStorage">Sample Storage:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <ejs-combobox
+                        id="SampleStorage"
+                        [dataSource]="SampleStorage"
+                        [fields]="fields"
+                        (filtering)="onFiltering($event)"
+                        [popupHeight]="height"
+                        [allowFiltering]="true"
+                        [placeholder]="watermark"
+                        name="SampleStorage"
+                      ></ejs-combobox>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="BarcodeHeader">Barcode Header:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <input
+                        class="form-control"
+                        name="BarcodeHeader"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="BarcodeId">Barcode Id:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <input
+                        class="form-control"
+                        name="BarcodeId"
+                        placeholder="Auto"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="BarcodeFooter">Barcode Footer:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <input
+                        type="text"
+                        name="BarcodeFooter"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-actions pull-right">
+                    <div class="d-flex no-block align-items-center">
+                      <div class="ml-auto">
+                        <button type="submit" class="btn_frmsubmit" ejs-button>
+                          <i class="fa fa-check"></i> &nbsp;Generate Barcode
+                        </button>
+
+                        <button type="submit" class="btn_frmcancel" ejs-button>
+                          <i class="fa fa-check"></i> &nbsp;Print
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-Series" title="Series">
+          <ng-template ngbTabContent>
+            <br />
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="BarcodeSeries">Select Barcode Series:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <ejs-combobox
+                        id="BarcodeSeries"
+                        [dataSource]="BarcodeSeries"
+                        [fields]="fields"
+                        (filtering)="onFiltering($event)"
+                        [popupHeight]="height"
+                        [allowFiltering]="true"
+                        [placeholder]="watermark"
+                        name="BarcodeSeries"
+                       (change)= "Barcode($event)"
+                      ></ejs-combobox>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-actions pull-right">
+                    <div class="d-flex no-block align-items-center">
+                      <div class="ml-auto">
+                        <button
+                          type="submit"
+                          class="addbtn_style"
+                           (click)="GenerateNewSeries()"
+                          ejs-button
+                        >
+                          Create New Series
+                        </button>
+
+                        <label for="BarcodeSeries">Barcode Series:{{new}}</label>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-3">
+                  <button
+                    type="submit"
+                    class="addbtn_style"
+                    (click)="addnewSeriesModal(addnewSeries)"
+                    ejs-button
+                  >
+                    Add Row
+                  </button>
+                </div>
+                <div class="col-md-7"></div>
+              </div>
+            </div>
+            <br />
+
+            <ng-template #addnewSeries let-modal>
+              <div class="modal_header">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title">Add</h5>
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i
+                        class="fas fa-times"
+                        (click)="modal.dismiss('Cross click')"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="BarcodeType">Barcode Type:</label>
+                        </div>
+                        <div class="col-md-7">
+                          <ejs-combobox
+                            id="BarcodeTypeId"
+                            [dataSource]="Barcodetype"
+                            [fields]="fields"
+                            (filtering)="onFiltering($event)"
+                            [popupHeight]="height"
+                            [allowFiltering]="true"
+                            [placeholder]="watermark"
+                            name="BarcodeTypeId"
+                          ></ejs-combobox>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="ParentSampleId">Parent Sample Id:</label>
+                        </div>
+                        <div class="col-md-7">
+                          <ejs-combobox
+                            id="ParentSampleId"
+                            [dataSource]="ParentSampleId"
+                            [fields]="fields"
+                            (filtering)="onFiltering($event)"
+                            [popupHeight]="height"
+                            [allowFiltering]="true"
+                            [placeholder]="watermark"
+                            name="ParentSampleId"
+                          ></ejs-combobox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="BarcodeSeries">Barcode Series:</label>
+                        </div>
+                        <div class="col-md-7">
+                          <ejs-combobox
+                            id="BarcodeSeries"
+                            [dataSource]="BarcodeSeries"
+                            [fields]="fields"
+                            (filtering)="onFiltering($event)"
+                            [popupHeight]="height"
+                            [allowFiltering]="true"
+                            [placeholder]="watermark"
+                            name="BarcodeSeries"
+                          ></ejs-combobox>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="SampleId">Sample Id:</label>
+                        </div>
+                        <div class="col-md-7">
+                          <ejs-combobox
+                            id="SampleId"
+                            [dataSource]="SampleId"
+                            [fields]="fields"
+                            (filtering)="onFiltering($event)"
+                            [popupHeight]="height"
+                            [allowFiltering]="true"
+                            [placeholder]="watermark"
+                            name="SampleId"
+                          ></ejs-combobox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="Department">Department:</label>
+                        </div>
+                        <div class="col-md-7">
+                          <ejs-combobox
+                            id="Department"
+                            [dataSource]="DeptName"
+                            [fields]="fields"
+                            (filtering)="onFiltering($event)"
+                            [popupHeight]="height"
+                            [allowFiltering]="true"
+                            [placeholder]="watermark"
+                            name="Department"
+                          ></ejs-combobox>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="SampleStorage">Sample Storage:</label>
+                        </div>
+                        <div class="col-md-7">
+                          <ejs-combobox
+                            id="SampleStorage"
+                            [dataSource]="SampleStorage"
+                            [fields]="fields"
+                            (filtering)="onFiltering($event)"
+                            [popupHeight]="height"
+                            [allowFiltering]="true"
+                            [placeholder]="watermark"
+                            name="SampleStorage"
+                          ></ejs-combobox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="BarcodeHeader">Barcode Header:</label>
+                        </div>
+                        <div class="col-md-7">
+                          <input
+                            class="form-control"
+                            name="BarcodeHeader"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="BarcodeId">Barcode Id:</label>
+                        </div>
+                        <div class="col-md-7">
+                          <input
+                            class="form-control"
+                            name="BarcodeId"
+                            placeholder="Auto"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="BarcodeFooter">Barcode Footer:</label>
+                        </div>
+                        <div class="col-md-7">
+                          <input
+                            type="text"
+                            name="BarcodeFooter"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button class="addmodal_style" ejs-button>Add</button>
+                <button
+                  class="cancel_style"
+                  (click)="modal.close('Close click')"
+                  ejs-button
+                >
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+
+            <ejs-grid
+              [dataSource]="Data"
+              [gridLines]="lines"
+              [filterSettings]="filterOptions"
+              height="410px"
+            >
+              <e-columns>
+                <e-column
+                  field="ParentSampleId"
+                  headerText="Parent Sample Id"
+                  textAlign="Center"
+                  width="60"
+                ></e-column>
+                <e-column
+                  field="SampleId"
+                  headerText="Sample Id"
+                  textAlign="Center"
+                  width="60"
+                ></e-column>
+                <e-column
+                  field="BarcodeId"
+                  headerText="Barcode Id"
+                  textAlign="Center"
+                  width="60"
+                ></e-column>
+                <e-column
+                  field="BarcodeSeries"
+                  headerText="Barcode Series"
+                  textAlign="Center"
+                  width="60"
+                ></e-column>
+                <e-column
+                  field="BarcodeHeader"
+                  headerText="Barcode Header"
+                  textAlign="Center"
+                  width="60"
+                ></e-column>
+                <e-column
+                  field="BarcodeFooter"
+                  headerText="Barcode Footer"
+                  textAlign="Center"
+                  width="60"
+                ></e-column>
+                <e-column
+                  field="SampleStorage"
+                  headerText="Sample Storage"
+                  textAlign="Center"
+                  width="60"
+                ></e-column>
+                <e-column
+                  field="Department"
+                  headerText="Department"
+                  textAlign="Center"
+                  width="60"
+                ></e-column>
+              </e-columns>
+            </ejs-grid>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

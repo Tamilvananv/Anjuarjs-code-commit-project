@@ -1,0 +1,1 @@
+{"theme":"material","properties":"{\"$primary\":\"#3f51b5\",\"$primary-font\":\"#fff\",\"$accent\":\"rgba(8,161,161,1)\",\"$accent-font\":\"#fff\"}","components":"[\"comp-grid\",\"comp-calendar\",\"comp-switch\",\"comp-drop-down-list\",\"comp-combo-box\",\"comp-multi-select\",\"comp-datepicker\",\"comp-datetimepicker\",\"comp-check-box\",\"comp-toolbar\"]"}

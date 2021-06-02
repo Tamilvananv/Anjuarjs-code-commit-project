@@ -1,0 +1,133 @@
+/* 
+
+.card_container{
+    margin-top:-9%;
+    }
+    .card_1{
+      height: 500px;
+      background-size: cover;
+      background: no-repeat;
+      color: black;
+      background-position: center;
+    }
+    
+    .card_head{
+      
+      font-size: 35px;
+       padding: 40px; 
+      padding-top: -15%;
+      text-align: center;
+      margin: 75px 0px 0px 0px;
+        color: #FFF;
+        padding: 0px 15px;
+     
+    }
+    .card_head h5{
+    padding-top: 80%;
+    } 
+    .card_ico{
+      font-size: 40px;
+      text-align: center;
+      padding-top: 36%;
+      color: #FFF;
+    }
+    .card_head2{
+      
+      font-size: 35px;
+       padding: 40px; 
+      padding-top: -15%;
+      text-align: center;
+      margin: 75px 0px 0px 0px;
+        color: #FFF;
+        padding: 0px 15px;
+     
+    }
+    .card_head2 h5{
+    padding-top: 90%;
+    } 
+    .card_ico2{
+      font-size: 40px;
+      text-align: center;
+      padding-top: 52%;
+      color: #FFF;
+    }
+    
+     */
+
+
+
+
+
+
+
+      
+    /* .card_1{
+      height: 200px; 
+     background-size: cover;
+     background: no-repeat;
+     color: black;
+     background-position: center;
+   }
+
+.card_info{
+ text-align: center;
+ color: #FFF;
+ padding: 60px 0px;
+}
+.card_info h4{
+ padding-top: 7px;
+}
+   
+   .card_head{
+     
+     font-size: 35px;
+      padding: 40px; 
+     padding-top: -15%;
+     text-align: center;
+     margin: 75px 0px 0px 0px;
+       color: #FFF;
+       padding: 0px 15px;
+    
+   }
+   .card_head h4{
+   padding-top: 80%;
+   } 
+   
+   .card_head2{
+     
+       font-size: 35px;
+        padding: 40px; 
+       padding-top: -15%;
+       text-align: center;
+       margin: 75px 0px 0px 0px;
+         color: #FFF;
+         padding: 0px 15px;
+      
+     }
+     .card_head2 h4{
+     padding-top: 130%;
+     } 
+     
+      */
+
+      .card_1{
+        height: 200px; 
+       background-size: cover;
+       background: no-repeat;
+       color: black;
+       background-position: center;
+     }
+ 
+ .card_info{
+   text-align: center;
+   color: #FFF;
+   padding: 40px 0px;
+ }
+ .card_info h4{
+   padding-top: 18px;
+ }
+ .card_info p{
+   font-size: 40px;
+   font-weight: 700;
+ }
+     

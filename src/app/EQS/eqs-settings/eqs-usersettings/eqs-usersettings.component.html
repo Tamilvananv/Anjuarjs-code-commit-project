@@ -1,0 +1,281 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" style="padding-top: 28px;">
+      <!-- <ngb-tabset #t="ngbTabset"> -->
+      <ngb-tabset class="tabset1" #t="ngbTabset">
+        <!-- <ngb-tab id="tab-selectbyid2" title="User Settings">
+          <ng-template ngbTabContent> </ng-template>
+        </ngb-tab> -->
+
+        <!-- <ngb-tab id="tab-selectbyid3" title="Alert Settings">
+          <ng-template ngbTabContent> </ng-template>
+        </ngb-tab> -->
+
+        <ngb-tab id="tab-selectbyid4" title="Custom Header Field">
+          <ng-template ngbTabContent>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox" *ngIf="PageAccessRight.HasWriteAccess">
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="addcustomheader(addcustomheaderModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #addcustomheaderModal let-modal>
+              <div class="modal_header">
+                <!-- <h5 class="modal-title" *ngIf="!IsCustomerHeaderEdit">Add Custom Header</h5>
+                <h5 class="modal-title" *ngIf="IsCustomerHeaderEdit">Edit Custom Header</h5>
+                <button type="button" class="close" aria-label="close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title" *ngIf="!IsCustomerHeaderEdit">Add Custom Header</h5>
+                      <h5 class="modal-title" *ngIf="IsCustomerHeaderEdit">Edit Custom Header</h5>
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" [formGroup]='CustomHeaderForm' autocomplete="off">
+                  <div class="form-group row">
+                    <label for="FieldName" class="col-sm-4 control-label col-form-label">Field Name:
+                      <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-sm-8" print-error [control]="CustomHeaderForm.get('CustomHeaderFieldName')">
+                      <input type="text" class="form-control" name="CustomHeaderFieldName"
+                        formControlName="CustomHeaderFieldName" placeholder="" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" *ngIf="!IsCustomerHeaderEdit" (click)="SaveCustomHeaderMaster()"
+                  ejs-button>
+
+                  Add
+                </button>
+                <button class="addmodal_style" (click)="UpdateCustomHeader()" *ngIf="IsCustomerHeaderEdit" ejs-button>
+                  Update
+                </button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+            <div class="table-responsive setting_table" style="padding-left: 30%;" >
+            <ejs-grid #grid id="Grid" [dataSource]="objCustomHeaderList" allowFiltering="true" [allowPaging]='true' [pageSettings]='pageSettings'
+              [filterSettings]="filterOptions" [gridLines]="lines" [toolbar]="toolbar" height="300px" width=60%
+              (commandClick)="actionCustomHeader($event)"  (toolbarClick)='toolbarClick($event)'  [allowExcelExport]='true'
+              (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)' [allowPdfExport]="true"
+              (created)="created($event)">
+              <e-columns>
+                <e-column headerText='Action' textAlign='center' [commands]="commands"  [visible]='IsVisible' width='10'></e-column>
+                <e-column field="CustomHeaderFieldName" headerText=" Field Name" headerTextAlign='center' textAlign='left' isPrimaryKey="true"
+                  width="20">
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-selectbyid5" title="Equipment Name">
+          <ng-template ngbTabContent>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox" *ngIf="PageAccessRight.HasWriteAccess">
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="addequipmenttype(addequipmenttypeModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #addequipmenttypeModal let-modal>
+              <div class="modal_header">
+                <!-- <h5 class="modal-title" *ngIf="!IsEquipmentTypeEdit">Add Equipment Name</h5>
+                <h5 class="modal-title" *ngIf="IsEquipmentTypeEdit">Edit Equipment Name</h5>
+                <button type="button" class="close" aria-label="close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title" *ngIf="!IsEquipmentTypeEdit">Add Equipment Name</h5>
+                      <h5 class="modal-title" *ngIf="IsEquipmentTypeEdit">Edit Equipment Name</h5>
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" [formGroup]='EquipmentTypeForm' autocomplete="off">
+                  <div class="form-group row">
+                    <label for="EqsEquipmentType" class="col-sm-4 control-label col-form-label">
+                      Equipment Name:<span class="text-danger">*</span>
+                    </label>
+                    <div class="col-sm-8" print-error [control]="EquipmentTypeForm.get('EquipmentTypeName')">
+                      <input type="text" class="form-control" name="EquipmentTypeName" formControlName="EquipmentName"
+                        placeholder="" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" *ngIf="!IsEquipmentTypeEdit" (click)="SaveEquipmentTypeMaster()"
+                  ejs-button>
+                  Add
+                </button>
+                <button class="addmodal_style" (click)="UpdateEquipmentTypeMaster()" *ngIf="IsEquipmentTypeEdit"
+                  ejs-button>
+                  Update
+                </button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+            <div class="table-responsive setting_table" style="padding-left: 30%" >
+            <ejs-grid  #grid1 id="Grid1"  [dataSource]="objEquipmentTypeList" [columns]="columns" [showColumnChooser]="true"
+              allowFiltering="true" [filterSettings]="filterOptions" [gridLines]="lines" [allowPaging]='true'[pageSettings]='pageSettings'
+              [toolbar]="toolbar" height="300px" width=60%
+              (commandClick)="actionEquipmentType($event)" (toolbarClick)='toolbarClick($event)'  [allowExcelExport]='true'
+              (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)' [allowPdfExport]="true" (created)="createdEquipmentType($event)"
+               >
+              <e-columns>
+                <e-column headerText='Action'  [visible]='IsVisible' textAlign='center' [commands]="commands" width='20'></e-column>
+                <e-column field="SerialNo" headerText="Sr. No." headerTextAlign="center" textAlign="left" isPrimaryKey="true"
+                  width="20">
+                </e-column>
+
+                <e-column field="Name" headerText="Equipment Name"  isPrimaryKey="true"headerTextAlign='center' textAlign='left'
+                  width="50">
+                </e-column>
+
+
+              </e-columns>
+            </ejs-grid>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-selectbyid6" title="Location">
+          <ng-template ngbTabContent>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox" *ngIf="PageAccessRight.HasWriteAccess">
+                          <button type="submit" class="addbtn_style" ejs-button (click)="
+                              addstoragelocation(addstoragelocationModal)
+                            ">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #addstoragelocationModal let-modal>
+              <div class="modal_header">
+                <!-- <h5 class="modal-title" *ngIf="!IsStorageLocationEdit">Add Location</h5>
+                <h5 class="modal-title" *ngIf="IsStorageLocationEdit">Edit Location</h5>
+                <button type="button" class="close" aria-label="close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title" *ngIf="!IsStorageLocationEdit">Add Location</h5>
+                      <h5 class="modal-title" *ngIf="IsStorageLocationEdit">Edit Location</h5>
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" [formGroup]='StorageLocationFrom' autocomplete="off">
+                  <div class="form-group row">
+                    <label for="StorageLoc" class="col-sm-4 control-label col-form-label">Location:<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8" print-error [control]="StorageLocationFrom.get('StorageLocationName')">
+                      <input type="text" class="form-control" name="StorageLocationName"
+                        formControlName="StorageLocationName" placeholder="" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" *ngIf="!IsStorageLocationEdit" (click)="SaveStorageLocation()"
+                  ejs-button>
+
+                  Add
+                </button>
+                <button class="addmodal_style" (click)="UpdateStorageLocation()" *ngIf="IsStorageLocationEdit"
+                  ejs-button>
+                  Update
+                </button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+            <div class="table-responsive setting_table" style="padding-left: 30%" >
+            <ejs-grid  #grid2 id="Grid2" [dataSource]="objEquipmentStorageLocation" allowFiltering="true" [allowPaging]='true' [pageSettings]='pageSettings'
+              [filterSettings]="filterOptions" [gridLines]="lines" [toolbar]="toolbar" height="300px" width=60%
+              (commandClick)="actionStorageLocation($event)" (toolbarClick)='toolbarClick($event)'  [allowExcelExport]='true'
+              (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)' [allowPdfExport]="true"  (created)="createdStorageLocation($event)">
+              <e-columns>
+                <e-column headerText='Action' textAlign='center'  [visible]='IsVisible' [commands]="commands" width='20'></e-column>
+                <e-column field="SerialNo" headerText="Sr. No." headerTextAlign="center" textAlign="left" isPrimaryKey="true"
+                  width="20">
+                </e-column>
+                <e-column field="Name" headerText="Location" headerTextAlign='center' textAlign='left' isPrimaryKey="true"
+                  width="50">
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+      <!-- </div> -->
+
+      <!-- </div> -->
+    </div>
+  </div>
+</div>

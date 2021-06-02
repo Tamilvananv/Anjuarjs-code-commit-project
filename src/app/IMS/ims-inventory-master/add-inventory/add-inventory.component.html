@@ -1,0 +1,477 @@
+<div class="row" style="padding-top: 32px;">
+    <div class="col-md-12">
+        <div class="card">
+            <form [formGroup]="ImsAddInventoryForm">
+                <div class="form-actions">
+                    <div class="d-flex no-block align-items-center">
+                        <div class="ml-auto">
+                            <div class="custom-control custom-checkbox">
+
+
+                                <button type="submit" *ngIf="isInventoryEdit === false" class="btn_frmsubmit"
+                                    (click)="addImsMaster()" ejs-button>
+                                    Save
+                                </button>
+                                <button type="submit" *ngIf="isInventoryEdit" class="btn_frmsubmit"
+                                    (click)="UpdateIImsMaster()" ejs-button>
+                                    Update
+                                </button>
+
+
+                                <button type="button" class="btn_frmcancel" (click)="gotoImsMaster()" ejs-button>
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MaterialId">
+                                        Material ID:
+                                    </label>
+                                    <span class="text-danger">*</span>
+                                </div>
+                                <div class="col-md-6"  print-error [control]="ImsAddInventoryForm.get('MaterialId')">
+
+                                    <input type="text"  class="form-control frm_tabtxtbox" name="ImsMaterialId"
+                                        id="ImsMaterialId" formControlName="ImsMaterialId" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ImsInventoryMasterAuthRequird">
+                                        Approver Required:
+                                    </label>
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="radio" id="customRadio1" name="ImsInventoryMasterAuthRequird"
+                                        class="custom-control-input" [value]="true"
+                                        formControlName="ImsInventoryMasterAuthRequird" />
+                                    <label class="custom-control-label" for="customRadio1">Yes</label>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" id="customRadio2" name="ImsInventoryMasterAuthRequird"
+                                        class="custom-control-input" [value]="false"
+                                        formControlName="ImsInventoryMasterAuthRequird" />
+                                    <label class="custom-control-label" for="customRadio2">No</label>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--  <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                     <label for="QcId">
+                                        QC ID:
+                                    </label> 
+                                </div>
+                                <div class="col-md-7">
+                                     <input type="text" class="form-control" name="ImsQCId"
+                                        [(ngModel)]="formData.ImsQCId" placeholder=""> 
+                                </div>
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="InventoryCateogory">
+                                        Inventory Category:
+                                    </label>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <ejs-combobox [dataSource]='objInventoryCategoryType' [fields]='fields'
+                                        name="ImsInventoryCategoryId" id="ImsInventoryCategoryId"
+                                        formControlName="ImsInventoryCategoryId" [popupHeight]='height'
+                                        [placeholder]='watermark' (change)="loadSubCategory($event)"></ejs-combobox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="StorageLocId">
+                                        Storage Location:
+                                    </label>
+                                    <span class="text-danger">*</span>
+                                </div>
+                                <div class="col-md-6" print-error [control]="ImsAddInventoryForm.get('StorageLocId')">
+                                    <ejs-combobox id="StorageLoc" [dataSource]="objStorageLocList" [fields]="fields"
+                                        (filtering)="onFiltering($event)" [popupHeight]="height" [allowFiltering]="true"
+                                        [placeholder]="watermark" name="ImsStorageLocationId" id="ImsStorageLocationId"
+                                        (change)="getStoragetemperature($event)" formControlName="ImsStorageLocationId">
+                                    </ejs-combobox>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--  <div class="col-md-6">
+                                      <div class="row">
+                                          <div class="col-md-3">
+                                              <label 
+                                              for="QcRelNote">
+                                              QC Release Note:
+                                            </label>
+                                          </div>
+                                          <div class="col-md-7">
+                                              <ejs-uploader 
+                                              #defaultupload [autoUpload]='false' 
+                                              [dropArea]='dropEle' 
+                                              [asyncSettings]='path' 
+                                              (success)="onUploadSuccess($event)" 
+                                              (failure)="onUploadFailure($event)">
+                                               </ejs-uploader>
+                                             </div> 
+                                           </div>
+                                        </div> -->
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="InventorySubCateogory">
+                                        Inventory Subcategory:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <ejs-combobox [dataSource]='objInventorySubCategoryType' [fields]='fields'
+                                        (filtering)='onFiltering($event)' name="ImsInventorySubCategoryId"
+                                        [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark'
+                                        id="ImsInventorySubCategoryId" formControlName="ImsInventorySubCategoryId"
+                                        (change)="loadMaterial($event)"></ejs-combobox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label for="id">
+                                        Min:
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="col-form-label">{{MinTemparature}}</label>
+                                </div>
+                                <div class="col-md-1">
+                                    <label for="id">
+                                        Max:
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="col-form-label">{{MaxTemparature}}</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MaterialName">
+                                        Material Name:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <ejs-combobox [dataSource]='objImsCategoryMaterial' [fields]='fields'
+                                        name="ImsInventoryCategoryMaterialId" id="ImsInventoryCategoryMaterialId"
+                                        formControlName="ImsInventoryCategoryMaterialId" [popupHeight]='height'
+                                        [placeholder]='watermark'></ejs-combobox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="StorageTemp">
+                                        Storage Temperature:
+                                    </label>
+                                    <span class="text-danger">*</span>
+                                </div>
+                                <div class="col-md-6"  print-error [control]="ImsAddInventoryForm.get('StorageTemp')">
+                                    <input type="text" class="form-control" name="ImsInventoryStorageTemperature"
+                                        id="ImsInventoryStorageTemperature"
+                                        formControlName="ImsInventoryStorageTemperature" placeholder=""
+                                        (change)="CheckStorageLocationTemparature($event)">
+                                </div>
+                            </div>
+                        </div>
+                        <!--   <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MSDS">
+                                        MSDS:
+                                    </label> 
+                                </div>
+                                <div class="col-md-6">
+                                     <ejs-uploader #defaultupload [autoUpload]='false' [dropArea]='dropEle'
+                                        [asyncSettings]='path' (success)="onUploadSuccess($event)"
+                                        (failure)="onUploadFailure($event)">
+                                    </ejs-uploader> 
+                                </div>
+                            </div>
+                        </div> -->
+                        <!--   <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                     <label for="ImsInventoryMasterApprover">
+                                        Approver:
+                                    </label> 
+                                </div>
+                                <div class="col-md-6">
+
+                                     <ejs-combobox id='CatNoApprover' [dataSource]='data' [fields]='fields'
+                                        (filtering)='onFiltering($event)' [popupHeight]='height' [allowFiltering]='true'
+                                        [placeholder]='watermark'>
+                                    </ejs-combobox> 
+                                </div>
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="Vendor">
+                                        Vendor:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <ejs-combobox id="Vendor" [dataSource]="objVendorList" [fields]="fields"
+                                        (filtering)="onFiltering($event)" [popupHeight]="height" [allowFiltering]="true"
+                                        name="ImsVendorMasterId" id="ImsVendorMasterId"
+                                        formControlName="ImsVendorMasterId" [placeholder]="watermark"></ejs-combobox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ImsInventoryAllowGmP">
+                                        GMP:
+                                    </label>
+                                </div>
+                                <div class="col-md-1">
+
+
+
+                                    <input type="radio" id="customRadio3" name="ImsInventoryAllowGmP"
+                                        class="custom-control-input" [value]="true"
+                                        formControlName="ImsInventoryAllowGmP" (click)="SetAuthRequired()" />
+                                    <label class="custom-control-label" for="customRadio3">Yes</label>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <input type="radio" id="customRadio4" name="ImsInventoryAllowGmP"
+                                        class="custom-control-input" [value]="false"
+                                        formControlName="ImsInventoryAllowGmP" />
+                                    <label class="custom-control-label" for="customRadio4">No</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MfgName">
+                                        Manufacturer:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <ejs-combobox id="Vendor" [dataSource]="objManufacturerList" [fields]="fields"
+                                        (filtering)="onFiltering($event)" [popupHeight]="height" [allowFiltering]="true"
+                                        name="ImsManufacturerId" id="ImsManufacturerId"
+                                        formControlName="ImsManufacturerId" [placeholder]="watermark">
+                                    </ejs-combobox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ImsInventoryAllowNonGmP">
+                                        NON-GMP:
+                                    </label>
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="radio" id="customRadio5" name="ImsInventoryAllowNonGmP"
+                                        class="custom-control-input" [value]="true"
+                                        formControlName="ImsInventoryAllowNonGmP" (click)="SetAuthRequired()" />
+                                    <label class="custom-control-label" for="customRadio5">Yes</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" id="customRadio6" name="ImsInventoryAllowNonGmP"
+                                        class="custom-control-input" [value]="false"
+                                        formControlName="ImsInventoryAllowNonGmP" />
+                                    <label class="custom-control-label" for="customRadio6">No</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CatNo">
+                                        Catalogue Number:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="CatNo" class="form-control" name="ImsInventoryMasterCatalogueNumber"
+                                        id="ImsInventoryMasterCatalogueNumber"
+                                        formControlName="ImsInventoryMasterCatalogueNumber" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ROL">
+                                        Reorder Level:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="ImsInventoryMasterReorderLevel"
+                                        id="ImsInventoryMasterReorderLevel"
+                                        formControlName="ImsInventoryMasterReorderLevel" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <!--  <div class="col-md-6">
+                                                    <div class="row">
+                                                      <div class="col-md-4">
+                                                         <label for="AuditReportAttachment">
+                                                             Audit Report Attachment:
+                                                         </label>
+                                                      </div>
+                                                      <div class="col-md-6">
+                                                         <ejs-uploader 
+                                                         #defaultupload [autoUpload]='false' 
+                                                         [dropArea]='dropEle'
+                                                          [asyncSettings]='path'
+                                                           (success)="onUploadSuccess($event)" 
+                                                           (failure)="onUploadFailure($event)">
+                                                         </ejs-uploader>
+                                                       </div>
+                                                    </div>
+                                                   </div> -->
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+
+                        <!--  <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ImsInventoryMasterAllowInward">
+                                        Allow Inward:
+                                    </label>
+                                </div>
+                                <div class="col-md-1">
+                                        <input type="radio" id="customRadio3" name="ImsInventoryMasterAllowInward"
+                                        class="custom-control-input" [value]="true"
+                                        [(ngModel)]="formData.ImsInventoryMasterAllowInward"  
+                                         />
+                                    <label class="custom-control-label" for="customRadio3">Yes</label>
+                                </div>
+                                <div class="col-md-3">
+                                        <input type="radio" id="customRadio4" name="ImsInventoryMasterAllowInward"
+                                        class="custom-control-input" [value]="false"
+                                        [(ngModel)]="formData.ImsInventoryMasterAllowInward"  
+                                         />
+                                    <label class="custom-control-label" for="customRadio4">No</label>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+
+
+                        <!--  <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="AuditStatus">
+                                                                Audit Status:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ejs-combobox 
+                                                            id='AuditStatus' 
+                                                            [dataSource]='dataauditstatus'
+                                                             [fields]='fields' 
+                                                             (filtering)='onFiltering($event)' 
+                                                             [popupHeight]='height' 
+                                                             [allowFiltering]='true'
+                                                            [placeholder]='watermark'>
+                                                        </ejs-combobox>
+                                                         </div>
+                                                      </div>
+                                                  </div> -->
+
+                    </div>
+                </div>
+
+
+
+
+
+            </form>
+        </div>
+    </div>
+</div>

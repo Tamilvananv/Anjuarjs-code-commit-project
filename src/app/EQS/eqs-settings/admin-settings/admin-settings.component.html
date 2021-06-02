@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" style="padding-top: 28px;">
+     
+      <ngb-tabset class="tabset1" #t="ngbTabset">
+      
+
+        <ngb-tab id="tab-selectbyid1" title="Qualification">
+          <ng-template ngbTabContent>
+           
+          <div class="row">
+        <div class="col-lg-12">
+   
+     <div > <br /></div>
+
+      <div class="table-responsive">
+        <ejs-grid #grid id='Grid' [dataSource]='ObjQualificationList'   allowTextWrap='true'  [textWrapSettings]='wrapSettings'
+          [allowExcelExport]='true' [allowSelection]='true'  [toolbar]='toolbarOptions' allowFiltering='true'
+          [filterSettings]='filterOptions' [gridLines]="lines" [enableHover]='false' [allowSorting]='true'
+          e-gridheader='' height='363px'   [allowPaging]='true'  [pageSettings]='pageSettings' [allowPdfExport]="true" 
+           [showColumnMenu]="true" [allowGrouping]="true"   (excelExportComplete)='excelExportComplete()'
+           (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)' (created)="created($event)"   (toolbarClick)='toolbarClick($event)' 
+           >
+          <e-columns>
+          
+            <e-column field='EquipmentId'  headerText='Equipment Id'headerTextAlign="center" textAlign="left" width=130>
+            </e-column>
+            <e-column field='EquipmentTypeName'  headerText='Equipment Name'headerTextAlign="center" textAlign="left"
+              width=160>
+            </e-column>
+            <e-column field='EqsQualificationDate' headerText='Date of Qualification' headerTextAlign="center" textAlign="left"  [format]='Dateformat'    [filter]='filter' width=160>
+            </e-column>
+            <e-column field='EqsQualificationTypeName' headerText='Type of Qualification' headerTextAlign="center" textAlign="left" width=160>
+            </e-column>
+            <e-column headerText='Attachment' textAlign='center' width='130'>
+              <ng-template #template let-data>
+                  <div><a (click)="openAddModal(content4);setRowId(data);"><i [ngClass]="(data.HasAttachments===true)?'far fa-folder-open':'far fa-folder'"></i></a></div>
+              </ng-template>
+            </e-column>
+            <e-column field='EqsQualificationPerformedByName' headerText='Performed By'headerTextAlign="center" textAlign="left" width=130>
+            </e-column>
+            <e-column field='EqsQualificationDescription' headerText='Description' headerTextAlign="center" textAlign="left"
+              width=130></e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </div>
+  </div>
+
+
+<ng-template #content4 let-modal>
+  <div class="modal_header">   
+    <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+              <h5 class="modal-title">Attachments</h5>
+          </div>
+          <div class="col-md-6" class="Close_Popup">
+            <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+          </div>
+
+        </div>
+      </div>
+  </div>
+  <div class="modal-body">
+    <ejs-filemanager id='overview' #fileManagerCtrl [ajaxSettings]='ajaxSettings' [searchSettings]='searchSettings' (beforeDownload)="beforeSend($event)"
+        (beforeImageLoad)="beforeSend($event)" [rootAliasName]="'Attachments'" (beforeSend)="beforeSend($event)" [contextMenuSettings]='contextMenuSettings' [toolbarSettings]='toolbarSettings' view='Details'>
+    </ejs-filemanager>
+  </div>
+</ng-template>
+
+           
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-selectbyid2" title="Calibration">
+          <ng-template ngbTabContent>
+           
+             
+            
+           
+          </ng-template>
+        </ngb-tab>
+
+
+ <ngb-tab id="tab-selectbyid3" title="Maintenance">
+          <ng-template ngbTabContent>
+           
+             
+            
+           
+          </ng-template>
+        </ngb-tab>
+     
+      </ngb-tabset>
+      
+    </div>
+  </div>
+</div>

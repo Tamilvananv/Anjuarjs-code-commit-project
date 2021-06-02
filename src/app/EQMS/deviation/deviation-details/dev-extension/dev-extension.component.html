@@ -1,0 +1,363 @@
+<div style="padding-top: 30px">
+    <ejs-accordion>
+        <e-accordionitems>
+            <e-accordionitem expanded='true'>
+                <ng-template #header>
+                    <div>Raise for Extension</div>
+                </ng-template>
+                <ng-template #content>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Proposed CAPA</label>
+                            </div>
+                            <div class="col-md-10">
+                                Auto
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Department</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        Auto
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>CAPA Owner</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        Auto
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Original Target Date</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        Auto
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>CAPA Status</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        Auto
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Existing Target Date</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        Auto
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Number of Extensions</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        Auto
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>New Target Date</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        Auto
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Extension Attempt Status</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        Auto
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <ejs-grid #grid id="Grid" [dataSource]="data" allowFiltering="true" [filterSettings]="filterOptions"
+                        [gridLines]="lines" [enableHover]="false" [allowSorting]="true" e-gridheader="" height="100px"
+                        allowTextWrap='true' [textWrapSettings]='wrapSettings' [toolbar]="toolbarOptions"
+                        [allowExcelExport]="true" (toolbarClick)="toolbarClick($event)">
+                        <e-columns>
+                            <e-column field="one" headerText="Existing Target Date" textAlign="center" width="140"></e-column>
+                            <e-column headerText="Number of Extensions" textAlign="center" width="140"></e-column>
+                            <e-column headerText="New Target Date" textAlign="center" width="140"></e-column>
+                            <e-column headerText="Justification" textAlign="center" width="140"></e-column>
+                            <e-column headerText="Approver 1" textAlign="center" width="140"></e-column>
+                            <e-column headerText="Approver 2" textAlign="center" width="140"></e-column>
+                        </e-columns>
+                    </ejs-grid>
+                    <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                        </div>
+                                        <div class="col-md-7">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-actions pull-right">
+                                        <div class="d-flex no-block align-items-center">
+                                            <div class="ml-auto">
+                                                <button type="submit" class="btn_frmsubmit"(click)="OpenModal(addModal)" ejs-button>
+                                                    <i class="fa fa-check"></i> &nbsp;Raise Extension request
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </ng-template>
+            </e-accordionitem>
+            <e-accordionitem expanded='true'>
+                <ng-template #header>
+                    <div>Approver 1</div>
+                </ng-template>
+                <ng-template #content>
+                        <ejs-grid width='100%' [dataSource]='data1' [editSettings]='editSettings' [toolbar]='toolbar'
+                        height='200px' [gridLines]="lines">
+                        <e-columns>
+                            <e-column field='EmpList' headerText='Employee List' editType='dropdownedit' [edit]='deptlist'
+                                width=50 textAlign='Center'></e-column>
+                            <e-column field='ChooseAction' headerText='Choose Action' editType='dropdownedit'
+                                [edit]='action' width=50 textAlign='Center'>
+                            </e-column>
+                            <e-column field='Comments' headerText='Comments' width=120 textAlign='Center'>
+                            </e-column>
+                        </e-columns>
+                    </ejs-grid>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-actions pull-right">
+                                    <div class="d-flex no-block align-items-center">
+                                        <div class="ml-auto">
+                                            <button type="submit" class="btn_frmsubmit" ejs-button>
+                                              Save
+                                            </button>
+                                            <button type="button" class="btn_frmsubmit" ejs-button>
+                                                Sign and Submit 
+                                            </button>
+                                            <button type="button" class="btn_frmcancel" ejs-button>
+                                               Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </e-accordionitem>
+            <e-accordionitem expanded='true'>
+                <ng-template #header>
+                    <div>Approver 2</div>
+                </ng-template>
+                <ng-template #content>
+                        <ejs-grid width='100%' [dataSource]='data1' [editSettings]='editSettings' [toolbar]='toolbar'
+                        height='200px' [gridLines]="lines">
+                        <e-columns>
+                            <e-column field='EmpList' headerText='Employee List' editType='dropdownedit' [edit]='deptlist'
+                                width=50 textAlign='Center'></e-column>
+                            <e-column field='ChooseAction' headerText='Choose Action' editType='dropdownedit'
+                                [edit]='action' width=50 textAlign='Center'>
+                            </e-column>
+                            <e-column field='Comments' headerText='Comments' width=120 textAlign='Center'>
+                            </e-column>
+                        </e-columns>
+                    </ejs-grid>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-actions pull-right">
+                                    <div class="d-flex no-block align-items-center">
+                                        <div class="ml-auto">
+                                            <button type="submit" class="btn_frmsubmit" ejs-button>
+                                             Save
+                                            </button>
+                                            <button type="button" class="btn_frmsubmit" ejs-button>
+                                                Sign and Submit 
+                                            </button>
+                                            <button type="button" class="btn_frmcancel" ejs-button>
+                                              Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </e-accordionitem>
+        </e-accordionitems>
+    </ejs-accordion>
+</div>
+<ng-template #addModal let-modal>
+    <div class="modal_header">
+        <h5 class="modal-title">Raise Extension </h5>
+        <button type="button" class="close" aria-label="close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        
+
+        <div class="col-md-12 frm_tabpanel">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="ExistingTargetDate">Existing Target Date:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input ype="text" name="ExistingTargetDate" class="form-control" placeholder="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="NewTargetDate">New Target Date:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input ype="text" name="NewTargetDate" class="form-control" placeholder="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 frm_tabpanel">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="CAPANumber">CAPA Number:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input ype="text" name="CAPANumber" class="form-control" placeholder="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="CAPAStatus">CAPA Status:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input ype="text" name="CAPAStatus" class="form-control" placeholder="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 frm_tabpanel">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="Justification">Justification:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea name="Justification" rows="5" cols="75">Type here </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Attachments">Attachments:</label>
+                </div>
+                <div class="col-md-9">
+                     <ejs-uploader #defaultupload [autoUpload]="false" [dropArea]="dropEle" [asyncSettings]="path"
+                        (success)="onUploadSuccess($event)" (failure)="onUploadFailure($event)"></ejs-uploader> 
+                </div>
+            </div>
+        </div> 
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="Requestor">Requestor:</label>
+                        </div>
+                        <div class="col-md-6">
+                           <label> Shruti</label>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="Commnets">Comments:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea name="Justification" rows="3" cols="75">Type here </textarea>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="addmodal_style" (click)="modal.close('Close click')" ejs-button>
+            Sign and Submit
+        </button>
+
+      
+    </div>
+</ng-template>

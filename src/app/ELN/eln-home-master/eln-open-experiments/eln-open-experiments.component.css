@@ -1,0 +1,24 @@
+.table_row {
+    border: 1px solid #e0e0e0;
+}
+
+.e-grid .e-grouptext {
+    width: 100% !important;
+}
+
+.e-headertext,
+.e-stackedheadercelldiv {
+    font-size: 14px !important;
+}
+
+.e-grid .e-groupheadercell span {
+    float: none;
+    display: inline;
+}
+
+.e-gridheader {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 56px; /* The height of top nav menu. */
+    z-index: 1;
+}

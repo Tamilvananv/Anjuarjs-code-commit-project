@@ -1,0 +1,392 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" style="padding-top: 28px;">
+
+      <ngb-tabset class="tabset1" #t="ngbTabset">
+
+        <ngb-tab id="tab-ElnProgramcode" title="Program Code">
+          <ng-template ngbTabContent>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox" *ngIf="PageAccessRight.HasWriteAccess">
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="openModal(addProgramcodeModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #addProgramcodeModal let-modal>
+              <div class="modal_header">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title" *ngIf="!IsEditMode">Add Program code</h5>
+                      <h5 class="modal-title" *ngIf="IsEditMode">Edit Program code</h5>
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" [formGroup]='ProgramCodeForm' autocomplete="off">
+                  <div class="form-group row">
+
+                    <label for="Programcode" class="col-sm-4 control-label col-form-label">Program Code:
+                      <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-sm-8" print-error [control]="ProgramCodeForm.get('ProgramCode')">
+                      <input type="text" class="form-control" placeholder="Enter Program code" name="ProgramCode"
+                        formControlName="ProgramCode" />
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" *ngIf="!IsEditMode" (click)="SaveProgramCode()" ejs-button>
+                  Add
+                </button>
+                <button class="addmodal_style" *ngIf="IsEditMode" (click)="UpdateProgramCode()" ejs-button>
+                  Update
+                </button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+
+            <div class="table-responsive setting_table" style="padding-left: 30%;">
+              <ejs-grid #grid id="Grid" [dataSource]="ProgramCodeList" allowFiltering="true" [allowPaging]='true'
+                [pageSettings]='pageSettings' [filterSettings]="filterOptions" [gridLines]="lines" [toolbar]="toolbar"
+                height="300px" width=60% (commandClick)="EditProgramCode($event);openModal(addProgramcodeModal)">
+                <e-columns>
+                  <e-column headerText='Action' textAlign='center' [visible]='IsVisible' [commands]="commands"
+                    width='10'></e-column>
+                  <e-column field="Name" headerText="Program Code" headerTextAlign='center' textAlign='left'
+                    isPrimaryKey="true" width="20">
+                  </e-column>
+                </e-columns>
+              </ejs-grid>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-ElnSampleBarcode" title="Sample Barcode">
+          <ng-template ngbTabContent>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox" *ngIf="PageAccessRight.HasWriteAccess">
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="openModal(addSampleBarcodeModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #addSampleBarcodeModal let-modal>
+              <div class="modal_header">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title" *ngIf="!IsEditMode">Add Sample Barcode Id</h5>
+                      <h5 class="modal-title" *ngIf="IsEditMode">Edit Sample Barcode Id</h5>
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" [formGroup]='SampleBarcodeForm' autocomplete="off">
+                  <div class="form-group row">
+                    <label for="SampleBarcodeId" class="col-sm-4 control-label col-form-label">
+                      Sample Barcode Id:<span class="text-danger">*</span>
+                    </label>
+                    <div class="col-sm-8" print-error [control]="SampleBarcodeForm.get('SampleBarcodeId')">
+                      <input type="text" class="form-control" placeholder="Enter Sample Barcode Id"
+                        name="SampleBarcodeId" formControlName="SampleBarcodeId" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" *ngIf="!IsEditMode" (click)="SaveSampleBarcode()" ejs-button>
+                  Add
+                </button>
+                <button class="addmodal_style" *ngIf="IsEditMode" (click)="UpdateSampleBarcode()" ejs-button>
+                  Update
+                </button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+            <div class="table-responsive setting_table" style="padding-left: 30%">
+              <ejs-grid #grid1 id="Grid1" [dataSource]="SampleBarcodeList" [columns]="columns"
+                [showColumnChooser]="true" allowFiltering="true" [filterSettings]="filterOptions" [gridLines]="lines"
+                [allowPaging]='true' [pageSettings]='pageSettings' [toolbar]="toolbar" height="300px" width=60%
+                (commandClick)="EditSampleBarcode($event);openModal(addSampleBarcodeModal)">
+                <e-columns>
+                  <e-column headerText='Action' textAlign='center' [visible]='IsVisible' [commands]="commands"
+                    width='20'></e-column>
+                  <e-column field="Name" headerText="Sample Barcode" isPrimaryKey="true" headerTextAlign='center'
+                    textAlign='left' width="50">
+                  </e-column>
+                </e-columns>
+              </ejs-grid>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-ElnTestMaterial" title="Test Material">
+          <ng-template ngbTabContent>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox" *ngIf="PageAccessRight.HasWriteAccess">
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="openModal(addTestMaterialModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #addTestMaterialModal let-modal>
+              <div class="modal_header">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title" *ngIf="!IsEditMode">Add Test Material Id</h5>
+                      <h5 class="modal-title" *ngIf="IsEditMode">Edit Test Material Id</h5>
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" [formGroup]='TestMaterialForm' autocomplete="off">
+                  <div class="form-group row">
+                    <label for="TestMaterialId" class="col-sm-4 control-label col-form-label">
+                      Sample Barcode Id:<span class="text-danger">*</span>
+                    </label>
+                    <div class="col-sm-8" print-error [control]="TestMaterialForm.get('TestMaterialId')">
+                      <input type="text" class="form-control" placeholder="Enter Test Material Id" name="TestMaterialId"
+                        formControlName="TestMaterialId" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" *ngIf="!IsEditMode" (click)="SaveTestMaterial()" ejs-button>
+                  Add
+                </button>
+                <button class="addmodal_style" *ngIf="IsEditMode" (click)="UpdateTestMaterial()" ejs-button>
+                  Update
+                </button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+            <div class="table-responsive setting_table" style="padding-left: 30%">
+              <ejs-grid #grid1 id="Grid1" [dataSource]="TestMaterialList" [columns]="columns" [showColumnChooser]="true"
+                allowFiltering="true" [filterSettings]="filterOptions" [gridLines]="lines" [allowPaging]='true'
+                [pageSettings]='pageSettings' [toolbar]="toolbar" height="300px" width=60%
+                (commandClick)="EditTestMaterial($event);openModal(addTestMaterialModal)">
+                <e-columns>
+                  <e-column headerText='Action' textAlign='center' [visible]='IsVisible' [commands]="commands"
+                    width='20'></e-column>
+                  <e-column field="Name" headerText="Test Material" isPrimaryKey="true" headerTextAlign='center'
+                    textAlign='left' width="50">
+                  </e-column>
+                </e-columns>
+              </ejs-grid>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-ElnTestType" title="Test Type">
+          <ng-template ngbTabContent>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox" *ngIf="PageAccessRight.HasWriteAccess">
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="openModal(addTestTypeModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #addTestTypeModal let-modal>
+              <div class="modal_header">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title" *ngIf="!IsEditMode">Add Test Type Id</h5>
+                      <h5 class="modal-title" *ngIf="IsEditMode">Edit Test Type Id</h5>
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" [formGroup]='TestTypeForm' autocomplete="off">
+                  <div class="form-group row">
+                    <label for="TestTypeId" class="col-sm-4 control-label col-form-label">
+                      Test Type Id:<span class="text-danger">*</span>
+                    </label>
+                    <div class="col-sm-8" print-error [control]="TestTypeForm.get('TestTypeId')">
+                      <input type="text" class="form-control" placeholder="Enter Test Material Id" name="TestTypeId"
+                        formControlName="TestTypeId" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" *ngIf="!IsEditMode" (click)="SaveTestType()" ejs-button>
+                  Add
+                </button>
+                <button class="addmodal_style" *ngIf="IsEditMode" (click)="UpdateTestType()" ejs-button>
+                  Update
+                </button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+            <div class="table-responsive setting_table" style="padding-left: 30%">
+              <ejs-grid #grid1 id="Grid1" [dataSource]="TestTypeList" [columns]="columns" [showColumnChooser]="true"
+                allowFiltering="true" [filterSettings]="filterOptions" [gridLines]="lines" [allowPaging]='true'
+                [pageSettings]='pageSettings' [toolbar]="toolbar" height="300px" width=60%
+                (commandClick)="EditTestType($event);openModal(addTestTypeModal)">
+                <e-columns>
+                  <e-column headerText='Action' textAlign='center' [visible]='IsVisible' [commands]="commands"
+                    width='20'></e-column>
+                  <e-column field="Name" headerText="Test Type" isPrimaryKey="true" headerTextAlign='center'
+                    textAlign='left' width="50">
+                  </e-column>
+                </e-columns>
+              </ejs-grid>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-ElnType" title="Type">
+          <ng-template ngbTabContent>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox" *ngIf="PageAccessRight.HasWriteAccess">
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="openModal(addTypeModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #addTypeModal let-modal>
+              <div class="modal_header">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title" *ngIf="!IsEditMode">Add Type Id</h5>
+                      <h5 class="modal-title" *ngIf="IsEditMode">Edit Type Id</h5>
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" [formGroup]='TypeForm' autocomplete="off">
+                  <div class="form-group row">
+                    <label for="TypeId" class="col-sm-4 control-label col-form-label">
+                      Type Id:<span class="text-danger">*</span>
+                    </label>
+                    <div class="col-sm-8" print-error [control]="TypeForm.get('TypeId')">
+                      <input type="text" class="form-control" placeholder="Enter Type Id" name="TypeId"
+                        formControlName="TypeId" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" *ngIf="!IsEditMode" (click)="SaveType()" ejs-button>
+                  Add
+                </button>
+                <button class="addmodal_style" *ngIf="IsEditMode" (click)="UpdateType()" ejs-button>
+                  Update
+                </button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+            <div class="table-responsive setting_table" style="padding-left: 30%">
+              <ejs-grid #grid1 id="Grid1" [dataSource]="TypeList" [columns]="columns" [showColumnChooser]="true"
+                allowFiltering="true" [filterSettings]="filterOptions" [gridLines]="lines" [allowPaging]='true'
+                [pageSettings]='pageSettings' [toolbar]="toolbar" height="300px" width=60%
+                (commandClick)="EditType($event);openModal(addTypeModal)">
+                <e-columns>
+                  <e-column headerText='Action' textAlign='center' [visible]='IsVisible' [commands]="commands"
+                    width='20'></e-column>
+                  <e-column field="Name" headerText="Type" isPrimaryKey="true" headerTextAlign='center'
+                    textAlign='left' width="50">
+                  </e-column>
+                </e-columns>
+              </ejs-grid>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

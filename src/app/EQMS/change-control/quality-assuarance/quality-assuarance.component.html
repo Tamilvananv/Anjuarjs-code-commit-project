@@ -1,0 +1,261 @@
+<form class="form-horizontal" [formGroup]='EQMSAddQualityAssuaranceformData'>
+    <div class="col-md-12 text-right">
+        <div class="custom-control " style="padding-bottom: 5px;">
+            <button type="submit" class="btn_frmsubmit" *ngIf="IfEditBtn" (click)="addQualityAssurance()" ejs-button>
+                Save
+            </button>
+            <button type="submit" class="btn_frmsubmit"   (click)="moveToTab('tab-selectbyid3');" ejs-button>
+                Back
+            </button>
+            <button type="button" class="btn_frmsubmit"  *ngIf="IfNextBtn"  (click)="moveToTab('tab-selectbyid5');" ejs-button>
+                Next
+            </button>
+            <button type="button" class="btn_frmcancel" ejs-button>
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <label style="font-size: 16px;">Justification For Change:</label>
+            </div>
+            <div class="col-md-2">
+                <ejs-dropdownlist formControlName="EqmsCcQualityAssuaranceStatus1" name="EqmsCcQualityAssuaranceStatus1"
+                    id='reason1' #sample [dataSource]='ReasonData' [value]='value' [fields]='fields1'
+                    [placeholder]='waterMark' [popupHeight]='height'></ejs-dropdownlist>
+            </div>
+            <div class="col-md-6">
+                <ejs-textbox formControlName="EqmsCcQualityAssuaranceComents1" name="EqmsCcQualityAssuaranceComents1"
+                    [multiline]='true' value='Mr. Dodsworth Dodsworth, System Analyst, Studio 103, The Business Center'>
+                </ejs-textbox>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <label style="font-size: 16px;">Action Plan:</label>
+            </div>
+            <div class="col-md-2">
+                <ejs-dropdownlist [dataSource]='ReasonData' [value]='value' [placeholder]='waterMark'
+                    name="EqmsCcQualityAssuaranceStatus2"  formControlName="EqmsCcQualityAssuaranceStatus2"
+                    [popupHeight]='height' [fields]="fields1">
+                </ejs-dropdownlist>
+
+
+            </div>
+            <div class="col-md-6">
+                <ejs-textbox formControlName="EqmsCcQualityAssuaranceComents2" name="EqmsCcQualityAssuaranceComents2"
+                    [multiline]='true' value='Mr. Dodsworth Dodsworth, System Analyst, Studio 103, The Business Center'>
+                </ejs-textbox>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <label style="font-size: 16px;">Primary Assessment by Initiator Lead:</label>
+            </div>
+            <div class="col-md-2">
+                <ejs-dropdownlist formControlName="EqmsCcQualityAssuaranceStatus3" name="EqmsCcQualityAssuaranceStatus3"
+                    id='reason3' #sample [dataSource]='ReasonData' [value]='value' [fields]='fields1'
+                    [placeholder]='waterMark' [popupHeight]='height'></ejs-dropdownlist>
+            </div>
+            <div class="col-md-6">
+                <ejs-textbox formControlName="EqmsCcQualityAssuaranceComents3" name="EqmsCcQualityAssuaranceComents3"
+                    [multiline]='true' value='Mr. Dodsworth Dodsworth, System Analyst, Studio 103, The Business Center'>
+                </ejs-textbox>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <label style="font-size: 16px;">Inputs from Cross Functional Team:</label>
+            </div>
+            <div class="col-md-2">
+                <ejs-dropdownlist formControlName="EqmsCcQualityAssuaranceStatus4" name="EqmsCcQualityAssuaranceStatus4"
+                    id='reason4' #sample [dataSource]='ReasonData' [value]='value' [fields]='fields1'
+                    [placeholder]='waterMark' [popupHeight]='height'></ejs-dropdownlist>
+            </div>
+            <div class="col-md-6">
+                <ejs-textbox formControlName="EqmsCcQualityAssuaranceComents4" name="EqmsCcQualityAssuaranceComents4"
+                    [multiline]='true' value='Mr. Dodsworth Dodsworth, System Analyst, Studio 103, The Business Center'>
+                </ejs-textbox>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+               
+            </div>
+            <div class="col-md-6">
+                <div class="form-actions pull-right">
+                    <div class="d-flex no-block align-items-center">
+                        <div class="ml-auto">
+                            <!-- <button type="button" *ngIf="IfEditBtn"
+                                class="btn_frmsubmit" ejs-button>
+                                Sign and Submit
+                            </button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <ejs-accordion>
+            <e-accordionitems>
+                <e-accordionitem expanded='true'>
+                    <ng-template #header>
+                        <div>First Level Approval <b>{{ strFirstLevelApprovalName }}</b></div>
+                        <div>Approval Status: <b
+                                [ngClass]="(boolFirstlvlApproval===true)?'btn btn-success':'btn btn-danger'">{{ strFirstLevelApprovalStatus }}</b>
+                        </div>
+                        <br>
+                        <p>{{strFirstLevelCommenttext}}</p>
+                    </ng-template>
+                    <ng-template #content >
+                        <form class="form-horizontal" [formGroup]='EQMSFirstAddApprovalStatusform'>
+                        <div class="col-md-12" *ngIf="IfEditBtn">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <ul>
+
+                                            <div class="col-md-2">
+                                                <ejs-radiobutton label="Rework Required" name="custom"
+                                                value="1" formControlName="EqmsCcFirstLvlApprovalStatus"  cssClass="e-warning">
+                                                </ejs-radiobutton>
+                                            </div>
+
+
+                                            <div class="col-md-2">
+                                                <ejs-radiobutton label="Rejected" name="custom"
+                                                value="2" formControlName="EqmsCcFirstLvlApprovalStatus" cssClass="e-danger">
+                                                </ejs-radiobutton>
+                                            </div>
+
+
+                                            <div class="col-md-2">
+                                                <ejs-radiobutton label="Approved" name="custom"
+                                                value="3" formControlName="EqmsCcFirstLvlApprovalStatus" cssClass="e-success">
+                                                </ejs-radiobutton>
+
+                                            </div>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="Comments">Comments:</label>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <textarea rows="5" cols="105"
+                                            formControlName="EqmsCcFirstLvlComment" name="Comments"> </textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-right" *ngIf="IfEditBtn">
+                            <div class="custom-control " style="padding-bottom: 5px;">
+                                <button type="button" *ngIf="IfEditBtn" (click)="submitCcUserSign()"
+                                class="btn_frmsubmit" ejs-button>
+                                Sign and Submit
+                            </button>
+                            </div>
+                        </div>
+                        </form>
+                    </ng-template>
+                </e-accordionitem>
+                <e-accordionitem expanded='true'>
+                    <ng-template #header>
+                        <div>Second Level Approval <b>{{ strSecondLevelApprovalName }}</b></div>
+                        <div>Approval Status: <b
+                                [ngClass]="(boolSecondlvlApproval===true)?'btn btn-success':'btn btn-danger'">{{ strSecondLevelApprovalStatus }}</b>
+                        </div> <br>
+                        <p>{{strSecondLevelCommenttext}}</p>
+                    </ng-template>
+                    <ng-template #content>
+                        <form class="form-horizontal" [formGroup]='EQMSSecondAddApprovalStatusform'>
+                        <div class="col-md-12"  *ngIf="IfSecondlvlApproval">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <ul>
+                                            <div class="col-md-2">
+                                                <ejs-radiobutton label="Rework Required" name="custom"
+                                                value="1" formControlName="EqmsCcSecondLvlApprovalStatus"  cssClass="e-warning">
+                                                </ejs-radiobutton>
+                                            </div>
+
+
+                                            <div class="col-md-2">
+                                                <ejs-radiobutton label="Rejected" name="custom"
+                                                value="2" formControlName="EqmsCcSecondLvlApprovalStatus" cssClass="e-danger">
+                                                </ejs-radiobutton>
+                                            </div>
+
+
+                                            <div class="col-md-2">
+                                                <ejs-radiobutton label="Approved" name="custom"
+                                                value="3" formControlName="EqmsCcSecondLvlApprovalStatus" cssClass="e-success">
+                                                </ejs-radiobutton>
+
+                                            </div>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="Comments">Comments:</label>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <textarea rows="5" cols="105"
+                                            formControlName="EqmsCcSecondLvlComment"  name="Comments"></textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-md-12 text-right" *ngIf="IfSecondlvlApproval">
+                            <div class="custom-control " style="padding-bottom: 5px;">
+                              
+                                <button type="button" class="btn_frmsubmit"  *ngIf="IfSecondlvlSubmitbtn" (click)="SignSecondleval()" ejs-button>
+                                    Sign & Approve
+                                </button>
+                            </div>
+                        </div>
+                        </form>
+                    </ng-template>
+                </e-accordionitem>
+            </e-accordionitems>
+        </ejs-accordion>
+       
+    </div>
+</form>

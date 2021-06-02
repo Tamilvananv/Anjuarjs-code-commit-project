@@ -1,0 +1,165 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="no-block align-items-center">
+        <h4 class="card-title"></h4>
+        <div class="ml-auto mb-2 buttons_padding">
+          <button class="addbtn_style" ejs-button (click)="addimsrecord(addImsModal)">
+            <i class="fas fa-plus-circle"></i>
+            Add Record
+          </button>
+        </div>
+        <div class="table-responsive">
+          <ejs-grid #grid id="Grid" [dataSource]="" [allowSelection]="true" (toolbarClick)="toolbarClick($event)"
+            allowFiltering="true" allowTextWrap="true" [textWrapSettings]="wrapSettings" [toolbar]="toolbarOptions"
+            [allowExcelExport]="true" [filterSettings]="filterOptions" [gridLines]="lines" [enableHover]="false"
+            [allowSorting]="true" [allowPaging]="true" [pageSettings]="pageSettings" e-gridheader="" height="363px"
+            (commandClick)="
+              EditRecord($event); addimsrecord(addImsModal)
+            " [showColumnMenu]="true" [allowGrouping]="true" [allowPdfExport]="true" (created)="created($event)">
+            <e-columns>
+              <e-column headerText="Action" textAlign="center" [commands]="commands" width="70">
+                <ng-template #template let-data>
+                  <div class="loc">
+                    <e-column headerText="Action" textAlign="center" width="5" [commands]="commands">
+                    </e-column>
+                  </div>
+                </ng-template>
+              </e-column>
+              <e-column field="MaterialId" headerText="Material Id" headerTextAlign="center" textAlign="left"
+                width="60">
+              </e-column>
+              <e-column field="BatchNo" headerText="Batch No" headerTextAlign="center" textAlign="left" width="80">
+              </e-column>
+              <e-column field="Manufacturer" headerText="Manufacturer" headerTextAlign="center" textAlign="left"
+                width="80">
+              </e-column>
+              <e-column field="ExpiryDate" headerText="Expiry Date" headerTextAlign="center" textAlign="left"
+                width="80">
+              </e-column>
+
+              <e-column field="Comments" headerText="Comments" headerTextAlign="center" textAlign="left" width="80">
+              </e-column>
+              <e-column field="Location" headerText="Location" headerTextAlign="center" textAlign="left" width="80">
+              </e-column>
+
+            </e-columns>
+          </ejs-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #addImsModal let-modal>
+    <div class="modal_header">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <!--  <h5 class="modal-title" *ngIf="!IsParameterEdit">Add Parameter</h5>
+            <h5 class="modal-title" *ngIf="IsParameterEdit">Edit Parameter</h5> -->
+          </div>
+          <div class="col-md-6" class="Close_Popup">
+            <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="ImsRecordForm">
+
+
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-5">
+                  <label for="MaterialId" class="control-label col-form-label">Material ID:</label>
+                </div>
+                <div class="col-md-7">
+                  <input type="text" class="form-control" id="MaterialId" placeholder="" name="MaterialId"
+                    formControlName="MaterialId" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-5">
+                  <label for="BatchNo" class="control-label col-form-label">Batch No :</label>
+                </div>
+                <div class="col-md-7">
+                  <input type="text" class="form-control" id="BatchNo" placeholder="" name="BatchNo"
+                    formControlName="BatchNo" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-5">
+                  <label for="ExpiryDate" class="control-label col-form-label">Expiry Date:</label>
+                </div>
+                <div class="col-md-7">
+                  <ejs-datepicker [value]='dateValue' placeholder='Enter date' name='ExpiryDate'
+                    formControlName="ExpiryDate"></ejs-datepicker>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-5">
+                  <label for="Manufacturer" class="control-label col-form-label">Manufacturer :</label>
+                </div>
+                <div class="col-md-7">
+                  <input type="text" class="form-control" id="Manufacturer" placeholder="" name="Manufacturer"
+                    formControlName="Manufacturer" />
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-5">
+                    <label for="Comments" class="control-label col-form-label">Comments :</label>
+                  </div>
+                  <div class="col-md-7">
+                    <input type="text" class="form-control" id="Comments" placeholder="" name="Comments"
+                      formControlName="Comments" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-5">
+                    <label for="Location" class="control-label col-form-label">Location :</label>
+                  </div>
+                  <div class="col-md-7">
+                    <input type="text" class="form-control" id="Location" placeholder="" name="Location"
+                      formControlName="Location" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="addmodal_style" ejs-button (click)="SaveParameter()" *ngIf="!IsParameterEdit">
+        Add
+      </button>
+      <button class="addmodal_style" (click)="UpdateParameter()" *ngIf="IsParameterEdit" ejs-button>
+        Update
+      </button>
+      <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+        cancel
+      </button>
+    </div>
+  </ng-template>

@@ -1,0 +1,62 @@
+.lblHeading {
+    line-height: 2;
+    background-color: #9597a3;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0 5px;
+    text-align: center;
+}
+
+.tableHeader {
+    background: #08a1a1;
+    color: white;
+}
+
+.tableHeader tr th {
+    text-align: center;
+}
+
+td, th {
+    height: 28px;
+    padding: 0 0;
+}
+
+.linkTableOfContent {
+    color: black;
+    font-size: 16px;
+}
+
+ul.leaders li {
+    padding-top: 5px;
+    padding-left: 35px;
+}
+
+ul.leaders {
+    max-width: 100%;
+    padding: 0;
+    overflow-x: hidden;
+    list-style: none
+}
+
+ul.leaders li:before {
+    float: left;
+    width: 0;
+    white-space: nowrap;
+    content: ". . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . "
+}
+
+ul.leaders a:first-child {
+    padding-right: 0.33em;
+    background: white
+}
+
+ul.leaders a+a {
+    float: right;
+    padding-left: 0.33em;
+    background: white
+}
+
+.hiddenView {
+    display: none;
+}

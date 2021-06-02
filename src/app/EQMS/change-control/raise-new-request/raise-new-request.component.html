@@ -1,0 +1,476 @@
+<!-- <div class="row">
+    <div class="col-md-12"> -->
+<div class="" style="padding-top: 28px;">
+    <ngb-tabset #tabset disabled="true" class="tabset2">
+        <!-- <ngb-tab id="tab-selectbyid1" title=" Requisition Details"> -->
+        <ngb-tab id="tab-requisition-details" title="Requisition Details" [ngClass]="{ active: tab_Master }">
+            <ng-template ngbTabContent>
+                <form class="form-horizontal" [formGroup]='EQMSAddRequisitionDetailsform'>
+                    <div class="col-md-12 text-right">
+                        <div class="custom-control " style="padding-bottom: 5px;">
+                            
+                            <button type="button" *ngIf="IfSaveBtn" (click)="addEqmsCCRequisitionDetail()"
+                                class="btn_frmsubmit" ejs-button>
+                                Save
+                            </button>
+                            <button type="button" *ngIf="IfEditBtn" (click)="EditEqmsCCRequisitionDetail()"
+                                class="btn_frmsubmit" ejs-button>
+                                Edit
+                            </button>
+                            <button type="button"  *ngIf="IfNextBtn" class="btn_frmsubmit" (click)="tabset.select('tab-selectbyid2');"
+                                ejs-button>
+                                Next
+                            </button>
+                            <button type="button" class="btn_frmcancel" ejs-button>
+                                Cancel
+                            </button>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12 frm_tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="ChangeControlNumber">Change Control Number:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        {{ ChangeControlNumber }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="EqmsCcInitiatedDate">Initiated Date:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        {{ date }}
+                                        <!-- <ejs-datepicker name="EqmsCcInitiatedDate"
+                                            formControlName="EqmsCcInitiatedDate" [value]='dateValue' placeholder='Enter date'></ejs-datepicker> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 frm_tabpanel">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="EqmsCcRelatedTo">CC Related To:</label>
+                                        <span class="text-danger">*</span>
+                                    </div>
+                                    <div class="col-md-7" *ngIf="IfReadOnly">
+                                        {{EqmsCcRelatedToName}}
+                                    </div>
+                                    <div class="col-md-7" *ngIf="!IfReadOnly" print-error [control]="EQMSAddRequisitionDetailsform.get('EqmsCcRelatedToId')">
+                                        <ejs-dropdownlist id="EqmsCcRelatedTo"
+                                            [dataSource]="objGetCcRelatedToReasonList" [fields]="fields"
+                                            [readonly]="editable" [popupHeight]="height" [allowFiltering]="true"
+                                            [placeholder]="watermark" formControlName="EqmsCcRelatedToId"
+                                            name="EqmsCcRelatedToId">
+                                        </ejs-dropdownlist>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="Department">Requester Department Name:</label>
+                                        <span class="text-danger">*</span>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="IfReadOnly">
+                                        {{RequesterDeptName}}
+                                    </div>
+                                    <div class="col-md-6" *ngIf="!IfReadOnly" print-error [control]="EQMSAddRequisitionDetailsform.get('RequesterDepartmentId')">
+                                        <ejs-dropdownlist id="RequesterDepartment"
+                                            [dataSource]="objRequesterDepartmentList" [readonly]="editable"
+                                            [fields]="fields" (filtering)="onFiltering($event)" [popupHeight]="height"
+                                            [allowFiltering]="true" [placeholder]="watermark"
+                                            name="RequesterDepartmentId" formControlName="RequesterDepartmentId">
+                                        </ejs-dropdownlist>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 frm_tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="EqmsCcMediumForChange">Medium For Change:<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-7" *ngIf="IfReadOnly">
+                                        {{MediumforChange}}
+                                    </div>
+                                    <div class="col-md-7" *ngIf="!IfReadOnly" print-error [control]="EQMSAddRequisitionDetailsform.get('EqmsCcMediumForChangeId')">
+                                        <ejs-dropdownlist id="EqmsCcMediumForChange" [readonly]="editable"
+                                            [dataSource]="objGetMediumForChangeList" [fields]="fields"
+                                            [popupHeight]="height" [allowFiltering]="true" [placeholder]="watermark"
+                                            name="EqmsCcMediumForChangeId" formControlName="EqmsCcMediumForChangeId"
+                                            (change)="GetSelectedTypeId($event)"></ejs-dropdownlist>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="Department">Department Name:</label><span class="text-danger">*</span>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="IfReadOnly">
+                                        {{DepartmentName}}
+                                    </div>
+                                    <div class="col-md-6" *ngIf="!IfReadOnly" print-error [control]="EQMSAddRequisitionDetailsform.get('DepartmentId')">
+                                        <ejs-dropdownlist id="Department" [dataSource]="objDepartmentList"
+                                            [readonly]="editable" [fields]="fields" (filtering)="onFiltering($event)"
+                                            [popupHeight]="height" [allowFiltering]="true" [placeholder]="watermark"
+                                            name="DepartmentId" formControlName="DepartmentId">
+                                        </ejs-dropdownlist>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 frm_tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="EqmsCcMediumId">Medium ID:</label><span class="text-danger">*</span>
+                                    </div>
+                                    <div class="col-md-7" *ngIf="IfReadOnly">
+                                        <label *ngIf="DisplayMediumIdList">{{MediumName}}</label>
+                                        <label *ngIf="!DisplayMediumIdList">NA</label>
+                                    </div>
+                                    <div class="col-md-7" *ngIf="!IfReadOnly" print-error [control]="EQMSAddRequisitionDetailsform.get('EqmsCcMediumId')">
+                                        <ejs-dropdownlist [dataSource]='objMediumIdList' [value]='value'
+                                            *ngIf="DisplayMediumIdList" [placeholder]='waterMark' name="EqmsCcMediumId"
+                                            [readonly]="editable" formControlName="EqmsCcMediumId"
+                                            [popupHeight]='height' [fields]="fields">
+                                        </ejs-dropdownlist>
+                                        <label for="EqmsCcMediumHide" *ngIf="!DisplayMediumIdList">NA</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="Attachments">Attachments If Any:</label>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="IfReadOnly">
+                                        <button type="button" (click)="openAddModal(content4)" class="btn_frmcancel" *ngIf="AttachmentIfAny"
+                                            ejs-button>
+                                            View Attachment
+                                        </button>
+                                        <label *ngIf="!AttachmentIfAny">NA</label>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="!IfReadOnly">
+                                        <ejs-uploader #defaultupload [autoUpload]="false" [dropArea]="dropEle"
+                                            [asyncSettings]="path" (success)="onUploadSuccess($event)"
+                                            (failure)="onUploadFailure($event)" (selected)="onFileSelect($event)"
+                                            formArrayName='AttachmentList'></ejs-uploader>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 frm_tabpanel" *ngIf="IfOtherDetails">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="Others">Details, if others:</label>
+                                    </div>
+                                    <div class="col-md-10" *ngIf="IfReadOnly">
+                                        {{DetailsIfOthers}}
+                                    </div>
+                                    <div class="col-md-10" *ngIf="!IfReadOnly">
+                                        <textarea name="Others" rows="5" cols="132" name="EqmsCcdetailsIfOthers"
+                                            [readonly]="editable" formControlName="EqmsCcdetailsIfOthers"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 frm_tabpanel">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="EqmsCcDocumentTitle">Document Title:</label><span class="text-danger">*</span>
+                                    </div>
+                                    <div class="col-md-10" *ngIf="IfReadOnly">
+                                        {{DocumentTitle}}
+                                    </div>
+                                    <div class="col-md-10" *ngIf="!IfReadOnly" print-error [control]="EQMSAddRequisitionDetailsform.get('EqmsCcDocumentTitle')">
+                                        <textarea rows="5" cols="132" name="EqmsCcDocumentTitle" [readonly]="editable"
+                                            formControlName="EqmsCcDocumentTitle">Title </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 frm_tabpanel">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="EqmsCcBriefDescription">Brief Description Of Changes:<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-10" *ngIf="IfReadOnly">
+                                        {{BrifDescriptionOfChanges}}
+                                    </div>
+                                    <div class="col-md-10" *ngIf="!IfReadOnly" print-error [control]="EQMSAddRequisitionDetailsform.get('EqmsCcBriefDescription')">
+                                        <textarea name="EqmsCcBriefDescription" formControlName="EqmsCcBriefDescription"
+                                            [readonly]="editable" rows="5" cols="132">Description</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UserId">Initiated By:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <h4 *ngIf="NgifForEdit">{{InitiatedBy}}</h4>
+                                    <h4 *ngIf="!NgifForEdit">{{UserInfo.UserFullName}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-actions pull-right">
+                                <div class="d-flex no-block align-items-center">
+                                    <div class="ml-auto">
+                                        <button type="button" *ngIf="IfSignAndSubmitBtn" (click)="submitCcUserSign()"
+                                            class="btn_frmsubmit" ejs-button>
+                                            Sign and Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+                <br>
+                <ng-template #content4 let-modal>
+                    <div class="modal_header">
+                        <!-- <h5 class="modal-title">Attachments</h5>
+                      <button
+                        type="button"
+                        class="close"
+                        aria-label="Close"
+                        (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button> -->
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="modal-title">Attachments</h5>
+                                </div>
+                                <div class="col-md-6" class="Close_Popup" (click)="modal.dismiss('Cross click')">
+                                    <i class="fas fa-times"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+
+                        <ejs-filemanager id='overview' #fileManagerCtrl [ajaxSettings]='ajaxSettings'
+                            [searchSettings]='searchSettings' (beforeDownload)="beforeSend($event)"
+                            (beforeImageLoad)="beforeSend($event)" [rootAliasName]="'Attachments'"
+                            (beforeSend)="beforeSend($event)" [contextMenuSettings]='contextMenuSettings'
+                            [toolbarSettings]='toolbarSettings' view='Details'>
+                        </ejs-filemanager>
+                    </div>
+                </ng-template>
+                <ejs-accordion>
+                    <e-accordionitems>
+                        <e-accordionitem expanded='true'>
+                            <ng-template #header >
+                                <div style="color: teal">First Level Approval <b>{{ strFirstLevelApprovalName }}</b></div>
+                                <div style="color: teal">Approval Status: <b
+                                        [ngClass]="(boolFirstlvlApproval===true)?'btn btn-success':'btn btn-danger'">{{ strFirstLevelApprovalStatus }}</b>
+                                </div>
+                                <br>
+                                <p  style="color: teal">{{strFirstLevelCommenttext}}</p>
+                            </ng-template>
+                            <ng-template #content >
+                                <form class="form-horizontal" [formGroup]='EQMSFirstAddApprovalStatusform'>
+                                <div class="col-md-12" *ngIf="IfFirstlvlApproval">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="row" print-error [control]="EQMSFirstAddApprovalStatusform.get('EqmsCcFirstLvlApprovalStatus')">
+                                                <ul>
+
+                                                    <div class="col-md-2">
+                                                        <ejs-radiobutton label="Rework Required" name="custom"
+                                                        value="1" formControlName="EqmsCcFirstLvlApprovalStatus"  cssClass="e-warning">
+                                                        </ejs-radiobutton>
+                                                    </div>
+
+
+                                                    <div class="col-md-2">
+                                                        <ejs-radiobutton label="Rejected" name="custom"
+                                                        value="2" formControlName="EqmsCcFirstLvlApprovalStatus" cssClass="e-danger">
+                                                        </ejs-radiobutton>
+                                                    </div>
+
+
+                                                    <div class="col-md-2">
+                                                        <ejs-radiobutton label="Approved" name="custom"
+                                                        value="3" formControlName="EqmsCcFirstLvlApprovalStatus" cssClass="e-success">
+                                                        </ejs-radiobutton>
+
+                                                    </div>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label for="Comments">Comments:</label><span class="text-danger">*</span>
+
+                                                </div>
+                                                <div class="col-md-4" print-error [control]="EQMSFirstAddApprovalStatusform.get('EqmsCcFirstLvlComment')">
+                                                    <textarea rows="5" cols="105"
+                                                    formControlName="EqmsCcFirstLvlComment" name="Comments"></textarea>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 text-right" *ngIf="IfFirstlvlApproval">
+                                    <div class="custom-control " style="padding-bottom: 5px;">                                       
+                                        <button type="button" *ngIf="IfFirstlvlSubmitbtn" class="btn_frmsubmit" (click)="SignFirstleval()" ejs-button>
+                                            Sign & Submit
+                                        </button>
+                                    </div>
+                                </div>
+                                </form>
+                            </ng-template>
+                        </e-accordionitem>
+                        <e-accordionitem expanded='true'>
+                            <ng-template #header>
+                                <div  style="color: teal">Second Level Approval <b>{{ strSecondLevelApprovalName }}</b></div>
+                                <div  style="color: teal">Approval Status: <b
+                                        [ngClass]="(boolSecondlvlApproval===true)?'btn btn-success':'btn btn-danger'">{{ strSecondLevelApprovalStatus }}</b>
+                                </div> <br>
+                                <p  style="color: teal">{{strSecondLevelCommenttext}}</p>
+                            </ng-template>
+                            <ng-template #content>
+                                <form class="form-horizontal" [formGroup]='EQMSSecondAddApprovalStatusform'>
+                                <div class="col-md-12"  *ngIf="IfSecondlvlApproval">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="row" print-error [control]="EQMSSecondAddApprovalStatusform.get('EqmsCcSecondLvlApprovalStatus')">
+                                                <ul>
+                                                    <div class="col-md-2">
+                                                        <ejs-radiobutton label="Rework Required" name="custom"
+                                                        value="1" formControlName="EqmsCcSecondLvlApprovalStatus"  cssClass="e-warning">
+                                                        </ejs-radiobutton>
+                                                    </div>
+
+
+                                                    <div class="col-md-2">
+                                                        <ejs-radiobutton label="Rejected" name="custom"
+                                                        value="2" formControlName="EqmsCcSecondLvlApprovalStatus" cssClass="e-danger">
+                                                        </ejs-radiobutton>
+                                                    </div>
+
+
+                                                    <div class="col-md-2">
+                                                        <ejs-radiobutton label="Approved" name="custom"
+                                                        value="3" formControlName="EqmsCcSecondLvlApprovalStatus" cssClass="e-success">
+                                                        </ejs-radiobutton>
+
+                                                    </div>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label for="Comments">Comments:</label><span class="text-danger">*</span>
+
+                                                </div>
+                                                <div class="col-md-4" print-error [control]="EQMSSecondAddApprovalStatusform.get('EqmsCcSecondLvlComment')">
+                                                    <textarea rows="5" cols="105"
+                                                    formControlName="EqmsCcSecondLvlComment"  name="Comments"></textarea>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="col-md-12 text-right" *ngIf="IfSecondlvlApproval">
+                                    <div class="custom-control " style="padding-bottom: 5px;">
+                                      
+                                        <button type="button" class="btn_frmsubmit"  *ngIf="IfSecondlvlSubmitbtn" (click)="SignSecondleval()" ejs-button>
+                                            Sign & Approve
+                                        </button>
+                                    </div>
+                                </div>
+                                </form>
+                            </ng-template>
+                        </e-accordionitem>
+                    </e-accordionitems>
+                </ejs-accordion>
+                <br><br>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid2" title="Change Details">
+            <ng-template ngbTabContent>
+                <app-change-details></app-change-details>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid3" title="Primary Assessment">
+            <ng-template ngbTabContent>
+                <app-primary-assessment></app-primary-assessment>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid4" title="Quality Assurance">
+            <ng-template ngbTabContent>
+                <app-quality-assuarance></app-quality-assuarance>
+
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid5" title="Closure">
+            <ng-template ngbTabContent>
+                <app-closure></app-closure>
+            </ng-template>
+        </ngb-tab>
+
+    </ngb-tabset>
+</div>
+<!-- </div>
+</div> -->

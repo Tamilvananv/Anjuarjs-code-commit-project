@@ -1,0 +1,21 @@
+.lblHeading {
+    line-height: 2;
+    background-color: #9597a3;
+    color: white;
+    font-weight: bold;
+    font-size:14px;
+    padding: 0 5px;
+}
+.tableHeader {
+    background: #08a1a1;
+    color: white;
+}
+
+    .tableHeader tr th {
+        text-align: center;
+    }
+
+    td, th {
+        height:28px;
+        padding:0 2px;
+    }

@@ -1,0 +1,26 @@
+
+:host ::ng-deep .tabset1 a.nav-link {
+    color: #5f6971;
+  }
+  :host ::ng-deep .tabset1 a.nav-link:hover{
+   
+    /* color: #308cff; */
+    color: #08a1a1;
+  }
+  :host ::ng-deep .tabset1 a.nav-link.active {
+    color: #5f6971 ;
+    font-weight: 700;
+    font-size: 14px;
+    background-color: #f1f5f8;
+    border-top:2px solid #08a1a1; 
+    border: 0px 1px 0px 1px solid #cacaca;
+  }
+  :host ::ng-deep.tab-content > .active {
+    display: block;
+     background-color:#f1f5f8; 
+    border-top: none;
+    height: 800px;
+} 
+table, th, td {
+  border: 1px solid black;
+}

@@ -1,0 +1,172 @@
+<div class="col-md-12 text-right">
+    <div class="custom-control custom-checkbox" style="padding-bottom: 5px;">
+        <button type="submit" class="btn_frmsubmit" *ngIf="expVersionObj.IsAllowEdit" (click)="SaveExperiment()"
+            ejs-button>
+            <!-- <i class="fa fa-check"></i> &nbsp; -->
+            Save
+        </button>
+        <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabICEQ')" ejs-button>
+            Next
+            <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+        </button>
+        <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/qcelnhome'">
+            <!-- <i class="fas fa-times"></i> &nbsp; -->
+            Cancel
+        </button>
+    </div>
+</div>
+<form [formGroup]="elnHeaderForm" class="form-horizontal">
+    <div class="container-fluid">
+        <div class="row">
+            <label for="Title" class="col-sm-2 mandatoryfield control-label">Title:</label>
+            <div class="col-sm-4 form-group" print-error [control]="elnHeaderForm.get('Title')">
+                <input type="text" autofocus [disableControl]="!expVersionObj.IsAllowEdit" formControlName="Title"
+                    maxlength="100" class="form-control" placeholder="">
+            </div>
+            <label for="ExperimentNo" class="col-sm-2 mandatoryfield control-label">Experiment Id:</label>
+            <div class="col-sm-4 form-group" print-error [control]="elnHeaderForm.get('ExperimentNo')">
+                <input type="text" formControlName="ExperimentNo" [disableControl]="!expVersionObj.IsAllowEdit"
+                    maxlength="100" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ProgramCode" class="col-sm-2 mandatoryfield control-label col-form-label">Program Code:</label>
+            <div class="col-sm-4" print-error [control]="elnHeaderForm.get('ProgramCode')">
+                <ejs-combobox [disableControl]="!expVersionObj.IsAllowEdit" [dataSource]='ProgramCodeList'
+                    [fields]='dropDwnFields' formControlName="ProgramCode" [popupHeight]='height'
+                    [allowFiltering]='true' [placeholder]='watermark'></ejs-combobox>
+            </div>
+            <label for="Date" class="col-sm-2 mandatoryfield control-label col-form-label">Date:</label>
+            <div class="col-sm-4" print-error [control]="elnHeaderForm.get('ExperimentDate')">
+                <ejs-datepicker [format]="'dd-MMM-yyyy'" [disableControl]="!expVersionObj.IsAllowEdit"
+                    formControlName='ExperimentDate' [max]='currentDate'>
+                </ejs-datepicker>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="PatientId" class="col-sm-2 control-label col-form-label">Patient ID:</label>
+            <div class="col-sm-4">
+                <ejs-combobox [disableControl]="!expVersionObj.IsAllowEdit" [dataSource]='PatientList'
+                    [fields]='dropDwnFields' formControlName="PatientId" [popupHeight]='height' [allowFiltering]='true'
+                    [placeholder]='watermark'></ejs-combobox>
+            </div>
+            <label for="BatchId" class="col-sm-2 control-label col-form-label">Batch ID:</label>
+            <div class="col-sm-4">
+                <ejs-combobox [disableControl]="!expVersionObj.IsAllowEdit" [dataSource]='BatchList'
+                    [fields]='dropDwnFields' formControlName="BatchId" [popupHeight]='height' [allowFiltering]='true'
+                    [placeholder]='watermark'></ejs-combobox>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="SampleBarcode" class="col-sm-2 control-label col-form-label">Sample Barcode:</label>
+            <div class="col-sm-4">
+                <ejs-combobox [disableControl]="!expVersionObj.IsAllowEdit" [dataSource]='SampleBarcodeList'
+                    [fields]='dropDwnFields' formControlName="SampleBarcode" [popupHeight]='height'
+                    [allowFiltering]='true' [placeholder]='watermark'></ejs-combobox>
+            </div>
+            <label for="TestMaterial" class="col-sm-2 control-label col-form-label">Test Material:</label>
+            <div class="col-sm-4">
+                <ejs-combobox [disableControl]="!expVersionObj.IsAllowEdit" [dataSource]='TestMaterialList'
+                    [fields]='dropDwnFields' formControlName="TestMaterial" [popupHeight]='height'
+                    [allowFiltering]='true' [placeholder]='watermark'></ejs-combobox>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="QCTestType" class="col-sm-2 control-label col-form-label">QC Test Type:</label>
+            <div class="col-sm-4">
+                <ejs-combobox [disableControl]="!expVersionObj.IsAllowEdit" [dataSource]='TestTypeList'
+                    [fields]='dropDwnFields' formControlName="QCTestType" [popupHeight]='height'
+                    [allowFiltering]='true' [placeholder]='watermark'></ejs-combobox>
+            </div>
+            <label for="Type" class="col-sm-2 control-label col-form-label">Type:</label>
+            <div class="col-sm-4">
+                <ejs-combobox [disableControl]="!expVersionObj.IsAllowEdit" [dataSource]='TypeList'
+                    [fields]='dropDwnFields' formControlName="Type" [popupHeight]='height'
+                    [allowFiltering]='true' [placeholder]='watermark'></ejs-combobox>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Witness" class="col-sm-2 mandatoryfield control-label col-form-label">Witness:</label>
+            <div class="col-sm-4" print-error [control]="elnHeaderForm.get('WitnessId')">
+                <ejs-dropdownlist [disableControl]="!expVersionObj.IsAllowEdit" showClearButton="true"
+                    [dataSource]='UserList' [fields]='dropDwnFields2' formControlName="WitnessId" [popupHeight]='height'
+                    [allowFiltering]='true' [placeholder]='watermark'></ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="QC_Reviewer_1" class="col-sm-2 mandatoryfield control-label col-form-label">QC Reviewer 1:</label>
+            <div class="col-sm-4" print-error [control]="elnHeaderForm.get('QC_Reviewer_1')">
+                <ejs-dropdownlist [disableControl]="!expVersionObj.IsAllowEdit" showClearButton="true"
+                    [dataSource]='UserList' [fields]='dropDwnFields2' formControlName="QC_Reviewer_1"
+                    [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark'></ejs-dropdownlist>
+            </div>
+            <label for="QC_Reviewer_2" class="col-sm-2 control-label col-form-label">QC Reviewer 2:</label>
+            <div class="col-sm-4">
+                <ejs-dropdownlist [disableControl]="!expVersionObj.IsAllowEdit" showClearButton="true"
+                    [dataSource]='UserList' [fields]='dropDwnFields2' formControlName="QC_Reviewer_2"
+                    [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark'></ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="QA_Reviewer_1" class="col-sm-2 mandatoryfield control-label col-form-label">QA Reviewer 1:</label>
+            <div class="col-sm-4" print-error [control]="elnHeaderForm.get('QA_Reviewer_1')">
+                <ejs-dropdownlist [disableControl]="!expVersionObj.IsAllowEdit" showClearButton="true"
+                    [dataSource]='UserList' [fields]='dropDwnFields2' formControlName="QA_Reviewer_1"
+                    [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark'></ejs-dropdownlist>
+            </div>
+            <label for="QA_Reviewer_2" class="col-sm-2 control-label col-form-label">QA Reviewer 2:</label>
+            <div class="col-sm-4">
+                <ejs-dropdownlist [disableControl]="!expVersionObj.IsAllowEdit" showClearButton="true"
+                    [dataSource]='UserList' [fields]='dropDwnFields2' formControlName="QA_Reviewer_2"
+                    [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark'></ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="QC_Approver" class="col-sm-2 mandatoryfield control-label col-form-label">QA Approver:</label>
+            <div class="col-sm-4" print-error [control]="elnHeaderForm.get('QC_Approver')">
+                <ejs-dropdownlist [disableControl]="!expVersionObj.IsAllowEdit" showClearButton="true"
+                    [dataSource]='UserList' [fields]='dropDwnFields2' formControlName="QC_Approver"
+                    [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark'></ejs-dropdownlist>
+            </div>
+            <label for="QA_Approver" class="col-sm-2 mandatoryfield control-label col-form-label">QA Approver:</label>
+            <div class="col-sm-4" print-error [control]="elnHeaderForm.get('QA_Approver')">
+                <ejs-dropdownlist [disableControl]="!expVersionObj.IsAllowEdit" showClearButton="true"
+                    [dataSource]='UserList' [fields]='dropDwnFields2' formControlName="QA_Approver"
+                    [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark'></ejs-dropdownlist>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="Aim" class="col-sm-2  control-label col-form-label">Aim :</label>
+            <div class="col-md-12" [ngSwitch]="expVersionObj.IsAllowEdit">
+                <div *ngSwitchCase="true">
+                    <ejs-richtexteditor [toolbarSettings]='GetTools()' [insertImageSettings]='insertImageSettings'
+                        formControlName="Aim">
+                        <ng-template>
+
+                        </ng-template>
+                    </ejs-richtexteditor>
+                </div>
+                <div *ngSwitchCase="false" [innerHtml]="elnHeaderForm.get('Aim').value">
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Rationale" class="col-sm-2 control-label col-form-label">Rationale :</label>
+            <div class="col-md-12" [ngSwitch]="expVersionObj.IsAllowEdit">
+                <div *ngSwitchCase="true">
+                    <ejs-richtexteditor [toolbarSettings]='GetTools()' [insertImageSettings]='insertImageSettings'
+                        formControlName="Rationale">
+                        <ng-template>
+                        </ng-template>
+                    </ejs-richtexteditor>
+                </div>
+                <div *ngSwitchCase="false" [innerHtml]="elnHeaderForm.get('Rationale').value">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

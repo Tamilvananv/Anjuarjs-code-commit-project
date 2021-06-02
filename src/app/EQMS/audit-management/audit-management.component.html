@@ -1,0 +1,61 @@
+<h6 style="color: black; padding-top: 29px; text-align: right;">AUDN001</h6>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <ngb-tabset #t="ngbTabset" class="tabset1">
+        <ngb-tab id="tab-selectbyid1" title="Open Audits">
+          <ng-template ngbTabContent>
+            <button id='show' ejs-button (click)='hide()'>HIDE</button>
+            <button id='show' ejs-button (click)='Show()'>SHOW</button>
+            <div *ngIf="show">
+            <div class="control-section">
+                      <ejs-grid [dataSource]='data' (rowDataBound)="rowDataBound($event)" allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'>
+                    <e-columns>
+                        <e-column headerText='Manage Records' textali width='160' [commands]='commands'></e-column>
+                        <e-column field='OrderID' headerText='Order ID' width='120' textAlign='Right' isPrimaryKey='true' [validationRules]='orderidrules'></e-column>
+                        <e-column field='CustomerID' headerText='Customer ID' width='120' textAlign='Right' [validationRules]='customeridrules'></e-column>
+                        <e-column field='Freight' headerText='Freight' width='120' format='C2' textAlign='Right' editType='numericedit' [validationRules]='freightrules'></e-column>
+                        <e-column field='OrderDate' headerText='Order Date' width='130' type='date' format='yMd' editType='datepickeredit' textAlign='Right'></e-column>
+                        <e-column field='ShipCountry' headerText='Ship Country' width='150' editType='dropdownedit' [edit]='editparams'></e-column>
+                         </e-columns>
+                </ejs-grid>
+            </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid2" title="Raise New Audit Request">
+          <ng-template ngbTabContent>
+            <app-raise-new-request></app-raise-new-request>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid3" title="Summary">
+          <ng-template ngbTabContent>
+            <div class="table-responsive">
+              <ejs-grid id="grid" #grid [dataSource]=""
+              [allowExcelExport]='true'
+                 [allowSorting]="true" (toolbarClick)="toolbarClick($event)" [toolbar]="toolbar"
+                  [allowPaging]="true"  [allowGrouping]="true"  [allowResizing]="true"
+                  [groupSettings]="groupOptions">
+                  <e-columns>
+                    <e-column field="AuditNumber" headerText="Audit No." textAlign="Center" width="150"></e-column>
+                    <e-column field="LinkedAuditNumber" headerText="Linked Audit/CC/CAPA No." textAlign="Center" width="140"></e-column>
+                    <e-column field="LinkedRequestStatus" headerText="Linked Request Status" textAlign="Center" width="140"></e-column>
+                    <e-column field="Department" headerText="Department" textAlign="Center" width="100"></e-column>
+                    <e-column field="InitiatedOn" headerText="Initiated On" textAlign="Center" width="150"></e-column>
+                    <e-column field="InitiatedBy" headerText="Initiated By" textAlign="Center" width="140"></e-column>
+                    <e-column field="AuditDescription" headerText="Brief Description of Audit" textAlign="Center" width="140"></e-column>
+                    <e-column field="ReasonForAudit" headerText="Reason for Audit" textAlign="Center" width="150"></e-column>
+                    <e-column field="DateofClosure" headerText="Date of Closure" textAlign="Center" width="140"></e-column>
+                    <e-column field="Attachment" headerText="Attachment" textAlign="Center" width="100"></e-column>
+
+
+                  
+                  </e-columns>
+              </ejs-grid>
+          </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

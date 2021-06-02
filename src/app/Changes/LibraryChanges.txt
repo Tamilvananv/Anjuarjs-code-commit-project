@@ -1,0 +1,9 @@
+-------------------------Keep every Libraries- Angular Syncfysion etc here date wise-------------------
+ie: npm install angular2-signaturepad --save
+--------------------------------------------------------------------------------
+In administration module used listviewmodule syncfusion control so Need to install below command:
+
+npm install @syncfusion/ej2-angular-lists --save
+
+--------------------------------------
+ npm install @syncfusion/ej2-angular-schedule --save

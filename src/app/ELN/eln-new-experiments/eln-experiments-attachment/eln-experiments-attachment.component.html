@@ -1,0 +1,29 @@
+<div class="col-md-12 text-right">
+    <div class="custom-control custom-checkbox">
+        <button type="submit" class="btn_frmsubmit" (click)="moveToTab('tabProcedure')" ejs-button>
+            Back
+        </button>
+        <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabResultRemark')" ejs-button>
+            Next
+        </button>
+        <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/elnhome'">
+          Cancel
+        </button>
+    </div>
+</div>
+<div class="col-md-12" [hidden]="expVersionObj.VersionId ==null">
+    <ejs-filemanager id='overview' #fileManagerCtrl [rootAliasName]="'Attachments'" [showHiddenItems]="showHiddenItems"
+    [toolbarSettings]='toolbarSettings' [contextMenuSettings]='contextMenuSettings' [ajaxSettings]='ajaxSettings' [searchSettings]='searchSettings' (beforeDownload)="beforeSend($event)"
+        (beforeImageLoad)="beforeSend($event)" (beforeSend)="beforeSend($event)" view="Details">
+    </ejs-filemanager>
+</div>
+<style>
+.e-grid .e-columnheader .e-headercell{
+    color: #484848 !important;
+    background-color: #08A1A1;
+    
+}
+.e-headercell{
+    min-width:50px;
+}
+</style>

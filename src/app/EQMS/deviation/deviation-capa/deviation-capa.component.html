@@ -1,0 +1,185 @@
+
+    <div class="col-md-12 frm_tabpanel">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="Date">Date of CAPA Implementaion:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <ejs-datepicker [value]='dateValue' placeholder='Enter date'>
+                        </ejs-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 " style="padding-left: 19%;">
+                <div class="row">
+                    <div class="custom-control " >
+                        <button type="submit" class="btn_frmsubmit" ejs-button>
+                                Save
+                            </button>
+                    <button type="submit" class="btn_frmsubmit" ejs-button>
+                        Back
+                    </button>
+                    <button type="button" class="btn_frmsubmit"  ejs-button>
+                        Next 
+                    </button>
+                    <button type="button" class="btn_frmcancel" ejs-button >
+                        Cancel
+                    </button>
+                </div>
+                </div>
+            </div>
+            </div>
+    </div>
+            
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <label>Status Of Implemented CAPA</label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <ejs-grid width='100%' [dataSource]='data' height='100px;' [gridLines]="lines">
+                        <e-columns>
+
+                            <e-column field='Action' headerText='Action' width=120 textAlign='Center'>
+                                <ng-template #template let-data>
+                                    <div class="loc">
+                                        <a>
+                                            <i class="fa fa-plus" (click)="OpenModal(addModal)"></i>
+                                        </a>
+                                    </div>
+                                </ng-template>
+
+
+                            </e-column>
+                            <e-column field='ProposedCAPA' headerText='Proposed CAPA' width=120 textAlign='Center'>
+                            </e-column>
+                            <e-column field='Status' headerText='Status' width=120 textAlign='Center'></e-column>
+                            <e-column field='DateOfCompletion' headerText='Date Of Completion' width=120
+                                textAlign='Center'></e-column>
+                            <e-column field='Attachments' headerText='Attachments' width=120 textAlign='Center'>
+                            </e-column>
+                        </e-columns>
+                    </ejs-grid>
+                </div>
+                <ng-template #addModal let-modal>
+                    <div class="modal_header">
+                        <h5 class="modal-title">Add </h5>
+                        <button type="button" class="close" aria-label="close" (click)="modal.dismiss('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12 frm_tabpanel">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="ProposedCAPA">Proposed CAPA:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <p>Prepopulate</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="Status">Status:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <ejs-dropdownlist id='Status' #sample [dataSource]='Status' [value]='value'
+                                                [fields]='fields1' [placeholder]='' [popupHeight]='height'>
+                                            </ejs-dropdownlist>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 frm_tabpanel">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="Date">Date of Completion:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <ejs-datepicker [value]='dateValue' placeholder='Enter date'>
+                                            </ejs-datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="Attachment">Attachments:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <ejs-uploader #defaultupload [autoUpload]="false" [dropArea]="dropEle"
+                                                [asyncSettings]="path" (success)="onUploadSuccess($event)"
+                                                (failure)="onUploadFailure($event)"></ejs-uploader>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="addmodal_style" ejs-button>
+                            Add
+                        </button>
+
+                        <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                            cancel
+                        </button>
+                    </div>
+                </ng-template>
+           
+<ejs-accordion>
+        <e-accordionitems>
+            
+            <e-accordionitem expanded='true'>
+                <ng-template #header>
+                    <div >Initiator Department Lead/Head</div>
+                </ng-template>
+                <ng-template #content>
+                    <ejs-grid width='100%' [dataSource]='data1' [editSettings]='editSettings' [toolbar]='toolbar'
+                        height='100px' [gridLines]="lines">
+                        <e-columns>
+                            <!-- <e-column field='EmpList' headerText='Employee List' editType='dropdownedit' [edit]='deptlist'
+                                width=50 textAlign='Center'></e-column> -->
+                            <e-column field='ChooseAction' headerText='Choose Action' editType='dropdownedit'
+                                [edit]='action' width=50 textAlign='Center'>
+                            </e-column>
+                            <e-column field='Comments' headerText='Comments' width=120 textAlign='Center'>
+                            </e-column>
+                        </e-columns>
+                    </ejs-grid>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-actions pull-right">
+                                    <div class="d-flex no-block align-items-center">
+                                        <div class="ml-auto">
+                                            
+                                            <button type="button" class="btn_frmsubmit" ejs-button>
+                                                Sign and Submit 
+                                            </button>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </e-accordionitem>
+        </e-accordionitems>
+    </ejs-accordion>

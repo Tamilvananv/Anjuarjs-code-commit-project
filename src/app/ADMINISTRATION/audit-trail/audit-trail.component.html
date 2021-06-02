@@ -1,0 +1,16 @@
+<div style="padding-top: 28px">
+  <ejs-grid  #grid   id="Grid" [dataSource]="ObjAuditTrailList"    [allowFiltering]="true"    [gridLines]="lines"    [filterSettings]="filterOptions"  height="370px"
+    allowTextWrap="true"    [textWrapSettings]="wrapSettings"    [toolbar]="toolbar"    [allowGrouping]="true"    [allowSorting]="true"  [showColumnMenu]="true"
+    [groupSettings]="groupOptions"    [allowExcelExport]="true"    (toolbarClick)="toolbarClick($event)"  (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)' [allowPdfExport]="true" [allowPaging]='true'  [pageSettings]='pageSettings' 
+      (created)="created($event)"
+    >
+    <e-columns>
+      <e-column field="ModuleType" [filter]="filter" textAlign="Center" headerText=" Module "  width="60"   ></e-column>
+      <e-column field="FeatureName" headerText="Feature"   headerTextAlign="center" textAlign="left" width="60"  ></e-column>
+      <e-column field="Description" headerText="Activity"  headerTextAlign="center" textAlign="left"width="80" ></e-column>
+      <e-column field="UserName"  headerText="User Name"   headerTextAlign="center" textAlign="left" width="50" ></e-column>
+      <e-column field="UserId"  headerText="User Email Id"  headerTextAlign="center" textAlign="left" width="80"  ></e-column>
+      <e-column field="Date"headerText=" Date Time" [format]='format'    headerTextAlign="center" textAlign="left"   width="65"  [filter]='filter' ></e-column>
+    </e-columns>
+  </ejs-grid>
+</div>

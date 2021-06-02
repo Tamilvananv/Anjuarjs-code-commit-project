@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" style="padding-top: 28px;">
+            <!-- <div class="card-body"> -->
+                <div class="table-responsive">
+                    <ejs-grid  #grid id='Grid' [dataSource]='ObjInstrumentReportList' [allowSelection]='true' allowFiltering='true'
+                        [filterSettings]='filterOptions'[toolbar]='toolbarOptions'
+                        [allowExcelExport]='true' allowPaging='true'   [pageSettings]='pageSettings'
+                        (toolbarClick)='toolbarClick($event)' [gridLines]="lines" [enableHover]='false' [allowSorting]='true'
+                        e-gridheader='' height='363px'  [showColumnMenu]="true" [allowGrouping]="true" (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)' [allowPdfExport]="true"
+                        (created)="created($event)">
+                        <e-columns>
+                            <e-column field='InstrumentId' headerText='Instrument Id' headerTextAlign='center' textAlign='left' width=100>
+                            </e-column>
+                            <e-column field='InstrumentTypeName' headerText='Instrument Name'
+                            headerTextAlign='center' textAlign='left' width=110></e-column>
+                            <!--  <e-column field='LastCalibrationPerformedBy' headerText='Last Calibration Performed By'
+                                textAlign='center' format='yMd' width=300></e-column> -->
+                            <e-column field='LastCalibrationPerformedDate' headerText='Last Performed Calibration Date'
+                            headerTextAlign='center' textAlign='left' [format]='Dateformat'  [filter]='filter'  width=170></e-column>
+                            <!--  <e-column field='LastPerformedQualification' headerText='Last Performed Qualification'
+                                textAlign='center' format='yMd' width=300></e-column> -->
+                            <e-column field='LastQualificationPerformedDate'
+                                headerText='Last Performed Qualification Date' headerTextAlign='center' textAlign='left'[format]='Dateformat'
+                                [filter]='filter'  width=170></e-column>
+                            <!-- <e-column field='LastPerformedMaintenance' headerText='Last Performed Maintenance'
+                                textAlign='center' format='yMd' width=300></e-column> -->
+                            <e-column field='LastMaintenancePerformedDate' headerText='Last Performed Maintenance Date'
+                            headerTextAlign='center' textAlign='left' [format]='Dateformat'  [filter]='filter'  width=170></e-column>
+
+                        </e-columns>
+                    </ejs-grid>
+                </div>
+            <!-- </div> -->
+        </div>
+    </div>
+</div>

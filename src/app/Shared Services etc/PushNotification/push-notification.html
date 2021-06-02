@@ -1,0 +1,160 @@
+<section ngbDropdown placement="bottom-right" style="line-height: 21px;">
+    <a ngbDropdownToggle class="nav-link dropdown-toggle waves-effect waves-dark" href="javascript:void(0)"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         <!--  <i class="mdi mdi-bell font-20" style="color: #0881a9;;" (click)="ViewNotifications()">
+            <sup><span class="badge badge-success"
+                    *ngIf="unseenCount>0">{{unseenCount>9?'9+':unseenCount}}</span></sup></i>   -->
+
+                     <i class="mdi mdi-bell font-20" style="color: white;" (click)="ViewNotifications()">
+                        <sup><span class="badge badge-success"
+                                *ngIf="unseenCount>0">{{unseenCount>9?'9+':unseenCount}}</span></sup></i>  
+    </a>
+    <div class="dropdown-menu dropdown-menu-right mailbox" ngbDropdownMenu>
+        <span class="with-arrow">
+            <span class="bg-primary"></span>
+        </span>
+        <ul class="list-style-none">
+            <li>
+                <h4 class="bg-primary p-2 text-white text-center chat_header">Notifications</h4>
+                <div class="container">
+                    <div class="messaging">
+                        <div class="inbox_msg">
+                            <div class="mesgs">
+                                <div class="msg_history" style="max-height: 270px;overflow-y: auto;">
+                                    <div *ngFor="let msg of messages">
+                                        <div class="incoming_msg">
+                                            <div class="incoming_msg_img"> </div>
+                                            <div class="received_msg">
+                                                <div class="received_withd_msg p-b-5">
+                                                    <p class="m-0" style="cursor: pointer;" [routerLink]="msg.RedirectionLink"
+                                                        [ngClass]="{'unseen-msg':msg.IsSeen==false}">
+                                                        {{msg.NotificationText}}
+                                                    </p>
+                                                    <small class="time_date"> {{msg.CreatedDate | date:'medium'}}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="outgoing_msg" *ngIf="msg.type == 'sent'">
+                                            <div class="sent_msg">
+                                                <p>
+                                                    {{msg.message}}
+                                                </p>
+                                                <span class="time_date"> {{msg.date | date:'medium'}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="isLoading==false && messages.length==0">
+                                        No message to display.
+                                    </div>
+                                </div>
+                                <div class="type_msg" *ngIf="false">
+                                    <div class="input_msg_write">
+                                        <input type="text" class="write_msg" [value]="txtMessage"
+                                            (input)="txtMessage=$event.target.value" (keydown.enter)="sendMessage()"
+                                            placeholder="Type a message" />
+                                        <button class="msg_send_btn" type="button" (click)="sendMessage()"><i
+                                                class="fa fa-paper-plane-o" aria-hidden="true"></i>Send</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="isLoading" style="min-height: 40px;">
+                                <div class="wrap">
+                                    <div class="loading">
+                                        <div class="bounceball"></div>
+                                        <div class="text">Loading messages..</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<style>
+    .unseen-msg {
+        font-weight: bold;
+    }
+
+
+    .wrap {
+        margin-left: 40%;
+        margin-top: 20px;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .text {
+        color: black;
+        display: inline-block;
+        margin-left: 5px;
+    }
+
+    .bounceball {
+        position: relative;
+        display: inline-block;
+        height: 37px;
+        width: 15px;
+    }
+
+    .bounceball:before {
+        position: absolute;
+        content: '';
+        display: block;
+        top: 0;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #08a1a1;
+        -webkit-transform-origin: 50%;
+        transform-origin: 50%;
+        -webkit-animation: bounce 500ms alternate infinite ease;
+        animation: bounce 500ms alternate infinite ease;
+    }
+
+    @-webkit-keyframes bounce {
+        0% {
+            top: 30px;
+            height: 5px;
+            border-radius: 60px 60px 20px 20px;
+            -webkit-transform: scaleX(2);
+            transform: scaleX(2);
+        }
+
+        35% {
+            height: 15px;
+            border-radius: 50%;
+            -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+        }
+
+        100% {
+            top: 0;
+        }
+    }
+
+    @keyframes bounce {
+        0% {
+            top: 30px;
+            height: 5px;
+            border-radius: 60px 60px 20px 20px;
+            -webkit-transform: scaleX(2);
+            transform: scaleX(2);
+        }
+
+        35% {
+            height: 15px;
+            border-radius: 50%;
+            -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+        }
+
+        100% {
+            top: 0;
+        }
+    }
+</style>

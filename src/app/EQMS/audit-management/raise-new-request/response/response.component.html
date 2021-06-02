@@ -1,0 +1,224 @@
+<div class="col-md-12 text-right">
+    <div class="custom-control " style="padding-bottom: 5px;">
+
+        <button type="submit" class="btn_frmsubmit" ejs-button>
+            Back
+        </button>
+        <button type="submit" class="btn_frmcancel" ejs-button>
+            Close
+        </button>
+
+    </div>
+</div>
+
+<div class="table-responsive">
+    <ejs-grid #grid id='Grid' [dataSource]='data' [gridLines]="lines" e-gridheader=''[allowResizing]="true" height='200px'>
+
+        <e-columns>
+            <e-column headerText='Action' textAlign='center' width='70'>
+                    <ng-template #template let-data>
+                            <div class="loc">
+                                <a>
+                                    <i class="fa fa-plus" (click)="OpenModal(addModal)"></i>
+                                </a>
+                            </div>
+                        </ng-template>
+
+            </e-column>
+            <e-column field='Observation' headerText='Observation' headerTextAlign="center" textAlign="left" width=100>
+            </e-column>
+            <e-column field='Dept' headerText='Department' headerTextAlign='center' textAlign='left' width=100>
+            </e-column>
+            <e-column field='Category' headerText='Category' headerTextAlign='center' textAlign='left' width=100>
+            </e-column>
+            <e-column field='FirstActionSuggested' headerText='First Action Suggested' headerTextAlign='center'
+                textAlign='left' width=140>
+            </e-column>
+            <e-column field='Comments' headerText='Auditor Comments' headerTextAlign='center' textAlign='left' width=150>
+                </e-column>
+            <e-column field='RequestNumber' headerText='Request Number' headerTextAlign='center' textAlign='left'
+                width=130>
+            </e-column>
+            <e-column field='Status' headerText='Status' headerTextAlign='center' textAlign='left' width=130>
+            </e-column>
+           
+        </e-columns>
+    </ejs-grid>
+</div>
+<ng-template #addModal let-modal>
+        <div class="modal_header">
+                <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="modal-title">Add</h5>
+        
+                            </div>
+                            <div class="col-md-6" class="Close_Popup">
+                                <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                            </div>
+        
+                        </div>
+                    </div>
+         
+        </div>
+        <div class="modal-body">
+                <div class="col-md-12 frm_tabpanel">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label for="Observations">Observations:</label>
+                                    </div>
+                                    <div class="col-md-7">
+        
+                                    </div>
+        
+                                </div>
+                            </div>
+        
+        
+                        </div>
+                    </div>
+                    <div class="col-md-12 frm_tabpanel">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label for="Department">Department:</label>
+                                        </div>
+                                        <div class="col-md-7">
+            
+                                        </div>
+            
+                                    </div>
+                                </div>
+            
+                                <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label for="Category">Category:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                
+                                            </div>
+                
+                                        </div>
+                                    </div>
+                
+            
+                            </div>
+                        </div>
+                        <div class="col-md-12 frm_tabpanel">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label for="ActionSuggested">Action Suggested By User:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                
+                                            </div>
+                
+                                        </div>
+                                    </div>
+                
+                    
+                
+                                </div>
+                            </div>
+                <div class="col-md-12 frm_tabpanel">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="Auditorcomments">Auditor Comments:</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        
+                                    </div>
+                    
+                                </div>
+                            </div>
+                    
+                    
+                        </div>
+                    </div>
+                    <form [formGroup]="EqmsAuditDetailsForm">
+                    <div class="col-md-12 frm_tabpanel">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label for="DepartmentAction">Auditee Department Action:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                                <ejs-dropdownlist id='A'  [dataSource]='Action' [value]='value' [fields]='fields'
+                                                (change)="onChange1($event)"  formControlName="AuditEnt"  [placeholder]='waterMark' [popupHeight]='height'>
+                                                </ejs-dropdownlist>
+
+                                                <!-- <ejs-dropdownlist id="A" [value]="value" [dataSource]="Action" [fields]="fields1"
+                                                [placeholder]="waterMark"
+                                                  [popupHeight]="height">
+                                                </ejs-dropdownlist> -->
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                <div *ngIf="visible">
+                                        <div class="form-group">
+                                <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label for="AssignReqTo">Assign Request To:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                    <ejs-dropdownlist id="A" [value]="value" [dataSource]="Action" [fields]="fields1"
+                                                    [placeholder]="waterMark"
+                                                      [popupHeight]="height">
+                                                    </ejs-dropdownlist>
+                                            </div>
+                
+                                        </div>
+                                    </div>
+                
+            </div></div>
+                            </div>
+                        </div>
+</form>
+                    <div class="col-md-12 frm_tabpanel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="AuditeeHeadComments">Auditee Head Comments:</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="text" name="AuditeeHeadComments" class="form-control" placeholder="AuditeeHeadComments" />
+                                        </div>
+                        
+                                    </div>
+                                </div>
+                        
+                        
+                            </div>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn_frmsubmit float-right" ejs-button
+                      >Sign & Submit</button>
+                    <button type="button" class="btn_frmcancel float-right" ejs-button
+                        (click)="modal.close()">Back</button>
+                </div>
+            </ng-template>
+
+
+<div class="col-md-12 text-right">
+    <div class="custom-control " style="padding-bottom: 5px;">
+
+        <button type="submit" class="btn_frmsubmit" ejs-button>
+           Sign & Close
+        </button>
+
+    </div>
+</div>
+

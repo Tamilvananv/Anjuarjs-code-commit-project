@@ -1,0 +1,377 @@
+<div class="col-md-12 text-right" *ngIf="tabset.activeId=='tabInstrument'">
+    <div class="custom-control custom-checkbox" style="padding-bottom: 5px;">
+        <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabHeader')" ejs-button>
+            <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+            Back
+        </button>
+        <button type="button" class="btn_frmsubmit" (click)="tabset.select('tabEquipment')" ejs-button>
+            Next
+            <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+        </button>
+        <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/qcelnhome'">
+            <!-- <i class="fas fa-times"></i> &nbsp; -->
+            Cancel
+        </button>
+    </div>
+</div>
+<div class="col-md-12 text-right" *ngIf="tabset.activeId=='tabEquipment'">
+    <div class="custom-control custom-checkbox" style="padding-bottom: 5px;">
+        <button type="button" class="btn_frmsubmit" (click)="tabset.select('tabInstrument')" ejs-button>
+            <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+            Back
+        </button>
+        <button type="button" class="btn_frmsubmit" (click)="tabset.select('tabMaterial')" ejs-button>
+            Next
+            <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+        </button>
+        <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/elnhome'">
+            <!-- <i class="fas fa-times"></i> &nbsp; -->
+            Cancel
+        </button>
+    </div>
+</div>
+<div class="col-md-12 text-right" *ngIf="tabset.activeId=='tabMaterial'">
+    <div class="custom-control custom-checkbox" style="padding-bottom: 5px;">
+        <button type="button" class="btn_frmsubmit" (click)="tabset.select('tabEquipment')" ejs-button>
+            <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+            Back
+        </button>
+        <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabSOP')" ejs-button>
+            Next
+            <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+        </button>
+        <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/elnhome'">
+            <!-- <i class="fas fa-times"></i> &nbsp; -->
+            Cancel
+        </button>
+    </div>
+</div>
+
+<div style=" box-shadow: 1px 1px 4px 1px;">
+    <ngb-tabset #tabset="ngbTabset" (tabChange)="tabChanged($event)" [destroyOnHide]="false">
+        <ngb-tab id="tabInstrument">
+            <ng-template ngbTabTitle>
+                <span title="Instrument Details">Instrument Details</span>
+            </ng-template>
+            <ng-template ngbTabContent>
+                <div class="col-lg-12 col-md-12" *ngIf="expVersionObj !=null && expVersionObj.IsAllowEdit"
+                    style="padding-bottom: 5px;">
+                    <button type="submit" class="addbtn_style" title="Add Instrument Details"
+                        (click)="openPopup(addElninstrumentModal,'instrument')" ejs-button>
+                        <!-- <i class="fa fa-plus-circle"></i> &nbsp; -->
+                        {{ELNInstrumentList==null || ELNInstrumentList.length==0?'Add':'Edit'}}
+                    </button>
+                    <ng-template #addElninstrumentModal let-modal>
+                        <div class="modal_header">
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5 class="modal-title"> Instrument Details</h5>
+                                    </div>
+                                    <div class="col-md-6" class="Close_Popup">
+                                        <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="height: 550px;overflow-y: auto;">
+                                <ejs-grid #instrumentGrid [dataSource]='InstrumentList' [gridLines]="lines" [allowFiltering]='true' [filterSettings]="filterOptions" [toolbar]="toolbar">
+                                    <e-columns>
+                                        <e-column headerText="Select" textAlign="center" width="100">
+                                            <ng-template #template let-data>
+                                                <input type="checkbox" [disabled]="data.Availability==false"
+                                                    [(ngModel)]="data.IsSelected" (click)="onSelectionChange($event,data,'instrument',instrumentGrid)">
+                                            </ng-template>
+                                        </e-column>
+                                        <e-column field="InstrumentNo" headerText="Instrument Id"
+                                            headerTextAlign='center' textAlign='left' width="130">
+                                        </e-column>
+                                        <e-column field="InstrumentTypeName" headerText="Instrument Name"
+                                            headerTextAlign='center' textAlign='left' width="160">
+                                        </e-column>
+                                        <e-column headerText="Availability" textAlign="center" width="100">
+                                            <ng-template #template let-data>
+                                                <span>{{data.Availability|yesNo}}</span>
+                                            </ng-template>
+                                        </e-column>
+                                        <e-column headerText="User Qualification Status" textAlign="center" width="150">
+                                            <ng-template #template let-data>
+                                                <select type="checkbox" class="form-control"
+                                                    [disabled]="data.Availability==false" (change)="onQualificationStatusChange($event,data,'instrument')"
+                                                    [(ngModel)]="data.QualificationStatus">
+                                                    <option value="null">Select</option>
+                                                    <option value="true">Yes</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                            </ng-template>
+                                        </e-column>
+                                        <e-column headerText="Remark" textAlign="center" width="250">
+                                            <ng-template #template let-data>
+                                                <textarea class="form-control"[disabled]="data.Availability==false"
+                                                 rows="2" [(ngModel)]="data.Remark" (keyup)="remarkTyping($event,data,'equipment')"></textarea>
+                                            </ng-template>
+                                        </e-column>
+                                        <e-column field="ManufactureName" headerText="Manufacturer"
+                                            headerTextAlign='center' textAlign='left' width="150"></e-column>
+                                        <e-column field="Model" headerText="Model" headerTextAlign='center'
+                                            textAlign='left' width="100"></e-column>
+                                        <e-column field="CalibrationDue" headerText="Calibration Due"
+                                            headerTextAlign='center' textAlign='left' [format]='Dateformat'
+                                            [filter]='filter' width="130">
+                                        </e-column>
+                                        <e-column field="InstrumentMfgSrNo" headerText="Manufacturers Sr No"
+                                            headerTextAlign='center' textAlign='left' width="170">
+                                        </e-column>
+                                        <e-column field="StorageLocation" headerText="Location" headerTextAlign='center'
+                                            textAlign='left' width="100">
+                                        </e-column>
+                                        <e-column field="DepartmentName" headerText="Department Name"
+                                            headerTextAlign='center' textAlign='left' width="160">
+                                        </e-column>
+                                    </e-columns>
+                                </ejs-grid>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="addmodal_style" type="submit" (click)="SaveInstrument()"
+                                ejs-button>Add Selected Instruments</button>
+                            <button class="cancel_style" type="button" (click)="modal.close('Close click')"
+                                ejs-button>cancel</button>
+                        </div>
+                    </ng-template>
+                </div>
+                <div class="col-lg-12 col-md-12">
+                    <ejs-grid  [dataSource]='ELNInstrumentList' [gridLines]="lines" [toolbar]='toolbar' height='300px' [allowFiltering]='true' [filterSettings]="filterOptions" [toolbar]="toolbar">
+                        <e-columns>
+                            <e-column field='InstrumentNo' headerText='Instrument Id' textAlign='Center' width=190>
+                            </e-column>
+                            <e-column field='InstrumentTypeName' headerText='Instrument Type' textAlign='Center'
+                                width=200>
+                            </e-column>
+                            <e-column field='StorageLocation' headerText='Storage Location' textAlign='Center'
+                                width=200>
+                            </e-column>
+                            <e-column field='ManufactureName' headerText='Manufacturer' textAlign='Center' width=180>
+                            </e-column>
+                            <e-column field='Model' headerText='Model' textAlign='Center' width=170>
+                            </e-column>
+                            <e-column headerText='User Qualification Status' textAlign='Center' width=250>
+                                <ng-template #template let-data>
+                                    <div>
+                                        <span>{{data.QualificationStatus|yesNo}}</span>
+                                    </div>
+                                </ng-template>
+                            </e-column>
+                            <e-column field='Remark' headerText='Remark/Issues' textAlign='Center' width=200></e-column>
+                        </e-columns>
+                    </ejs-grid>
+                </div>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tabEquipment">
+            <ng-template ngbTabTitle>
+                <span title="Equipment Details">Equipment Details</span>
+            </ng-template>
+            <ng-template ngbTabContent>
+                <div class="col-lg-12 col-md-12" *ngIf="expVersionObj.IsAllowEdit" style="padding-bottom: 5px;">
+                    <button type="submit" class="addbtn_style" title="Add Equipment Details"
+                        (click)="openPopup(addElnequipmentModal,'equipment')" ejs-button>
+                        {{ELNEquipmentList==null || ELNEquipmentList.length==0?'Add':'Edit'}}
+                    </button>
+                    <ng-template #addElnequipmentModal let-modal>
+                        <div class="modal_header">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5 class="modal-title"> Equipment Details</h5>
+                                    </div>
+                                    <div class="col-md-6" class="Close_Popup">
+                                        <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="height: 550px;overflow-y: auto;">
+                                <ejs-grid #enquipmentGrid [dataSource]='EquipmentList' [gridLines]="lines" [allowFiltering]='true' [filterSettings]="filterOptions" [toolbar]="toolbar">
+                                    <e-columns>
+                                        <e-column headerText="Select" textAlign="center" width="100">
+                                            <ng-template #template let-data>
+                                                <input type="checkbox" [disabled]="data.Availability==false"
+                                                   [(ngModel)]="data.IsSelected" (click)="onSelectionChange($event,data,'equipment',enquipmentGrid)">
+                                            </ng-template>
+                                        </e-column>
+                                        <e-column field="EquipmentNo" headerText="Equipment Id"
+                                            headerTextAlign='center' textAlign='left' width="130">
+                                        </e-column>
+                                        <e-column field='EquipmentTypeName' headerText='Equipment Type Name' 
+                                            headerTextAlign='center' textAlign='left' width="160">
+                                        </e-column>
+                                        <e-column headerText="Availability" textAlign="center" width="100">
+                                            <ng-template #template let-data>
+                                                <span>{{data.Availability|yesNo}}</span>
+                                            </ng-template>
+                                        </e-column>
+                                        <e-column headerText="User Qualification Status" textAlign="center" width="150">
+                                            <ng-template #template let-data>
+                                                <select type="checkbox" class="form-control"
+                                                    [disabled]="data.Availability==false" (change)="onQualificationStatusChange($event,data,'equipment')"
+                                                    [(ngModel)]="data.QualificationStatus">
+                                                    <option value="null">Select</option>
+                                                    <option value="true">Yes</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                            </ng-template>
+                                        </e-column>
+                                        <e-column headerText="Remark" textAlign="center" width="250">
+                                            <ng-template #template let-data>
+                                                <textarea class="form-control"[disabled]="data.Availability==false"
+                                                 rows="2" [(ngModel)]="data.Remark" (keyup)="remarkTyping($event,data,'equipment')"></textarea>
+                                            </ng-template>
+                                        </e-column>
+                                        <e-column field="ManufactureName" headerText="Manufacturer"
+                                            headerTextAlign='center' textAlign='left' width="150"></e-column>
+                                        <e-column field="Model" headerText="Model" headerTextAlign='center'
+                                            textAlign='left' width="100"></e-column>
+                                        <e-column field="CalibrationDue" headerText="Calibration Due"
+                                            headerTextAlign='center' textAlign='left' [format]='Dateformat'
+                                            [filter]='filter' width="130">
+                                        </e-column>
+                                        <e-column field="InstrumentMfgSrNo" headerText="Manufacturers Sr No"
+                                            headerTextAlign='center' textAlign='left' width="170">
+                                        </e-column>
+                                        <e-column field="StorageLocation" headerText="Location" headerTextAlign='center'
+                                            textAlign='left' width="100">
+                                        </e-column>
+                                        <e-column field="DepartmentName" headerText="Department Name"
+                                            headerTextAlign='center' textAlign='left' width="160">
+                                        </e-column>
+                                    </e-columns>
+                                </ejs-grid>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="addmodal_style" type="submit" (click)="SaveEquipment()"
+                                ejs-button>Add Selected Equipments</button>
+                            <button class="cancel_style" type="button" (click)="modal.close('Close click')"
+                                ejs-button>cancel</button>
+                        </div>
+                    </ng-template>
+                </div>
+                <div class="col-lg-12 col-md-12" style="padding-top: 5px;">
+
+                    <ejs-grid [dataSource]='ELNEquipmentList' [gridLines]="lines" [toolbar]='toolbar' height='300px' [allowFiltering]='true' [filterSettings]="filterOptions" [toolbar]="toolbar">
+                        <e-columns>
+                            <e-column field='EquipmentNo' headerText='Equipment Id' textAlign='Center'
+                                isPrimaryKey='true' editType='dropdownedit' width=190></e-column>
+                            <e-column field='EquipmentTypeName' headerText='Equipment Type Name' textAlign='Center'
+                                isPrimaryKey='true' width=200>
+                            </e-column>
+                            <e-column field='StorageLocation' headerText='Storage Location' textAlign='Center'
+                                isPrimaryKey='true' width=200>
+                            </e-column>
+                            <e-column field='ManufactureName' headerText='Manufacturer' textAlign='Center'
+                                isPrimaryKey='true' width=180>
+                            </e-column>
+                            <e-column field='Model' headerText='Model' textAlign='Center' isPrimaryKey='true' width=170>
+                            </e-column>
+                            <e-column headerText='User Qualification Status' textAlign='Center' isPrimaryKey=' true'
+                                width=250>
+                                <ng-template #template let-data>
+                                    <div>
+                                        <span>{{data.QualificationStatus|yesNo}}</span>
+                                    </div>
+                                </ng-template>
+                            </e-column>
+                            <e-column field='Remark' headerText='Remark/Issues' textAlign='Center' width=200></e-column>
+                        </e-columns>
+                    </ejs-grid>
+                </div>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tabMaterial">
+            <ng-template ngbTabTitle>
+                <span title="Material Details">Material Details</span>
+            </ng-template>
+            <ng-template ngbTabContent>
+                <h4 class="p-10">Coming soon</h4>
+                <!-- <div class="col-lg-12 col-md-12" *ngIf="expVersionObj.IsAllowEdit">
+                    <button type="submit" class="btn_frmadd" ejs-button (click)="openPopup(addElnMaterialModal,'material')">Add</button>
+                    <ng-template #addElnMaterialModal let-modal>
+                        <div class="modal_header">
+                            <h5 class="modal-title">Material</h5>
+                            <button type="button" class="close" aria-label="close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="MaterialId" class="control-label col-form-label">Material ID:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <ejs-combobox id='MaterialId' [dataSource]='MaterialList' [fields]='drpdwnfields' [popupHeight]='height' [placeholder]='watermark' (change)="GetMaterialDetails($event)" [allowFiltering]='true' [(ngModel)]='MaterialObj.MaterialId'></ejs-combobox>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="Mfg" class="control-label col-form-label">Manufacturer:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <span for="Mfg" class="control-label col-form-label">{{MaterialObj.ManufactureName}}</span>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="CatalogueNo" class="control-label col-form-label">Catalogue No:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <span for="CatalogueNo" class="control-label col-form-label">{{MaterialObj.CatalogueNo}}</span>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="LOTNo" class="control-label col-form-label">LOT No.:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <span for="LOTNo" class="control-label col-form-label">{{MaterialObj.LOTNo}}</span>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="ExpiryDate" class="control-label col-form-label">Expiry Date:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <span for="ExpiryDate" class="control-label col-form-label">{{MaterialObj.ExpiryDate}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="Remark" class="control-label col-form-label">Remark:</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" [(ngModel)]='MaterialObj.Remark' id="Remark" placeholder="" maxlength="100"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="addmodal_style" (click)="SaveMaterial()" ejs-button>Add</button>
+                            <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>cancel</button>
+                        </div>
+                    </ng-template>
+                </div>
+                <div class="col-lg-12 col-md-12">
+                    <ejs-grid [dataSource]='ELNMaterialList' [gridLines]="lines" [toolbar]='toolbar' height='300px'>
+                        <e-columns>
+                            <e-column field='MaterialNo' headerText='Material Id' textAlign='Center' isPrimaryKey='true' editType='dropdownedit' width=190></e-column>
+                            <e-column field='ManufactureName' headerText='Manufacturer' textAlign='Center' isPrimaryKey='true'>
+                            </e-column>
+                            <e-column field='CatalogueNo' headerText='Catalogue No' textAlign='Center' isPrimaryKey='true'>
+                            </e-column>
+                            <e-column field='LOTNo' headerText='LOTNo' textAlign='Center' isPrimaryKey='true' width=170></e-column>
+                            <e-column field='ExpiryDate' headerText='Expiry Date' textAlign='Center' isPrimaryKey=' true'></e-column>
+                            <e-column field='Remark' headerText='Remark/Issues' textAlign='Center' width=200></e-column>
+                        </e-columns>
+                    </ejs-grid>
+                </div> -->
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</div>

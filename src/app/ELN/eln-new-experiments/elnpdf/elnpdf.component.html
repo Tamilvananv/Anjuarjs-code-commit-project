@@ -1,0 +1,352 @@
+<div id="pdfDivContent">
+    <h2 class="text-center hiddenView">Table of Contents</h2>
+    <ul class="leaders hiddenView">
+        <li><a href="#headerSection" target="" class="linkTableOfContent">1. Header</a></li>
+        <li><a href="#InstrumentSection" class="linkTableOfContent">2. Instrument Details</a></li>
+        <li><a href="#EquipmentSection" class="linkTableOfContent">3. Equipment Details</a></li>
+        <li><a href="#SOPSection" class="linkTableOfContent">4. SOP Details</a></li>
+        <li><a href="#PrecautionSection" class="linkTableOfContent">5. Precaution</a></li>
+        <li><a href="#ProcedureSection" class="linkTableOfContent">6. Procedure</a></li>
+        <li><a href="#CommentsSection" class="linkTableOfContent">7. Comments</a></li>
+        <li><a href="#ResultSection" class="linkTableOfContent">8. Results</a></li>
+        <li><a href="#RemarksSection" class="linkTableOfContent">9. Remarks</a></li>
+        <li><a href="#ConclusionSection" class="linkTableOfContent">10. Conclusion</a></li>
+        <li><a href="#SummarySection" class="linkTableOfContent">11. Summary</a></li>
+        <li><a href="#ReworkSection" class="linkTableOfContent">12. Rework</a></li>
+        <li><a href="#SignaturesSection" class="linkTableOfContent">13. Signatures</a></li>
+    </ul>
+    <table width="100%" *ngIf="pdfData!=null">
+        <tr style="border-bottom: 2px solid black;page-break-before: always" id="headerSection">
+            <td colspan="4" style="padding-bottom: 5px;">
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <img class="light-logo" src="{{applicationUrl}}/content/images/immuneel_logo.png">
+                        </td>
+                        <td align="right" style="font-size: 18x;">
+                            <label style="margin-bottom: 0 !important;">Experiment No.:</label>&nbsp;{{pdfData.ExperimentObj.ExperimentNo}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="padding-top: 5px;">
+                <label class="m-b-5" *ngIf="pdfData.ExperimentObj.VersionId>0">
+                    <span>Version - {{pdfData.ExperimentObj.VersionNo}}</span>, 
+                    <span>Performed By {{pdfData.ExperimentObj.CreatedBy}}</span>
+                    <small class="p-l-5" *ngIf="pdfData.ExperimentObj.PublishDate"> on
+                        {{pdfData.ExperimentObj.PublishDate|date:'dd-MMM-yyyy'}}</small>                                      
+                </label><br>
+                <label>Name of Experiment:</label>&nbsp;&nbsp;{{pdfData.Header.Title}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="lblHeading">
+                Header
+            </td>
+        </tr>
+        <tr>
+            <td width="15%">
+                <label>Program Code:</label>
+            </td>
+            <td width="35%">
+                <span *ngIf="pdfData.Header.ProgramCode.length>0">{{pdfData.Header.ProgramCode}}</span>
+                <span *ngIf="pdfData.Header.ProgramCode.length==0">NA</span>
+            </td>
+            <td width="15%">
+                <label>Target Id:</label>
+            </td>
+            <td width="35%">
+                <span *ngIf="pdfData.Header.TargetId.length>0">{{pdfData.Header.TargetId}}</span>
+                <span *ngIf="pdfData.Header.TargetId.length==0">NA</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="15%">
+                <label>Experiment Date:</label>
+            </td>
+            <td width="35%">
+                {{pdfData.Header.ExperimentDate|date:'dd-MMM-yyyy'}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <label>Aim:</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" [innerHtml]="pdfData.Header.Aim" *ngIf="pdfData.Header.Aim.length>0">
+            </td>
+            <td colspan="4" *ngIf="pdfData.Header.Aim.length==0"><span>NA</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <label>Rationale:</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" [innerHtml]="pdfData.Header.Rationale" *ngIf="pdfData.Header.Rationale.length>0">
+            </td>
+            <td colspan="4" *ngIf="pdfData.Header.Rationale.length==0"><span>NA</span>
+            </td>
+        </tr>
+        <tr id="InstrumentSection" style="page-break-before: always">
+            <td colspan="4" class="lblHeading">
+                Instrument Details
+            </td>
+        </tr>
+        <tr *ngIf="pdfData.InstrumentList!=null && pdfData.InstrumentList.length>0">
+            <td colspan="4">
+                <table class="table table-bordered">
+                    <thead class="tableHeader">
+                        <tr>
+                            <th>
+                                Instrument Id
+                            </th>
+                            <th>
+                                Instrument Type
+                            </th>
+                            <th>
+                                Storage Location
+                            </th>
+                            <th>
+                                Manufacturer
+                            </th>
+                            <th>
+                                Model
+                            </th>
+                            <th>
+                                Qualification Status
+                            </th>
+                            <th>
+                                Remark
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of pdfData.InstrumentList">
+                            <td>{{item.InstrumentNo}}</td>
+                            <td>{{item.InstrumentTypeName}}</td>
+                            <td>{{item.StorageLocation}}</td>
+                            <td>{{item.ManufactureName}}</td>
+                            <td>{{item.Model}}</td>
+                            <td class="text-center">{{item.QualificationStatus|yesNo}}</td>
+                            <td>{{item.Remark}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr *ngIf="pdfData.InstrumentList!=null && pdfData.InstrumentList.length==0">
+            <td colspan="4"><span>NA</span></td>
+        </tr>
+        <tr id="EquipmentSection" style="page-break-before: always">
+            <td colspan="4" class="lblHeading">
+                Equipment Details
+            </td>
+        </tr>
+        <tr *ngIf="pdfData.EquipmentList!=null && pdfData.EquipmentList.length>0">
+            <td colspan="4">
+                <table class="table table-bordered">
+                    <thead class="tableHeader">
+                        <tr>
+                            <th>
+                                Equipment Id
+                            </th>
+                            <th>
+                                Equipment Name
+                            </th>
+                            <th>
+                                Storage Location
+                            </th>
+                            <th>
+                                Manufacturer
+                            </th>
+                            <th>
+                                Model
+                            </th>
+                            <th>
+                                Qualification Status
+                            </th>
+                            <th>
+                                Remark
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of pdfData.EquipmentList">
+                            <td>{{item.EquipmentNo}}</td>
+                            <td>{{item.EquipmentTypeName}}</td>
+                            <td>{{item.StorageLocation}}</td>
+                            <td>{{item.ManufactureName}}</td>
+                            <td>{{item.Model}}</td>
+                            <td class="text-center">{{item.QualificationStatus|yesNo}}</td>
+                            <td>{{item.Remark}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr *ngIf="pdfData.EquipmentList!=null && pdfData.EquipmentList.length==0">
+            <td colspan="4"><span>NA</span></td>
+        </tr>
+        <tr id="SOPSection" style="page-break-before: always">
+            <td colspan="4" class="lblHeading">
+                SOP Details
+            </td>
+        </tr>
+        <tr *ngIf="pdfData.SOPList!=null && pdfData.SOPList.length>0">
+            <td colspan="4">
+                <table class="table table-bordered">
+                    <thead class="tableHeader">
+                        <tr>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                SOP
+                            </th>
+                            <th>
+                                Qualification Status
+                            </th>
+                            <th>
+                                Remark
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of pdfData.SOPList">
+                            <td>{{item.Title}}</td>
+                            <td>{{item.ProcedureFilePath|fileName}}</td>
+                            <td class="text-center">{{item.QualificationStatus|yesNo}}</td>
+                            <td>{{item.Remark}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr *ngIf="pdfData.SOPList!=null && pdfData.SOPList.length==0">
+            <td colspan="4"><span>NA</span></td>
+        </tr>
+        <tr id="PrecautionSection" style="page-break-before: always">
+            <td colspan="4" class="lblHeading">
+                Precaution
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" *ngIf="pdfData.Precaution!=null && pdfData.Precaution.length>0">
+                <ejs-documenteditor class="hide" id="editorPrecaution"
+                    (created)="onCreate(pdfData.Precaution,'Precaution')">
+                </ejs-documenteditor>
+                <div id="htmlPrecaution"></div>
+            </td>
+            <td colspan="4" *ngIf="pdfData.Precaution==null || pdfData.Precaution.length==0"><span>NA</span></td>
+        </tr>
+        <tr *ngFor="let item of pdfData.DocumentEditorList" id="{{item.ContentType}}Section" style="page-break-before: always">
+            <td colspan="4">
+                <table width="100%">
+                    <tr>
+                        <td class="lblHeading">
+                            {{item.ContentType}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td *ngIf="item.ContentBody.length>0">
+                            <ejs-documenteditor class="hide" id="editor{{item.ContentType}}"
+                                (created)="onCreate(item.ContentBody,item.ContentType)">
+                            </ejs-documenteditor>
+                            <div id="html{{item.ContentType}}"></div>
+                        </td>
+                        <td colspan="4" *ngIf="item.ContentBody.length==0"><span>NA</span></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr id="ReworkSection" style="page-break-before: always">
+            <td colspan="4" class="lblHeading">
+                Rework
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" *ngIf="pdfData.ReworkList.length>0">
+                <table class="table table-bordered">
+                    <thead class="tableHeader">
+                        <tr>
+                            <th>
+                                Reason
+                            </th>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Created By
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of pdfData.ReworkList">
+                            <td>{{item.Reason}}</td>
+                            <td>{{item.Date|date:'dd-MMM-yyyy'}}</td>
+                            <td align="center">
+                                <span>{{item.CreatedBy}}</span>&nbsp;
+                                <small *ngIf="item.UserType!=null">({{item.UserType}})</small>
+                                <small *ngIf="item.UserType==null">(Performer)</small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td colspan="4" *ngIf="pdfData.ReworkList.length==0"><span>NA</span></td>
+        </tr>
+        <tr style="page-break-before: always" id="SignaturesSection">
+            <td style="text-align:center;width:25%">
+                <table *ngIf="pdfData.InitiatorSignature !=null">
+                    <tr>
+                        <td style="text-align:center;">
+                            {{pdfData.InitiatorSignature.UserType}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;height: 150px;width: 150px;">
+                            <img [src]="sanitizeImageUrl(pdfData.InitiatorSignature.UserSignatureBase64)" height="150px"
+                                *ngIf="pdfData.InitiatorSignature.UserSignatureBase64!=null" width="150px"
+                                alt="Signature" class="img-signature">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;">
+                            <label class="m-0">{{pdfData.InitiatorSignature.FullName}}</label>
+                           <br> <small *ngIf="pdfData.InitiatorSignature.SignatureOnDate"> on
+                                {{pdfData.InitiatorSignature.SignatureOnDate|date:'dd-MMM-yyyy'}}</small>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td *ngFor="let userSign of pdfData.UserSignatureList" style="width:25%">
+                <table>
+                    <tr>
+                        <td style="text-align:center;">
+                            {{userSign.UserType}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;height: 150px;width: 150px;">
+                            <img [src]="sanitizeImageUrl(userSign.UserSignatureBase64)"
+                                *ngIf="userSign.UserSignatureBase64!=null" height="150px" width="150px" alt="Signature"
+                                class="img-signature">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;">
+                            <label class="m-0">{{userSign.FullName}}</label>
+                            <br>  <small *ngIf="userSign.SignatureOnDate">&nbsp;on
+                                {{userSign.SignatureOnDate|date:'dd-MMM-yyyy'}}</small>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

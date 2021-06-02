@@ -1,0 +1,1168 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <ngb-tabset #t="ngbTabset" class="tabset1">
+        <ngb-tab id="tab-selectbyid1" title=" Audit Scheduler">
+          <ng-template ngbTabContent>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                  <div class="form-actions pull-right">
+                    <div class="d-flex no-block align-items-center">
+                      <div class="ml-auto">
+                          <button type="submit" class="btn_frmsubmit" ejs-button>
+                              Save
+                            </button>
+    
+                        <button type="submit" class="btn_frmsubmit" ejs-button>
+                          Next
+                        </button>
+
+                        <button type="button" class="btn_frmcancel" ejs-button>
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <form [formGroup]="EqmsAuditDetailsForm">
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label for="AuditNumber">Audit Number:</label>
+                      </div>
+                      <div class="col-md-7">
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label for="InitiatedDate">Initiated On:</label>
+                      </div>
+                      <div class="col-md-7">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label for="Initiatedby">Initiated By:</label>
+                      </div>
+                      <div class="col-md-7">
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label for="Dept">Department:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <div class="form-group">
+                          <ejs-dropdownlist Id="dept" [dataSource]="DeptName" [value]="value"
+                            (change)="onChange($event)" [(text)]="text" [fields]="fields" [placeholder]="waterMark"
+                            [popupHeight]="height">
+                          </ejs-dropdownlist>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <label for="Scope">Scope of Audit:</label>
+                      </div>
+                      <div class="col-md-10">
+                        <textarea name="message" rows="3" cols="125">
+    Type Here </textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <label for="Reason">Reason for Audit:</label>
+                      </div>
+                      <div class="col-md-10">
+                        <textarea name="message" rows="3" cols="125">
+    Type Here </textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <label for="Descp">Description:</label>
+                      </div>
+                      <div class="col-md-10">
+                        <textarea name="message" rows="3" cols="125">
+    Type Here </textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label for="AuditType">Type of Audit:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-dropdownlist id="AuditEnt" [dataSource]="AuditType" [fields]="fields"
+                          [placeholder]="waterMark" [popupHeight]="height" formControlName="AuditEnt" name="AuditEnt"
+                          (change)="TypeOfAuditChange($event)" [enabled]="disableAuditdropdown">
+                        </ejs-dropdownlist>
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label for="DateofAudit">Date of Audit:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <ejs-datepicker [value]="dateValue" placeholder="Enter date">
+                        </ejs-datepicker>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div *ngIf="visible">
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <label style="color: red" for="name">Frequency Of Audit</label>
+                          </div>
+                          <div class="col-md-7">
+                            <ejs-dropdownlist id="FAuditType" [dataSource]="FrequencyAuditType" [value]="value"
+                              [fields]="fields2" [placeholder]="waterMark" [popupHeight]="height" [enabled]="true">
+                            </ejs-dropdownlist>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+
+
+
+
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <label style="color: red" for="name">Recurrence Start Date</label>
+                          </div>
+                          <div class="col-md-7">
+                            <ejs-datepicker [value]="dateValue" placeholder="Enter date">
+                            </ejs-datepicker>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <label style="color: red" for="name">Recurrence End Date</label>
+                          </div>
+                          <div class="col-md-7">
+                            <ejs-datepicker [value]="dateValue" placeholder="Enter date">
+                            </ejs-datepicker>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="visible1">
+                <div class="d-flex no-block align-items-center">
+                  <h4 class="card-title"></h4>
+                  <div class="ml-auto mb-2">
+                    <button class="addbtn_style" (click)="OpenModal(content1)" ejs-button>
+                      <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Add
+                    </button>
+                  </div>
+                </div>
+
+
+
+                <div class="table-responsive">
+                  <ejs-grid [dataSource]="data" [gridLines]="lines" e-gridheader="" height="50px">
+                    <e-columns>
+                      <e-column headerText="Action" textAlign="center" width="30">
+                      </e-column>
+                      <e-column headerText="Sr No" textAlign="center" width="30">
+                      </e-column>
+                      <e-column field="Dept" headerText="Department" textAlign="center" width="50">
+                      </e-column>
+                      <e-column field="Auditreq" headerText="Audit Required" textAlign="center" width="50">
+                      </e-column>
+                      <e-column field="NumberofDays" headerText="Number of Days" textAlign="center" width="50">
+                      </e-column>
+                      <e-column field="StartDate" headerText="Start Date" textAlign="center" width="50">
+                      </e-column>
+                      <e-column field="EndDate" headerText="End Date" textAlign="center" width="50"></e-column>
+                      <e-column field="Scope" headerText="Scope of Audit" textAlign="center" width="50">
+                      </e-column>
+
+                    </e-columns>
+                  </ejs-grid>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="InitiatedBy">Audit Lead:</label>
+                                </div>
+                                <div class="col-md-7">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-actions pull-right">
+                                <div class="d-flex no-block align-items-center">
+                                    <div class="ml-auto">
+                                        <button type="submit" class="btn_frmsubmit" (click)="OpenModalPreviewList(content2)" ejs-button>
+                                            Preview  Calender Entries
+                                        </button>
+                                        <button type="submit" class="btn_frmsubmit" (click)="OpenModalPreviewList1(content3)" ejs-button>
+                                            Preview List of Table Entries
+                                        </button>
+
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                
+              </div>
+
+              <div *ngIf="visible2">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label style="color: red" for="name">Planned Duration Of Audit[Working Days]</label>
+                    </div>
+                    <div class="col-md-7">
+                      <input type="text" class="form-control" name="Duaration" required />
+                    </div>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <ejs-grid [dataSource]="data" [gridLines]="lines" e-gridheader="" height="50px">
+                    <e-columns>
+                      <e-column headerText="Action" textAlign="center" width="30">
+                      </e-column>
+                      <e-column headerText="Sr No" textAlign="center" width="30">
+                      </e-column>
+                      <e-column headerText="Planned Start Date Of Audit" textAlign="center" width="30">
+                      </e-column>
+                      <e-column headerText="Planned End Date Of Audit" textAlign="center" width="30">
+                      </e-column>
+                      <e-column headerText="Audit lead" textAlign="center" width="30">
+                      </e-column>
+
+
+                    </e-columns>
+                  </ejs-grid>
+                </div>
+               
+              </div>
+
+
+
+
+              <ejs-accordion>
+                <e-accordionitems>
+                  <e-accordionitem expanded="true">
+                    <ng-template #header>
+                      <div>Prepared By-Employee Name</div>
+                    </ng-template>
+                    <ng-template #content>
+                      <ejs-grid width="100%" [dataSource]="data2" [editSettings]="editSettings" [toolbar]="toolbar"
+                        height="70px" [gridLines]="lines">
+                        <e-columns>
+                          <e-column field="DeptList" headerText="Department List" editType="dropdownedit"
+                            [edit]="deptlist" width="50" textAlign="Center"></e-column>
+                          <!-- <e-column field="EmpList" headerText="Employee List" editType="dropdownedit" [edit]="deptlist"
+                            width="50" textAlign="Center"></e-column> -->
+                          <e-column field="ChooseAction" headerText="Choose Action" editType="dropdownedit"
+                            [edit]="action" width="50" textAlign="Center">
+                          </e-column>
+                          <e-column field="Comments" headerText="Comments" width="120" textAlign="Center">
+                          </e-column>
+                        </e-columns>
+                      </ejs-grid>
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-6"></div>
+                          <div class="col-md-6">
+                            <div class="form-actions pull-right">
+                              <div class="d-flex no-block align-items-center">
+                                <div class="ml-auto">
+
+                                  <button type="button" class="btn_frmsubmit" ejs-button>
+                                    Sign and Submit &nbsp;<i class=""></i>
+                                  </button>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </e-accordionitem>
+                  <div *ngIf="visible1">
+                    <e-accordionitem expanded="true">
+                      <ng-template #header>
+                        <div>Reviewed By-Employee Name</div>
+                      </ng-template>
+                      <ng-template #content>
+                        <ejs-grid width="100%" [dataSource]="data1" [editSettings]="editSettings" [toolbar]="toolbar"
+                          height="200px" [gridLines]="lines">
+                          <e-columns>
+                            <e-column field="DeptList" headerText="Department List" editType="dropdownedit"
+                              [edit]="deptlist" width="50" textAlign="Center"></e-column>
+                            <!-- <e-column field="EmpList" headerText="Employee List" editType="dropdownedit" [edit]="deptlist"
+                              width="50" textAlign="Center"></e-column> -->
+                            <e-column field="ChooseAction" headerText="Choose Action" editType="dropdownedit"
+                              [edit]="action" width="50" textAlign="Center">
+                            </e-column>
+                            <e-column field="Comments" headerText="Comments" width="120" textAlign="Center">
+                            </e-column>
+                          </e-columns>
+                        </ejs-grid>
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                              <div class="form-actions pull-right">
+                                <div class="d-flex no-block align-items-center">
+                                  <div class="ml-auto">
+
+                                    <button type="button" class="btn_frmsubmit" ejs-button>
+                                      Sign and Submit &nbsp;<i class=""></i>
+                                    </button>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </e-accordionitem>
+                  </div>
+                  <div *ngIf="visible2">
+                  
+                        <e-accordionitem expanded="true">
+                          <ng-template #header>
+                            <div> Reviewed By</div>
+                          </ng-template>
+                          <ng-template #content>
+                              <ejs-grid width="100%" [dataSource]="data2" [editSettings]="editSettings" [toolbar]="toolbar"
+                              height="70px" [gridLines]="lines">
+                              <e-columns>
+                                <e-column field="DeptList" headerText="Department List" editType="dropdownedit"
+                                  [edit]="deptlist" width="50" textAlign="Center"></e-column>
+    
+                                <e-column field="ChooseAction" headerText="Choose Action" editType="dropdownedit"
+                                  [edit]="action" width="50" textAlign="Center">
+                                </e-column>
+                                <e-column field="Comments" headerText="Comments" width="120" textAlign="Center">
+                                </e-column>
+                              </e-columns>
+                            </ejs-grid>
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-6">
+                                  <div class="form-actions pull-right">
+                                    <div class="d-flex no-block align-items-center">
+                                      <div class="ml-auto">
+    
+                                        <button type="button" class="btn_frmsubmit" ejs-button>
+                                          Sign and Submit &nbsp;<i class=""></i>
+                                        </button>
+    
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            </ng-template>
+                            </e-accordionitem>
+                           </div>
+                           
+                  <e-accordionitem expanded="true">
+                    <ng-template #header>
+                      <div>Approved By-Employee Name</div>
+                    </ng-template>
+                    <ng-template #content>
+                      <ejs-grid width="100%" [dataSource]="data2" [editSettings]="editSettings" [toolbar]="toolbar"
+                        height="70px" [gridLines]="lines">
+                        <e-columns>
+                          <e-column field="DeptList" headerText="Department List" editType="dropdownedit"
+                            [edit]="deptlist" width="50" textAlign="Center"></e-column>
+                          <!-- <e-column field="EmpList" headerText="Employee List" editType="dropdownedit" [edit]="deptlist"
+                                width="50" textAlign="Center"></e-column> -->
+                          <e-column field="ChooseAction" headerText="Choose Action" editType="dropdownedit"
+                            [edit]="action" width="50" textAlign="Center">
+                          </e-column>
+                          <e-column field="Comments" headerText="Comments" width="120" textAlign="Center">
+                          </e-column>
+                        </e-columns>
+                      </ejs-grid>
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-6"></div>
+                          <div class="col-md-6">
+                            <div class="form-actions pull-right">
+                              <div class="d-flex no-block align-items-center">
+                                <div class="ml-auto">
+
+                                  <button type="button" class="btn_frmsubmit" ejs-button>
+                                    Sign and Submit &nbsp;<i class=""></i>
+                                  </button>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </e-accordionitem>
+                </e-accordionitems>
+              </ejs-accordion>
+            </form>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid2" title="Audit Plan">
+          <ng-template ngbTabContent>
+
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                  <div class="form-actions pull-right">
+                    <div class="d-flex no-block align-items-center">
+                      <div class="ml-auto">
+                        <button type="submit" class="btn_frmsubmit" ejs-button>
+                          Save
+                        </button>
+
+                        <button type="button" class="btn_frmcancel" ejs-button>
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="AuditTitle">Audit Title:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <input ype="text" name="AuditTitle" class="form-control" placeholder="Auto" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="AuditScope">Audit Scope :</label>
+                    </div>
+                    <div class="col-md-7">
+                      <input type="text" name="AuditScope" class="form-control" placeholder="Auto " />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="AuditTeam"> Audit Team:</label>
+                    </div>
+                    <div class="col-md-10">
+                      <p>Select Here</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="plannedaudit">Planned Audit:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <ejs-daterangepicker></ejs-daterangepicker>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="lastdateofinspection">Last Date of Inspection :</label>
+                    </div>
+                    <div class="col-md-7">
+                      <ejs-daterangepicker id="disable" width="200px" [enabled]=false [value]='value'>
+                      </ejs-daterangepicker>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="AuditLang"> Audit Language:</label>
+                    </div>
+                    <div class="col-md-10">
+                      <p>English</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-12" style="
+                    background-color: #08a1a1;
+                    color: white;
+                    padding-top: 5px;
+                  ">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="AuditTimeTable">
+                        Proposed Audit Time Table:</label>
+                    </div>
+                    <div class="col-md-10"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="OpeningMeeting">Opening Meeting:</label>
+                    </div>
+                    <div class="col-md-4" style="padding-left: 70px">
+                      <ejs-datepicker [value]="dateValue" placeholder="Enter date">
+                      </ejs-datepicker>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-2" style="text-align: right">
+                      <label for="SetTime">Start Time :</label>
+                    </div>
+                    <div class="col-md-4">
+                      <ejs-timepicker id="timepicker"></ejs-timepicker>
+                    </div>
+                    <div class="col-md-2" style="text-align: right">
+                      <label for="SetTime">End Time :</label>
+                    </div>
+                    <div class="col-md-4">
+                      <ejs-timepicker id="timepicker"></ejs-timepicker>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="ReqParticipants">Required Participants:</label>
+                    </div>
+                    <div class="col-md-10">Search Here</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="Agenda">Agenda:</label>
+                    </div>
+                    <div class="col-md-10">
+                      <textarea name="message" rows="3" cols="125">
+Type Here </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="Pounts">Points to Audit:</label>
+                    </div>
+                    <div class="col-md-10">
+                      <textarea name="message" rows="3" cols="125">
+Type Here </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="Breaks"> Breaks:</label>
+                    </div>
+                    <div class="col-md-4" style="padding-left: 105px">
+                      <ejs-timepicker id="timepicker"></ejs-timepicker>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="Pounts"> Additional Points:</label>
+                    </div>
+                    <div class="col-md-10">
+                      <textarea name="message" rows="3" cols="125">
+Type Here </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="OpeningMeeting">Closing Meeting:</label>
+                    </div>
+                    <div class="col-md-4" style="padding-left: 70px">
+                      <ejs-datepicker [value]="dateValue" placeholder="Enter date">
+                      </ejs-datepicker>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-2" style="text-align: right">
+                      <label for="SetTime">Start Time :</label>
+                    </div>
+                    <div class="col-md-4">
+                      <ejs-timepicker id="timepicker"></ejs-timepicker>
+                    </div>
+                    <div class="col-md-2" style="text-align: right">
+                      <label for="SetTime">End Time :</label>
+                    </div>
+                    <div class="col-md-4">
+                      <ejs-timepicker id="timepicker"></ejs-timepicker>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="ReqParticipants">Required Participants:</label>
+                    </div>
+                    <div class="col-md-10">Search Here</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="Agenda">Agenda:</label>
+                    </div>
+                    <div class="col-md-10">
+                      <textarea name="message" rows="3" cols="125">
+  Type Here </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="Pounts">Points to Audit:</label>
+                    </div>
+                    <div class="col-md-10">
+                      <textarea name="message" rows="3" cols="125">
+  Type Here </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="Breaks"> Breaks:</label>
+                    </div>
+                    <div class="col-md-4" style="padding-left: 105px">
+                      <ejs-timepicker id="timepicker"></ejs-timepicker>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="Pounts"> Additional Points:</label>
+                    </div>
+                    <div class="col-md-10">
+                      <textarea name="message" rows="3" cols="125">
+  Type Here </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ejs-accordion>
+              <e-accordionitems>
+                <e-accordionitem expanded="true">
+                  <ng-template #header>
+                    <div>Audit Lead-Employee Name</div>
+                  </ng-template>
+                  <ng-template #content>
+                    <ejs-grid width="100%" [dataSource]="data3" [editSettings]="editSettings" [toolbar]="toolbar"
+                      height="30px" [gridLines]="lines">
+                      <e-columns>
+                        <!-- <e-column field="EmpList" headerText="Employee List" editType="dropdownedit" [edit]="deptlist"
+                          width="50" textAlign="Center"></e-column> -->
+                        <e-column field="ChooseAction" headerText="Choose Action" editType="dropdownedit"
+                          [edit]="action" width="50" textAlign="Center">
+                        </e-column>
+                        <e-column field="Comments" headerText="Comments" width="120" textAlign="Center">
+                        </e-column>
+                      </e-columns>
+                    </ejs-grid>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                          <div class="form-actions pull-right">
+                            <div class="d-flex no-block align-items-center">
+                              <div class="ml-auto">
+                                <button type="submit" class="btn_frmsubmit" ejs-button>
+                                  Save
+                                </button>
+                                <button type="button" class="btn_frmsubmit" ejs-button>
+                                  Sign and Submit
+                                </button>
+                                <button type="button" class="btn_frmcancel" ejs-button>
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </e-accordionitem>
+                <e-accordionitem expanded="true">
+                  <ng-template #header>
+                    <div>Audit Head-Employee Name</div>
+                  </ng-template>
+                  <ng-template #content>
+                    <ejs-grid width="100%" [dataSource]="data3" [editSettings]="editSettings" [toolbar]="toolbar"
+                      height="30px" [gridLines]="lines">
+                      <e-columns>
+                        <!-- <e-column field="EmpList" headerText="Employee List" editType="dropdownedit" [edit]="deptlist"
+                          width="50" textAlign="Center"></e-column> -->
+                        <e-column field="ChooseAction" headerText="Choose Action" editType="dropdownedit"
+                          [edit]="action" width="50" textAlign="Center">
+                        </e-column>
+                        <e-column field="Comments" headerText="Comments" width="120" textAlign="Center">
+                        </e-column>
+                      </e-columns>
+                    </ejs-grid>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                          <div class="form-actions pull-right">
+                            <div class="d-flex no-block align-items-center">
+                              <div class="ml-auto">
+
+                                <button type="button" class="btn_frmsubmit" ejs-button>
+                                  Sign and Submit
+                                </button>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </e-accordionitem>
+                <e-accordionitem expanded="true">
+                  <ng-template #header>
+                    <div>QA Designee-Employee Name</div>
+                  </ng-template>
+                  <ng-template #content>
+                    <ejs-grid width="100%" [dataSource]="data3" [editSettings]="editSettings" [toolbar]="toolbar"
+                      height="30px" [gridLines]="lines">
+                      <e-columns>
+                        <!-- <e-column field="EmpList" headerText="Employee List" editType="dropdownedit" [edit]="deptlist"
+                          width="50" textAlign="Center"></e-column> -->
+                        <e-column field="ChooseAction" headerText="Choose Action" editType="dropdownedit"
+                          [edit]="action" width="50" textAlign="Center">
+                        </e-column>
+                        <e-column field="Comments" headerText="Comments" width="120" textAlign="Center">
+                        </e-column>
+                      </e-columns>
+                    </ejs-grid>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                          <div class="form-actions pull-right">
+                            <div class="d-flex no-block align-items-center">
+                              <div class="ml-auto">
+
+                                <button type="button" class="btn_frmsubmit" ejs-button>
+                                  Sign and Submit
+                                </button>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </e-accordionitem>
+              </e-accordionitems>
+            </ejs-accordion>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>
+<ng-template #content1 let-modal>
+  <div class="modal_header">
+
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="modal-title">Add Details</h5>
+        </div>
+        <div class="col-md-6" class="Close_Popup">
+          <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-body">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-5">
+              <label for="Dept" class="control-label col-form-label">Department:</label>
+            </div>
+            <div class="col-md-7">
+              <ejs-dropdownlist Id="dept" [dataSource]="DeptName" [value]="value" [(text)]="text" [fields]="fields"
+                [placeholder]="waterMark" [popupHeight]="height">
+              </ejs-dropdownlist>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-5">
+              <label for="AuditRequired" class="control-label col-form-label">Audit Required:</label>
+            </div>
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-3">
+
+                  <input type="radio" id="customRadio1" name="IsAuditRequired" class="custom-control-input"
+                    [value]="true" />
+                  <label class="custom-control-label" for="customRadio1">Yes</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="radio" id="customRadio2" name="IsAuditRequired" class="custom-control-input"
+                    [value]="false" />
+                  <label class="custom-control-label" for="customRadio2">No</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-5">
+              <label for="NumberOfDays" class="control-label col-form-label">Number of Days:</label>
+            </div>
+            <div class="col-md-7">
+              <input type="text" class="form-control" id="NumberOfDays" placeholder="" name="NumberOfDays" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-5">
+              <label for="Audit Number" class="control-label col-form-label">Audit Number:</label>
+            </div>
+            <div class="col-md-7">
+              <label>Auto</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-5">
+              <label for="Start Date" class="control-label col-form-label">Start Date:</label>
+            </div>
+            <div class="col-md-7">
+              <ejs-datepicker [value]="dateValue" placeholder="Enter date">
+              </ejs-datepicker>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-5">
+              <label for="End Date" class="control-label col-form-label">End Date:</label>
+            </div>
+            <div class="col-md-7">
+              <ejs-datepicker [value]="dateValue" placeholder="Enter date">
+              </ejs-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-12 frm_tabpanel">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-2">
+              <label for="Scope">Scope of Audit:</label>
+            </div>
+            <div class="col-md-10">
+              <textarea name="message" rows="3" cols="85">
+Type Here </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="addmodal_style" ejs-button>
+      Add
+    </button>
+
+    <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+      cancel
+    </button>
+  </div>
+
+</ng-template>
+
+
+<ng-template #content3 let-modal>
+    <div class="modal_header">
+  
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <h5 class="modal-title">Preview List</h5>
+          </div>
+          <div class="col-md-6" class="Close_Popup">
+            <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+    <div class="modal-body">
+  
+      <ejs-accordion>
+        <e-accordionitems>
+          <e-accordionitem expanded="false">
+            <ng-template #header>
+              <div>Table Entries</div>
+            </ng-template>
+            <ng-template #content>
+            </ng-template>
+          </e-accordionitem>
+         
+        </e-accordionitems>
+      </ejs-accordion>
+    </div>
+    <div class="modal-footer">
+      <button class="addmodal_style" ejs-button>
+        Add
+      </button>
+  
+      <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+        cancel
+      </button>
+    </div>
+  
+  </ng-template>
+<ng-template #content2 let-modal>
+  <div class="modal_header">
+
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="modal-title">Preview List</h5>
+        </div>
+        <div class="col-md-6" class="Close_Popup">
+          <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-body">
+
+    <ejs-accordion>
+      <e-accordionitems>
+       
+        <e-accordionitem expanded="false">
+          <ng-template #header>
+            <div>Calender Entries</div>
+          </ng-template>
+          <ng-template #content>
+              <div class="control-section">
+                  <div class="col-lg-12 content-wrapper">
+                      <ejs-schedule #schedule height='200' [(selectedDate)]="selectedDate" [eventSettings]="eventSettings">
+                      </ejs-schedule>
+                  </div>
+                 
+              </div>
+              
+          </ng-template>
+        </e-accordionitem>
+      </e-accordionitems>
+    </ejs-accordion>
+  </div>
+  <div class="modal-footer">
+    <button class="addmodal_style" ejs-button>
+      Add
+    </button>
+
+    <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+      cancel
+    </button>
+  </div>
+
+</ng-template>

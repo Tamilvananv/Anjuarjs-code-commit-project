@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" style="padding-top: 28px;">
+            <!-- <div class="card-body"> -->
+                <div class="table-responsive">
+                    <ejs-grid  #grid id='Grid' [dataSource]='ObjInstrumentHistoryReportList' [allowSelection]='true'
+                        allowFiltering='true' [toolbar]='toolbarOptions'allowPaging='true' [toolbar]='toolbar'
+                        [allowExcelExport]='true'  [pageSettings]='pageSettings'
+                        (toolbarClick)='toolbarClick($event)'[filterSettings]='filterOptions' [gridLines]="lines" [enableHover]='false'
+                        [allowSorting]='true' e-gridheader='' height='363px'  [showColumnMenu]="true" [allowGrouping]="true" (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)' [allowPdfExport]="true"
+                        (created)="created($event)">
+                        <e-columns>
+                            <e-column field='IcsInstrumentId' headerText='Instrument Id' headerTextAlign='center' textAlign='left' width=60>
+                            </e-column>
+                            <e-column field='InstrumentTypeName' headerText='Instrument Name'
+                            headerTextAlign='center' textAlign='left' width=110></e-column>
+                            <e-column field='ExperimentName' headerText='Experiment Name' headerTextAlign='center' textAlign='left'
+                                format='yMd' width=120></e-column>
+                            <e-column field='ExperimentExperimenttDate' headerText='Date' headerTextAlign='center' textAlign='left' [format]='Dateformat'
+                               [filter]='filter'   width=130></e-column>
+                        </e-columns>
+                    </ejs-grid>
+                </div>
+            <!-- </div> -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <ngb-tabset #t="ngbTabset" class="tabset1">
+        <ngb-tab id="tab-selectbyid1" title=" Audit Details">
+          <ng-template ngbTabContent>
+            <app-audit-details></app-audit-details>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid2" title="Attach">
+          <ng-template ngbTabContent>
+            <app-attachments></app-attachments>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid3" title="Notes">
+          <ng-template ngbTabContent>
+            <app-notes></app-notes>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid4" title="Report Generation">
+          <ng-template ngbTabContent>
+            <app-report-generation></app-report-generation>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid5" title="Response">
+          <ng-template ngbTabContent>
+            <app-response></app-response>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid6" title="Certificate">
+          <ng-template ngbTabContent>
+            <app-certificate></app-certificate>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

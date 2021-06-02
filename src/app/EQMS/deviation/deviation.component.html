@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-md-12" style="padding-top: 30px;">
+    <div class="card">
+      <ngb-tabset #t="ngbTabset" class="tabset1">
+        <ngb-tab id="tab-selectbyid1" title="Open Request">
+          <ng-template ngbTabContent>
+              <div class="table-responsive">
+                  <ejs-grid id="grid" #grid [dataSource]=""
+                  [allowExcelExport]='true'
+                     [allowSorting]="true" (toolbarClick)="toolbarClick($event)" [toolbar]="toolbar"
+                      [allowPaging]="true"  [allowGrouping]="true"  [allowResizing]="true"
+                      [groupSettings]="groupOptions">
+                      <e-columns>
+                          <e-column headerText="Action"  textAlign="center" width="100" >
+                          </e-column>
+                          <e-column field="DeviationNumber" headerText="Deviation No." textAlign="Center" width="150"></e-column>
+                          <e-column field="Title" allowGrouping="false" headerText="Title" textAlign="Center" width="100">
+                          </e-column>
+                          <e-column field="DevRelatedTo" headerText="Deviation Related To" textAlign="Center" width="150"></e-column>
+                          <e-column field="LinkedAuditNumber" headerText="Linked Audit No." textAlign="Center" width="140"></e-column>
+                          <e-column field="InitiatedOn" headerText="Initiated On" textAlign="Center" width="150"></e-column>
+                          <e-column field="InitiatedBy" headerText="Initiated By" textAlign="Center" width="140"></e-column>
+                          <e-column field="Department" headerText="Department" textAlign="Center" width="100"></e-column>
+                          <e-column field="Classification" headerText="Classification" textAlign="Center" width="140"></e-column>
+                          <e-column field="Risk" headerText="Risk and Impact" textAlign="Center" width="170"></e-column>
+                        
+                          <e-column headerText="Requisition" [columns]="requisitionColumns" textAlign="Center" width="5000">
+                          </e-column>
+                          <e-column headerText="Priliminary Assessment " [columns]="primilinaryassessmentColumns" textAlign="Center " width="300">
+                          </e-column>
+                          <e-column headerText="QA Approval" [columns]="qaapprovalColumns" textAlign="Center " width="300">
+                          </e-column>
+                          <e-column headerText="Closure " [columns]="closureColumns" textAlign="Center " width="300">
+                            </e-column>
+                        
+                      </e-columns>
+                    
+                  </ejs-grid>
+              </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid2" title="Raise New Request">
+          <ng-template ngbTabContent>
+            <app-raise-request></app-raise-request>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid3" title="Summary">
+          <ng-template ngbTabContent>
+            <div class="table-responsive">
+              <ejs-grid id="grid" #grid [dataSource]=""
+              [allowExcelExport]='true'
+                 [allowSorting]="true" (toolbarClick)="toolbarClick($event)" [toolbar]="toolbar"
+                  [allowPaging]="true"  [allowGrouping]="true"  [allowResizing]="true"
+                  [groupSettings]="groupOptions">
+                  <e-columns>
+                      <e-column headerText="Action"  textAlign="center" width="100" >
+                      </e-column>
+                      <e-column field="DeviationNumber" headerText="Deviation Number" textAlign="Center" width="150"></e-column>
+                      <e-column field="DevRelatedTo" headerText="Deviation Related To" textAlign="Center" width="150"></e-column>
+                      <e-column field="LinkedAuditNumber" headerText="Linked Audit No." textAlign="Center" width="140"></e-column>
+                      <e-column field="InitiatedOn" headerText="Initiated On" textAlign="Center" width="150"></e-column>
+                      <e-column field="MediumForChange" headerText="Medium For Change" textAlign="Center" width="150"></e-column>
+                      <e-column field="MediumId" headerText="Medium ID" textAlign="Center" width="100"></e-column>
+                      <e-column field="Classification" headerText="Classification" textAlign="Center" width="100"></e-column>
+                      <e-column field="Risk" headerText="Risk and Impact" textAlign="Center" width="140"></e-column>
+                      <e-column field="ImmediateAction" headerText="Immediate Action Taken" textAlign="Center" width="140"></e-column>
+                      <e-column field="DateofClosure" headerText="Date of Closure" textAlign="Center" width="140"></e-column>
+                  </e-columns>
+              </ejs-grid>
+          </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

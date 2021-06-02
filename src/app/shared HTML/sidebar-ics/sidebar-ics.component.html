@@ -1,0 +1,22 @@
+<nav class="sidebar-nav">
+    <ul id="sidebarnav">
+        <ng-template #recursiveList let-list>
+            <li class="sidebar-item" [class.active]="showMenu === item.FeatureName" *ngFor="let item of list"
+                [routerLinkActive]="item.ChildFeatureList.length != 0 ? '' : 'active'">
+                <div class="nav-small-cap" *ngIf="item.extralink === true">{{item.FeatureName},}</div>
+                <a class="sidebar-link waves-effect waves-dark" [routerLink]="item.FeatureURL?('/'+item.FeatureURL):null"
+                    [ngClass]="{'has-arrow':item.ChildFeatureList.length >0}" *ngIf="!item.extralink;"
+                    (click)="addExpandClass(item.FeatureName)"
+                    [routerLinkActive]="item.ChildFeatureList.length != 0 ? '' : 'active'">
+                    <i [ngClass]="[item.IconPath]" style="font-size: 16px"></i>
+    
+                    <span class="hide-menu">{{item.FeatureName}}</span>
+                </a>
+                <ul *ngIf="item.ChildFeatureList.length > 0" class="collapse" [ngClass]="{'in':showMenu==item.FeatureName}">
+                    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.ChildFeatureList }"></ng-container>
+                </ul>
+            </li>
+        </ng-template>
+        <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: sidebarnavItems }"></ng-container>
+    </ul>
+</nav>

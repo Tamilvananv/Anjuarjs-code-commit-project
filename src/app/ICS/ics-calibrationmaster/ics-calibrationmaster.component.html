@@ -1,0 +1,317 @@
+ <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12 " style="padding-top: 30px;">
+          <div class="row ">
+              <div class="col-md-2">
+                  <label for="InstrumentName" class="control-label col-form-label">Instrument Name:</label>
+               </div>
+               <div class="col-md-2">
+                  <ejs-dropdownlist id='objInstrumentType'  [fields]='fields'  [dataSource]='objInstrumentType'
+                  [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark'  (change)="GetInstrumentIdByName($event)"
+                  width=100% >
+                </ejs-dropdownlist>
+                </div>
+                <div class="col-md-2">
+                <label for="EquipmentID" class="control-label col-form-label">Instrument Id:</label>
+              </div>
+              <div class="col-md-2">
+                 <ejs-dropdownlist id='InstrumentId'  [fields]='fields' (change)="GetInstrumentListById($event)"
+                 [popupHeight]='height' [allowFiltering]='true' [placeholder]='watermark' [dataSource]='ObjInstrumentListNew'
+                 width=100%  >
+               </ejs-dropdownlist>
+               </div>
+          </div>
+         
+        </div>
+       
+      </div>
+</div> 
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="d-flex no-block align-items-center">
+        <h4 class="card-title"></h4>
+     <!--    <div class="ml-auto mb-2" style="padding-top: 28px;" *ngIf="PageAccessRight.HasWriteAccess">
+          <button class="addbtn_style" ejs-button (click)="OpenModal(addCalibrationModal)">
+            <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Add Calibration
+          </button>
+        </div> -->
+      </div>
+ <div *ngIf="!PageAccessRight.HasWriteAccess"><br /><br /> </div>
+   
+    <div *ngIf="show">  
+
+      <div class="table-responsive">
+        <ejs-grid #grid id='Grid' [dataSource]="ObjCalibrationListNew" [allowSelection]="true" allowFiltering="true"
+          [filterSettings]="filterOptions" [gridLines]="lines" [enableHover]="false" [allowSorting]="true"
+          [toolbar]='toolbarOptions' [allowExcelExport]='true' (toolbarClick)='toolbarClick($event)' e-gridheader=""
+          height="363px" [toolbar]='toolbar'  allowPaging='true'  [pageSettings]='pageSettings'  [showColumnMenu]="true" [allowGrouping]="true"  (excelExportComplete)='excelExportComplete()'
+            (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)' [allowPdfExport]="true"
+            (created)="created($event)"   (commandClick)="actionCalibration($event)" >
+          <e-columns>
+           <!--  <e-column headerText="Action" textAlign="center" width="120" [commands]="commands"> </e-column> -->
+            <div *ngIf="PageAccessRight.HasWriteAccess">
+           <e-column headerText="Action" textAlign="center" width="200">  
+            
+            <div class="col-md-12">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <ng-template #template let-data>
+                              <div class="row">
+                                <div class="col-md-6">
+                                    <button class="addbtn1_style"  [disabled]="!data.ShowCalibrationEditButton" (click)="EditCalibrationRecord($event,data)" ejs-button >
+                                        <i class="fa fa-edit"></i>        
+                                         &nbsp;Edit 
+                                      </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="addbtn1_style" [disabled]="!data.ShowCalibrationAddButton"  (click)="addCalibration($event,data)" ejs-button >
+                                        <i class="fas fa-plus-circle"></i>        
+                                        &nbsp;Add 
+                                      </button>
+                                  </div>
+                              </div>
+                              </ng-template>
+                            </div>
+                      </div>
+                    </div>
+                  
+           </e-column>
+           </div> 
+
+
+
+
+
+            <e-column field="InstrumentId" headerText="Instrument Id"  headerTextAlign='center' textAlign='left' width="150" ></e-column>
+            <e-column field="InstrumentTypeName" headerText="Instrument Name"  headerTextAlign='center' textAlign='left' width="150" ></e-column>
+            <e-column field="CalibrationDueDate" headerText="Due Date"  headerTextAlign='center' textAlign='left' [format]='Dateformat' [filter]='filter' width="160">
+            </e-column>
+            <e-column field="CalibrationPerformedDate" headerText="Performed Date"  [format]='Dateformat'  [filter]='filter' headerTextAlign='center' textAlign='left' width="160">
+            </e-column>
+            <e-column field="CalibrationNextDueDate" headerText="Next Due Date"  [format]='Dateformat' [filter]='filter'  headerTextAlign='center' textAlign='left' width="160">
+            </e-column>
+            <e-column headerText="Attachment" textAlign="center" width="150">
+              <ng-template #template let-data>
+                  <div><a (click)="OpenModal(content4);setRowId(data);"><i [ngClass]="(data.HasAttachments===true)?'far fa-folder-open':'far fa-folder'"></i></a></div>
+              </ng-template>
+            </e-column>
+            <e-column field="CalibrationDescription" headerText="Description"  headerTextAlign='center' textAlign='left' width="150"></e-column>
+            <e-column field="CalibrationPerformedBy" headerText="Performed By"  headerTextAlign='center' textAlign='left' width="150"></e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+<ng-template #addCalibrationModal let-modal>
+  <div class="modal_header">
+      <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <h5 class="modal-title" *ngIf="!IsCalibrationEdit">Add Calibration</h5>
+              <h5 class="modal-title" *ngIf="IsCalibrationEdit">Edit Calibration</h5>
+            </div>
+            <div class="col-md-6" class="Close_Popup">
+              <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+            </div>
+
+          </div>
+        </div>
+    <!-- <h5 class="modal-title" *ngIf="!IsCalibrationEdit">Add Calibration</h5>
+    <h5 class="modal-title" *ngIf="IsCalibrationEdit">Edit Calibration</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]='CalibrationForm'>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="InstId" class="control-label col-form-label">Instrument ID:</label><span
+                  class="text-danger">*</span>
+                  <div print-error [control]="CalibrationForm.get('IcsInstrumentId')">
+                <ejs-dropdownlist id="InstId" [dataSource]="ObjInstrumentList" [fields]="fields" [popupHeight]="height"
+                  [allowFiltering]="true"
+                  [placeholder]="watermark" name="IcsInstrumentId"
+                  (change)="GetInstrumentTypeById($event)"
+                  [disableControl]="IsCalibrationEdit"
+                  showClearButton="true"
+                  formControlName="IcsInstrumentId"
+                  ></ejs-dropdownlist>
+                  </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="InstType" class="control-label col-form-label">Instrument Name:</label>
+                <div class="UnderLine_Type">
+               <!--   <label  class="col-form-label">{{objInstrumentType['Name']}}</label> -->
+                    <label class="col-form-label">{{ObjInstrumentTypeName}}</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="PerformedBy" class="control-label col-form-label">Performed By:
+                </label><span class="text-danger">*</span>
+                <div print-error [control]="CalibrationForm.get('CalibrationPerformedByID')">
+                <ejs-dropdownlist id="PerformedBy" [dataSource]="ObjPerformedByList" [fields]="fields"
+                  [popupHeight]="height" [allowFiltering]="true" [placeholder]="watermark" name="PerformedById"
+                  formControlName="CalibrationPerformedByID"></ejs-dropdownlist>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr style="background-color: #a9a9a9;" />
+      <div class="col-md-12" style="margin-top: 10px;">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="DateOfCalibration" class="control-label col-form-label">Date of Calibration:</label><span
+                  class="text-danger">*</span>
+              </div>
+              <div class="col-md-6" print-error [control]="CalibrationForm.get('CalibrationPerformedDate')">
+                <ejs-datepicker [value]="dateValue" placeholder="Enter date" name="CalibrationPerformedDate"
+                  formControlName="CalibrationPerformedDate"></ejs-datepicker>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="margin-top: 10px;">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="col-md-12">
+                <label  style="padding-top: 20px;" for="ServiceAttachment" class="control-label col-form-label">Service Report:</label>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="col-md-12">
+                  <ejs-uploader
+                    #defaultupload
+                    [autoUpload]="false"
+                    [dropArea]="dropEle"
+                    formArrayName='ServiceAttachmentList'
+                    (selected)="onServiceFileSelect($event)"
+                  ></ejs-uploader>
+                <small class="form-text text-cyan">* multiple attachment</small>
+                <div *ngFor="let item of ServiceAttachmentList">
+                  <label class="link" (click)="DownLoadFile(item.AttachmentPath)">{{item.ImageName}}</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="margin-top: 10px;">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="col-md-12">
+                <label  style="padding-top: 20px;" for="CalibrationAttachment" class="control-label col-form-label">Calibration Report:</label>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="col-md-12">
+                <ejs-uploader
+                  #defaultupload
+                  [autoUpload]="false"
+                  [dropArea]="dropEle"
+                  formArrayName='AttachmentList'
+                  (selected)="onFileSelect($event)"
+                ></ejs-uploader>
+                <small class="form-text text-cyan">* multiple attachment</small>
+                <div *ngFor="let item of CalibrationAttachmentList">
+                  <label class="link" (click)="DownLoadFile(item.AttachmentPath)">{{item.ImageName}}</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12" style="margin-top: 10px;">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="col-md-12">
+                <label for="Description" class="control-label col-form-label">Description:</label>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="col-md-12">
+                <textarea class="form-control frm_tabtxtarea cye-lf-tag" rows="5" name="CalibrationDescription"
+                  formControlName="CalibrationDescription"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button class="addmodal_style" *ngIf="!IsCalibrationEdit"
+      (click)="SaveCalibration()" ejs-button>
+      Add
+    </button>
+    <button class="addmodal_style" *ngIf="IsCalibrationEdit"
+      (click)="UpdateCalibration()" ejs-button>
+      Update
+    </button>
+    <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+      cancel
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #content4 let-modal>
+  <div class="modal_header">
+    <!-- <h5 class="modal-title">Attachments</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+    <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+              <h5 class="modal-title">Attachments</h5>
+          </div>
+          <div class="col-md-6" class="Close_Popup">
+            <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+          </div>
+
+        </div>
+      </div>
+
+  </div>
+  <div class="modal-body">
+    <ejs-filemanager id='overview' #fileManagerCtrl [ajaxSettings]='ajaxSettings' [searchSettings]='searchSettings' (beforeDownload)="beforeSend($event)"
+        (beforeImageLoad)="beforeSend($event)" [rootAliasName]="'Attachments'" (beforeSend)="beforeSend($event)" [contextMenuSettings]='contextMenuSettings' [toolbarSettings]='toolbarSettings' view='Details'>
+    </ejs-filemanager>
+  </div>
+</ng-template>

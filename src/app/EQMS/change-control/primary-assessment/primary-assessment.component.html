@@ -1,0 +1,375 @@
+<div class="row" style="padding-top: 28px;">
+    <div class="col-md-6 text-left">
+        <div class="row" style="padding-left: 5px;">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="ChangeControlNumber">Change Control Number:</label>
+                    </div>
+                    <div class="col-md-7">
+                        {{ ChangeControlNumber }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-6 text-right">
+        <div class="custom-control " style="padding-bottom: 5px;">
+            <!-- <button type="submit" class="btn_frmsubmit" *ngIf="IfEditForNotAllowed" (click)="Click()" ejs-button>
+                Save
+            </button> -->
+            <button type="submit" class="btn_frmsubmit" (click)="moveToTab('tab-selectbyid2');" ejs-button>
+                Back
+            </button>
+            <button type="button"  *ngIf="btnNext" class="btn_frmsubmit" (click)="moveToTab('tab-selectbyid4');" ejs-button>
+                Next
+            </button>
+            <button type="button" class="btn_frmcancel" ejs-button>
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <ngb-tabset #tabsetpa class="tabset3">
+                <ngb-tab id="tab-selectbyid1" title="Impact of Proposed Change">
+                    <ng-template ngbTabContent>
+
+                        <ejs-grid #grid2 id='grid2' width='100%' [dataSource]='data3' [editSettings]='editSettings'
+                            [toolbar]='toolbar' height='400px' [gridLines]="lines"
+                            (actionComplete)='onActionComplete($event)' (actionBegin)='actionBegin($event)'>
+                            <e-columns>
+                                <e-column field='EqmsCcMediumOfImpactId' headerText='Id' isIdentity='true' width=20
+                                    textAlign='Center'></e-column>
+                                <e-column field='EqmsCcMediumOfImpact' headerText='Medium of Impact' isIdentity='true'
+                                    width=50 textAlign='Center'></e-column>
+                                <e-column field='EqmsCcImpacttxt' headerText='Impact' editType='dropdownedit'
+                                    [edit]='editparams' width=50 textAlign='Center'></e-column>
+                                <e-column field='EqmsCcProposedTimeFrame' headerText='Proposed Time Frame' width=120
+                                    textAlign='Center'></e-column>
+                                <e-column field='EqmsCcNotes' headerText='Notes' width=120 textAlign='Center'>
+                                </e-column>
+                            </e-columns>
+                        </ejs-grid>
+                        <br>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="Comments">Comments:</label>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <textarea rows="5" cols="90" [(ngModel)]="EqmsCCLeadComment"
+                                                name="Comments"></textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <b> {{ strLeadName }} </b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-actions pull-right">
+                                        <div class="d-flex no-block align-items-center">
+                                            <div class="ml-auto">
+                                                <button type="button" *ngIf="IfEditForNotAllowed"
+                                                    (click)="SignFirstleval()" class="btn_frmsubmit" ejs-button>
+                                                    Sign and Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!-- <ejs-accordion>
+                            <e-accordionitems>
+                                <e-accordionitem expanded='true' *ngIf="!editable">
+                                    <ng-template #header>
+                                        <div style="color: teal">Initiator Lead-Employee Name</div>
+                                    </ng-template>
+                                    <ng-template #content>
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="row">
+                                                        <ul>
+
+                                                            <div class="col-md-2">
+                                                                <ejs-radiobutton label="Rework Required" name="custom"
+                                                                    cssClass="e-warning">
+                                                                </ejs-radiobutton>
+                                                            </div>
+
+
+                                                            <div class="col-md-2">
+                                                                <ejs-radiobutton label="Rejected" name="custom"
+                                                                    cssClass="e-danger">
+                                                                </ejs-radiobutton>
+                                                            </div>
+
+
+                                                            <div class="col-md-2">
+                                                                <ejs-radiobutton label="Approved" name="custom"
+                                                                    cssClass="e-success">
+                                                                </ejs-radiobutton>
+
+                                                            </div>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <label for="Comments">Comments:</label>
+
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <textarea rows="5" cols="105"
+                                                                name="Comments">Drop Your Comments </textarea>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                   <ejs-grid width='100%' [dataSource]='data' [editSettings]='editSettings'
+                                                    [toolbar]='toolbar' height='200px' [gridLines]="lines">
+                                                    <e-columns>
+                                                        <e-column field='ChooseAction' headerText='Choose Action'
+                                                            editType='dropdownedit' [edit]='ddParams' width=50 textAlign='Center'>
+                                                        </e-column>
+                                                        <e-column field='Comment' headerText='Comment' width=120 textAlign='Center'>
+                                                        </e-column>
+                                                    </e-columns>
+                                                </ejs-grid> -->
+                        <!-- 
+                                        <div class="col-md-12 text-right">
+                                            <div class="custom-control " style="padding-bottom: 5px;">
+                                                <button type="button" class="btn_frmsubmit" ejs-button>
+                                                    Send Response
+                                                </button>
+                                                <button type="button" class="btn_frmsubmit" ejs-button>
+                                                    Sign & Approve
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </e-accordionitem>
+                                <e-accordionitem expanded='true'>
+                                    <ng-template #header>
+                                        <div>Primary Assessment Approval <b>{{ strFirstLevelApprovalName }}</b></div>
+                                        <div>Approval Status: <b
+                                                [ngClass]="(boolFirstlvlApproval===true)?'btn btn-success':'btn btn-danger'">{{
+                                                strFirstLevelApprovalStatus }}</b>
+                                        </div>
+                                        <br>
+                                        <p>{{strFirstLevelCommenttext}}</p>
+                                    </ng-template>
+                                    <ng-template #content>
+                                        <form class="form-horizontal" [formGroup]='EQMSFirstAddApprovalStatusform'>
+                                            <div class="col-md-12" *ngIf="IfFirstlvlApproval">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="row">
+                                                            <ul>
+
+                                                                <div class="col-md-2">
+                                                                    <ejs-radiobutton label="Rework Required"
+                                                                        name="custom" value="1"
+                                                                        formControlName="EqmsCcFirstLvlApprovalStatus"
+                                                                        cssClass="e-warning">
+                                                                    </ejs-radiobutton>
+                                                                </div>
+
+
+                                                                <div class="col-md-2">
+                                                                    <ejs-radiobutton label="Rejected" name="custom"
+                                                                        value="2"
+                                                                        formControlName="EqmsCcFirstLvlApprovalStatus"
+                                                                        cssClass="e-danger">
+                                                                    </ejs-radiobutton>
+                                                                </div>
+
+
+                                                                <div class="col-md-2">
+                                                                    <ejs-radiobutton label="Approved" name="custom"
+                                                                        value="3"
+                                                                        formControlName="EqmsCcFirstLvlApprovalStatus"
+                                                                        cssClass="e-success">
+                                                                    </ejs-radiobutton>
+
+                                                                </div>
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <label for="Comments">Comments:</label>
+
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <textarea rows="5" cols="105"
+                                                                    formControlName="EqmsCcFirstLvlComment"
+                                                                    name="Comments">Drop Your Comments </textarea>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 text-right" *ngIf="IfFirstlvlApproval">
+                                                <div class="custom-control " style="padding-bottom: 5px;">
+                                                    <button type="button" *ngIf="IfFirstlvlSubmitbtn"
+                                                        class="btn_frmsubmit" (click)="SignFirstleval()" ejs-button>
+                                                        Sign & Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </ng-template>
+                                </e-accordionitem>
+                            </e-accordionitems>
+                        </ejs-accordion>-->
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab id="tab-selectbyid2" title="Approvals">
+
+                    <ng-template ngbTabContent>
+                        <form class="form-horizontal" [formGroup]='EQMSDeptPrimaryAssessApprovalStatusform'>
+                            <div *ngIf="IsInitiator">
+                                <br>
+                                <div class="row" *ngIf="IfEditForNotAllowed2">
+                                    <div class="col-md-3">
+                                        <label for="Department">Department Name:</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <ejs-dropdownlist id="Department" [dataSource]="objDepartmentList"
+                                            [fields]="fields" (filtering)="onFiltering($event)" [popupHeight]="height"
+                                            [allowFiltering]="true" [placeholder]="watermark" name="DepartmentId"
+                                            formControlName="DepartmentId">
+                                        </ejs-dropdownlist>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" (click)="AddDeptForApproval()" class="btn_frmsubmit"
+                                            ejs-button>
+                                            Add
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" (click)="SignAndSubmitIntiator()" class="btn_frmsubmit"
+                                            ejs-button>
+                                            Sign and Submit
+                                        </button>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <ejs-grid #grid2 id='grid2' width='100%' [dataSource]='ObjBmrList' [toolbar]='toolbar'
+                                    height='400px' [gridLines]="lines">
+                                    <e-columns>
+                                        <e-column field='DeptTitle' headerText='Department' isIdentity='true' width=100
+                                            textAlign='Center'></e-column>
+                                        <e-column field='DeptHead' headerText='Department Head' isIdentity='true'
+                                            width=70 textAlign='Center'></e-column>
+                                        <e-column field='EqmsCcApprovalStatusText' headerText='Status' width=70
+                                            textAlign='Center'></e-column>
+                                        <e-column field='EqmsCcComment' headerText='Comment' width=120
+                                            textAlign='Center'>
+                                        </e-column>
+                                        <e-column field='EqmsCcSignSubmitTime' headerText='Date and time' width=120
+                                            textAlign='Center'>
+                                        </e-column>
+                                    </e-columns>
+                                </ejs-grid>
+                            </div>
+                            <ejs-accordion>
+                                <e-accordionitems>
+                                    <e-accordionitem expanded='true' *ngFor="let accordion of ObjBmrList">
+                                        <ng-template *ngIf="accordion.ShowAccordian" #header>
+                                            <div style="color: teal">Department Name: {{accordion.DeptTitle}}</div>
+                                            <div style="color: teal">Department Head Name: {{accordion.DeptHead}}
+                                                {{accordion.Time}}</div>
+                                        </ng-template>
+                                        <ng-template *ngIf="accordion.ShowAccordian" #content>
+                                            <form class="form-horizontal">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label for="Comments">Status:</label>
+
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <ejs-dropdownlist id="Department"
+                                                                        [dataSource]="objStatusList" [fields]="fields1"
+                                                                        [(ngModel)]="accordion.Status"
+                                                                        [popupHeight]="height" [allowFiltering]="true"
+                                                                        [placeholder]="watermark" name="StatusList">
+                                                                    </ejs-dropdownlist>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label for="Comments">Comments:</label>
+
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    <textarea rows="5" cols="90"
+                                                                        [(ngModel)]="accordion.Comment"
+                                                                        name="Comments"></textarea>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 text-right">
+                                                    <div class="custom-control " style="padding-bottom: 5px;">
+                                                        <button type="button" class="btn_frmsubmit"
+                                                            (click)="SignDeptApproval(accordion)" ejs-button>
+                                                            Sign & Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </ng-template>
+                                    </e-accordionitem>
+                                </e-accordionitems>
+                            </ejs-accordion>
+                        </form>
+                    </ng-template>
+
+
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+    </div>
+</div>

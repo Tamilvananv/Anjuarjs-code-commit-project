@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class=" no-block align-items-center">
+                <h4 class="card-title"> </h4>
+                <div class="ml-auto mb-2" style="padding-top: 28px;">
+                </div>
+            </div>
+            <div class="table-responsive">
+                <ejs-grid  #grid id='Grid' [dataSource]='ObjCalibrationList' [allowSelection]='true' allowFiltering='true'
+                    [filterSettings]='filterOptions'[toolbar]='toolbarOptions'
+                    [allowExcelExport]='true' [allowPaging]='true'  [pageSettings]='pageSettings' allowTextWrap='true'  [textWrapSettings]='wrapSettings'
+                     (toolbarClick)='toolbarClick($event)' [gridLines]="lines" [enableHover]='false' [allowSorting]='true'
+                    e-gridheader='' height='363px'  [showColumnMenu]="true" [allowGrouping]="true" (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)' [allowPdfExport]="true"
+                    (created)="created($event)">
+                    <e-columns>
+
+                        <e-column field='EquipmentId' headerText='Equipment Id' headerTextAlign="center" textAlign="left" width=60></e-column>
+                        <e-column field='EquipmentTypeName' headerText='Equipment Name' headerTextAlign='center' textAlign='left' width=90>
+                        </e-column>
+                        <e-column field='EqsCalibrationDueDate' headerText='Due Date' headerTextAlign='center' textAlign='left'  [format]='Dateformat'  [filter]='filter'
+                            width=100>
+                        </e-column>
+                        <e-column field='EqsCalibrationPerformedDate' headerText='Performed Date' headerTextAlign='center' textAlign='left'  [format]='Dateformat'  [filter]='filter'
+                            width=100>
+                        </e-column>
+                        <e-column field='EqsCalibrationNextDueDate' headerText='Next Due Date' headerTextAlign='center' textAlign='left' [format]='Dateformat'  [filter]='filter'
+                            width=100>
+                        </e-column>
+                    </e-columns>
+                </ejs-grid>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="col-md-12 text-right">
+    <div class="custom-control custom-checkbox" style="padding-bottom: 5px;">
+        <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabSOP')" ejs-button>
+            <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+            Back
+        </button>
+        <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabPrecautions')" ejs-button>
+            Next
+            <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+        </button>
+        <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/qcelnhome'">
+            <!-- <i class="fas fa-times"></i> &nbsp; -->
+            Cancel
+        </button>
+    </div>
+</div>
+<div style=" box-shadow: 1px 1px 4px 1px;min-height: 300px">
+    <h4 class="p-10">Coming soon</h4>
+</div>

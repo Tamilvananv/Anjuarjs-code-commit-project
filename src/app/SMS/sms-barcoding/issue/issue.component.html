@@ -1,0 +1,107 @@
+<div style="padding-top: 28px">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-3">
+            <label for="ParentSampleId">Parent Sample Id:</label>
+          </div>
+          <div class="col-md-7">
+            <ejs-combobox
+              id="ParentSampleId"
+              [dataSource]="ParentSampleId"
+              [fields]="fields"
+              (filtering)="onFiltering($event)"
+              [popupHeight]="height"
+              [allowFiltering]="true"
+              [placeholder]="watermark"
+              name="ParentSampleId"
+            ></ejs-combobox>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-3">
+            <label for="Department">Department:</label>
+          </div>
+          <div class="col-md-7">
+            <ejs-combobox
+              id="DepartmentId"
+              [dataSource]="DeptName"
+              [fields]="fields"
+              (filtering)="onFiltering($event)"
+              [popupHeight]="height"
+              [allowFiltering]="true"
+              [placeholder]="watermark"
+              name="DepartmentId"
+            ></ejs-combobox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding-top: 28px">
+    <ejs-grid
+      [dataSource]="Data"
+      [allowFiltering]="true"
+      [gridLines]="lines"
+      height="210px"
+    >
+      <e-columns> 
+        <e-column
+          field="SampleId"
+          headerText="Sample Id"
+          textAlign="Center"
+          width="60"
+        ></e-column>
+        <e-column
+          field="BarcodeId"
+          headerText="Barcode Id"
+          textAlign="Center"
+          width="60"
+        ></e-column>
+        <e-column
+          field="BarcodeSeries"
+          headerText="Barcode Series"
+          textAlign="Center"
+          width="60"
+        ></e-column>
+        <e-column
+          field="BarcodeHeader"
+          headerText="Barcode Header"
+          textAlign="Center"
+          width="60"
+        ></e-column>
+        <e-column
+          field="BarcodeFooter"
+          headerText="Barcode Footer"
+          textAlign="Center"
+          width="60"
+        ></e-column>
+        <e-column
+          field="SampleStorage"
+          headerText="Sample Storage"
+          textAlign="Center"
+          width="60"
+        ></e-column>       
+      </e-columns>
+    </ejs-grid>
+
+    <div class="form-actions">
+      <div class="d-flex no-block align-items-center">
+        <div class="ml-auto">
+          <div class="custom-control custom-checkbox">
+            <button type="button" id="" class="btn_frmsubmit" ejs-button>
+              <i class="fa fa-check"></i> &nbsp;Select
+            </button>
+            <button type="button" id="" class="btn_frmsubmit" ejs-button>
+              <i class="fa fa-check"></i>
+              &nbsp;Cancle
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  

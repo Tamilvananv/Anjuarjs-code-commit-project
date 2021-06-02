@@ -1,0 +1,175 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" style="padding-top: 28px;">
+    
+      <ngb-tabset class="tabset1" #t="ngbTabset">
+       
+        <ngb-tab id="tab-ElnProgramcode" title="Program Code">
+          <ng-template ngbTabContent>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox" *ngIf="PageAccessRight.HasWriteAccess" >
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="addProgramcode(addProgramcodeModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #addProgramcodeModal let-modal>
+              <div class="modal_header">               
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title" *ngIf="!IsProgramcodeEdit" >Add Program code</h5>   
+                        <h5 class="modal-title" *ngIf="IsProgramcodeEdit" >Edit Program code</h5>                      
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">     
+                <form class="form-horizontal" [formGroup]='ProgramCodeForm' autocomplete="off">         
+                  <div class="form-group row">
+                 
+                    <label for="Programcode" class="col-sm-4 control-label col-form-label">Program Code:
+                      <span class="text-danger">*</span>
+                    </label>   
+                     <div class="col-sm-8"  print-error [control]="ProgramCodeForm.get('ProgramCode')">                
+                      <input type="text" class="form-control"
+                     placeholder="Enter Program code"  name="ProgramCode"
+                        formControlName="ProgramCode"/>                   
+                  </div>                          
+
+                  </div>    
+                   </form>          
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style"   *ngIf="!IsProgramcodeEdit" (click)="SaveProgramCode()"
+                  ejs-button>
+                  Add
+                </button>    
+                 <button class="addmodal_style"   *ngIf="IsProgramcodeEdit" (click)="UpdateProgramCode()"
+                  ejs-button>
+                  Update
+                </button>                   
+                <button class="cancel_style" (click)="modal.close('Close click')"   ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+
+            <div class="table-responsive setting_table" style="padding-left: 30%;" >
+            <ejs-grid #grid id="Grid" [dataSource]="ObjProgramCodeList" allowFiltering="true" [allowPaging]='true' [pageSettings]='pageSettings'
+              [filterSettings]="filterOptions" [gridLines]="lines" [toolbar]="toolbar" height="300px" width=60%
+                (commandClick)="EditProgramCode($event);addProgramcode(addProgramcodeModal)"            
+              >
+              <e-columns>
+                <e-column headerText='Action' textAlign='center' [visible]='IsVisible'  [commands]="commands"   width='10'></e-column>
+                <e-column field="ProgramCode" headerText=" Program Code" headerTextAlign='center' textAlign='left' isPrimaryKey="true"
+                  width="20">
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-ElnTargetId" title="Target Id">
+          <ng-template ngbTabContent>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox" *ngIf="PageAccessRight.HasWriteAccess">
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="addTargetId(addTargetIdModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #addTargetIdModal let-modal>
+              <div class="modal_header">               
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title"  *ngIf="!IsTargetIdEdit" >Add Target Id</h5>
+                       <h5 class="modal-title"   *ngIf="IsTargetIdEdit">Edit Target Id</h5>
+                     
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">   
+               <form class="form-horizontal" [formGroup]='TargetIdForm' autocomplete="off">              
+                  <div class="form-group row">
+                    <label for="TargetId" class="col-sm-4 control-label col-form-label">
+                      Target Id:<span class="text-danger">*</span>
+                    </label>  
+                     <div class="col-sm-8" print-error [control]="TargetIdForm.get('TargetId')">                     
+                      <input type="text" class="form-control" 
+                        placeholder="Enter Target Id"  name="TargetId"
+                        formControlName="TargetId" />   
+                      </div>                    
+                  </div>   
+                   </form>                   
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style"   *ngIf="!IsTargetIdEdit" (click)="SaveTargetId()"
+                  ejs-button>
+                  Add
+                </button>    
+                 <button class="addmodal_style"   *ngIf="IsTargetIdEdit" (click)="UpdateTargetId()"
+                  ejs-button>
+                Update
+                </button>             
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+            <div class="table-responsive setting_table" style="padding-left: 30%" >
+            <ejs-grid  #grid1 id="Grid1"  [dataSource]="ObjTargetIdList" [columns]="columns" [showColumnChooser]="true"
+              allowFiltering="true" [filterSettings]="filterOptions" [gridLines]="lines" [allowPaging]='true'[pageSettings]='pageSettings'
+              [toolbar]="toolbar" height="300px" width=60%      
+                 (commandClick)="EditTargetId($event);addTargetId(addTargetIdModal)"   
+                  >
+              <e-columns>
+                <e-column headerText='Action'  textAlign='center' [visible]='IsVisible' [commands]="commands" width='20'></e-column>               
+                <e-column field="TargetId" headerText="Target Id"  isPrimaryKey="true"headerTextAlign='center' textAlign='left'
+                  width="50">
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+       
+      </ngb-tabset>
+      
+    </div>
+  </div>
+</div>

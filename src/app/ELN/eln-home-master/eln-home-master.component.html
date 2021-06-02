@@ -1,0 +1,90 @@
+<div class="row" style="padding-top: 35px;">
+    <div class="dashboardBox"  *ngIf="ExperimentCardList?.ELNFlow?.length>0 && HasWriteAccess==true">
+        <a [routerLink]="['/elnexperiments/new']">
+            <div class="text-white">
+                <div class="card">
+                    <div class="cardheader" [style.background-color]="'#b0f427'">
+                        <span class="fa fa-plus"></span>    
+                    </div>
+                    <div class="card_info">
+                        <div class="divider div-transparent"></div>
+                        <h4 [style.background-color]="'yellowgreen'">New Experiment </h4>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="dashboardBox">
+        <a [routerLink]="['listview',ExperimentCardList?.PendingApproval.StatusId,ExperimentCardList?.PendingApproval.StatusName]">
+            <div class=" text-white">
+                <div class="card">
+                    <div class="cardheader" [style.background-color]="ExperimentCardList?.PendingApproval.CardColor">{{ExperimentCardList?.PendingApproval.Count}} </div>
+                    <div class="card_info">
+                        <div class="divider div-transparent"></div>
+                        <h4 [style.background-color]="ExperimentCardList?.PendingApproval.CardColor">{{ExperimentCardList?.PendingApproval.StatusName}} </h4>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<hr class="m-0 horizontalDivider">
+<div class="row" style="padding-top: 25px;">
+    <div class="dashboardBox" *ngFor="let item of ExperimentCardList?.ELNFlow">
+        <a [routerLink]="['listview',item.StatusId,item.StatusName]">
+            <div class=" text-white">
+                <div class="card">
+                    <div class="cardheader" [style.background-color]="item.CardColor">{{item.Count}} </div>
+                    <div class="card_info">
+                        <div class="divider div-transparent"></div>
+                        <h4 [style.background-color]="item.CardColor">{{item.StatusName}} </h4>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="dashboardBox"  *ngIf="ExperimentCardList?.length>0 && HasWriteAccess==true">
+        <a [routerLink]="['/elnexperiments/new']">
+            <div class="text-white">
+                <div class="card">
+                    <div class="cardheader" [style.background-color]="'#b0f427'">
+                        <span class="fa fa-plus"></span>    
+                    </div>
+                    <div class="card_info">
+                        <div class="divider div-transparent"></div>
+                        <h4 [style.background-color]="'yellowgreen'">New Experiment </h4>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<hr class="m-0 horizontalDivider">
+<div class="row" style="padding-top: 25px;">
+    <div class="dashboardBox">
+        <a [routerLink]="['listview',ExperimentCardList?.FavouriteExperiments.StatusId,ExperimentCardList?.FavouriteExperiments.StatusName]">
+            <div class=" text-white">
+                <div class="card">
+                    <div class="cardheader" [style.background-color]="ExperimentCardList?.FavouriteExperiments.CardColor">{{ExperimentCardList?.FavouriteExperiments.Count}} </div>
+                    <div class="card_info">
+                        <div class="divider div-transparent"></div>
+                        <h4 [style.background-color]="ExperimentCardList?.FavouriteExperiments.CardColor">{{ExperimentCardList?.FavouriteExperiments.StatusName}} </h4>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="dashboardBox">
+        <a [routerLink]="['listview',ExperimentCardList?.AllExperiments.StatusId,ExperimentCardList?.AllExperiments.StatusName]">
+            <div class=" text-white">
+                <div class="card">
+                    <div class="cardheader" [style.background-color]="ExperimentCardList?.AllExperiments.CardColor">{{ExperimentCardList?.AllExperiments.Count}} </div>
+                    <div class="card_info">
+                        <div class="divider div-transparent"></div>
+                        <h4 [style.background-color]="ExperimentCardList?.AllExperiments.CardColor">{{ExperimentCardList?.AllExperiments.StatusName}} </h4>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

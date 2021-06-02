@@ -1,0 +1,109 @@
+<div class="col-md-12 text-right">
+    <div class="custom-control custom-checkbox" style="padding-bottom: 5px;">
+        <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabICEQ')" ejs-button>
+            <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+            Back
+        </button>
+        <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabPrecautions')" ejs-button>
+            Next 
+            <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+        </button>
+        <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/elnhome'">
+            <!-- <i class="fas fa-times"></i> &nbsp; -->
+            Cancel
+        </button>
+    </div>
+</div>
+<div style=" box-shadow: 1px 1px 4px 1px;">
+    <div class="col-lg-12 col-md-12" *ngIf="expVersionObj !=null && expVersionObj.IsAllowEdit" style="padding-bottom: 5px">
+        <button type="button" class="addbtn_style" title="Add SOP" (click)="openPopup(addElnsopModal)" ejs-button>
+            <!-- <i class="fa fa-plus-circle"></i> &nbsp; -->
+            Add
+        </button>
+        <ng-template #addElnsopModal let-modal>
+            <div class="modal_header">
+                    <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-6">
+                                    <h5 class="modal-title"> SOP</h5>
+                              </div>
+                              <div class="col-md-6" class="Close_Popup">
+                                <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                              </div>
+                      
+                            </div>
+                          </div>
+                <!-- <h5 class="modal-title"> SOP</h5>
+                <button type="button" class="close" aria-label="close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="SOPForm">
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label for="Title" class="control-label mandatoryfield col-form-label">Title:</label>
+                        </div>
+                        <div class="col-md-9 form-group" print-error [control]="SOPForm.get('Title')">
+                            <input type="text" formControlName="Title" class="form-control">
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label for="GenProc" class="control-label mandatoryfield col-form-label">General Procedure:</label>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <ejs-uploader #defaultupload [autoUpload]='false'
+                                formControlName="GeneralProcedureAttachment" (selected)="onFileSelect($event)"
+                                (removing)='onremoving($event)' [dropArea]='dropEle'></ejs-uploader>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label for="QualificationStat">Qualification Status:</label>
+                        </div>
+                        <div class="col-md-1 form-group">
+                            <input type="radio" id="rdoYes" formControlName="QualificationStatus" value="true">
+                            <label class="p-l-5" for="rdoYes"> Yes </label>
+                        </div>
+                        <div class="col-md-1 form-group">
+                            <input type="radio" id="rdoNo" formControlName="QualificationStatus" value="false">
+                            <label class="p-l-5" for="rdoNo"> No </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="Remark" class="control-label col-form-label">Remark:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea class="form-control" formControlName="Remark" maxlength="100"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="addmodal_style" (click)="AddSOP()" ejs-button>
+                    Add</button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>cancel</button>
+            </div>
+        </ng-template>
+    </div>
+
+    <ejs-grid [dataSource]='SOPList' [gridLines]="lines" height='300px'>
+        <e-columns>
+            <e-column headerText='SOP No./Manual/General Procedure' textAlign='Center'>
+                <ng-template #template let-data>
+                    <div>
+                        <a (click)="DownlLoadFile(data.ProcedureFilePath)" title="Download" class="btn btn-link">
+                            {{data.ProcedureFilePath|fileName:true}}
+                        </a>
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field='Title' headerText='Title' textAlign='Center' width=350></e-column>
+            <e-column headerText='User Qualification Status' textAlign='Center'>
+                <ng-template #template let-data>
+                    <div>
+                        <span>{{data.QualificationStatus|yesNo}}</span>
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field='Remark' headerText='Remark/Issues' textAlign='Center' width=400>
+            </e-column>
+        </e-columns>
+    </ejs-grid>
+</div>

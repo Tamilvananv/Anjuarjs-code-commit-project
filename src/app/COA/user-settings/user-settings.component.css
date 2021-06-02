@@ -1,0 +1,29 @@
+
+.btn_frmsubmit1 {
+  background-color: #03be80;
+  color: white;
+  margin: 5px 20px 10px 0px;
+  width: 150px
+}
+:host ::ng-deep .tabset2 a.nav-link {
+  color: #5f6971;
+}
+:host ::ng-deep .tabset2 a.nav-link:hover{
+ 
+   color: #308cff; 
+  /* color: #d37a23; */
+}
+:host ::ng-deep .tabset2 a.nav-link.active {
+  color: #5f6971 ;
+  font-weight: 700;
+  font-size: 14px;
+  background-color: #e7e6f7;
+   border-top:2px solid #76a4ca; 
+  /* border-bottom:  2px solid #d37a23; */
+  border: 0px 1px 0px 1px solid #cacaca;
+}
+:host ::ng-deep.tab-content > .active {
+  display: block;
+   background-color:#e7e6f7; 
+  border-top: none;
+} 

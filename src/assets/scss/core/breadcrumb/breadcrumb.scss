@@ -1,0 +1,35 @@
+/*******************
+ Breadcrumb and page title
+*******************/
+
+.page-breadcrumb {
+    // padding: 10px 10px 0 10px;
+      padding: 5px 5px 0 5px;
+      background-color: #08a1a1;  
+    position: fixed;
+    width: 100%;
+    z-index: 2 ;
+    
+    .page-title{
+        margin-bottom: 0px;
+    }
+    .breadcrumb {
+        padding: 0px;
+        margin: 0px;
+        background: transparent;
+        font-size: 13px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        
+        .breadcrumb-item+.breadcrumb-item::before {
+            content: "\e649";
+            font-family: themify;
+            color: $gray-400;
+            font-size: 11px;
+            align-self: center;
+          
+        }
+    }
+    .breadcrumb-item.active{
+        color: white;
+    }
+}

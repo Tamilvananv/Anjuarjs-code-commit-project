@@ -1,0 +1,183 @@
+<div class="col-md-12 text-right">
+    <div class="custom-control custom-checkbox" style="padding-bottom: 5px;">
+        <button type="submit" class="btn_frmsubmit" (click)="moveToTab('tabConclusionSummary')" ejs-button>
+            <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+            Back
+        </button>
+        <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/elnhome'">
+            <!-- <i class="fas fa-times"></i> &nbsp; -->
+            Cancel
+        </button>
+    </div>
+</div>
+
+<div style="box-shadow: 1px 1px 4px 1px;">
+    <div class="row p-l-10 p-t-10">
+        <div class="col-md-1">
+            <h4>Rework</h4>
+        </div>
+        <div class="col-md-3 pull-right p-b-10" *ngIf="expVersionObj.IsAllowRework">
+            <div class="custom-control custom-checkbox">
+                <button type="button" class="addbtn_style" title="Add Rework" (click)="openReworkPopup(addReworkModal)"
+                    ejs-button>
+                    Add
+                </button>
+                <button type="button" *ngIf="ReworkList.length>0" class="addbtn_style" title="Submit Rework"
+                    (click)="SaveAsRework()" ejs-button>
+                    Submit Rework
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row p-l-10 p-r-10">
+        <div class="col-md-12 form-group ">
+            <ejs-grid [dataSource]='ReworkList' [gridLines]="lines">
+                <e-columns>
+                    <e-column headerText="Completed" textAlign="center">
+                        <ng-template #template let-data>
+                            <input type="checkbox" [disabled]="data.IsAllowEdit==false || expVersionObj.IsAllowEdit==false" [(ngModel)]="data.IsReworkCompleted" (change)="MarkAsComplete($event, data) ">
+                        </ng-template>
+                    </e-column>
+                    <e-column field='Reason' headerText='Reason' textAlign='center'></e-column>
+                    <e-column field='Date' type="date" format="dd-MMM-yyyy" headerText='Date' textAlign='Center'></e-column>
+                    <e-column field='CreatedBy' headerText='Created By' textAlign='Center'>
+                        <ng-template #template let-data>
+                            <div>
+                                <span>{{data.CreatedBy}}</span>
+                                <span *ngIf="data.UserType!=null">({{data.UserType}})</span>
+                                <span *ngIf="data.UserType==null">(Performer)</span>
+                            </div>
+                        </ng-template>
+                    </e-column>
+                </e-columns>
+            </ejs-grid>
+        </div>
+    </div>
+    <div class="row p-l-10">
+        <div class="col-md-3">
+            <h4>User Signatures</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="col-md-12 text-center">
+                <span>{{InitiatorSignature.UserType}}</span>
+            </div>
+            <div class="col-md-12" [ngSwitch]="InitiatorSignature.AllowSignature && (InitiatorSignature.UserSignature==null || InitiatorSignature.IsSignaturePadOpen==true)">
+                <signature-pad *ngSwitchCase="true" [options]="signaturePadOptions" (onEndEvent)="drawComplete()"></signature-pad>
+                <div *ngSwitchCase="false" class="user-sign-box">
+                    <img [src]="loadFile(InitiatorSignature.UserSignature) | secure | async" *ngIf="InitiatorSignature.UserSignature!=null" alt="Signature" class="img-signature">
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <label>{{InitiatorSignature.FullName}} <small *ngIf="InitiatorSignature.SignatureOnDate">on {{InitiatorSignature.SignatureOnDate|date:'dd-MMM-yyyy'}}</small></label>
+            </div>
+            <div class="col-md-12 form-group text-center" *ngIf="InitiatorSignature.AllowSignature">
+                <button class="btn" ejs-button *ngIf="!expVersionObj.IsSendForApproval" (click)="SendForApproval()">
+                    <i class="fa fa-check p-r-5"></i>Send For Approval
+                </button>
+                <button class="btn" ejs-button *ngIf="InitiatorSignature.UserSignature!=null && InitiatorSignature.IsSignaturePadOpen!=true" (click)="InitiatorSignature.IsSignaturePadOpen=true" title="Add new signature">
+                    <i class="fa fa-pencil-alt"></i>
+                </button>
+                <button class="btn" ejs-button *ngIf="InitiatorSignature.IsSignaturePadOpen==true" (click)="InitiatorSignature.IsSignaturePadOpen=false" title="Load saved signature">
+                    <i class="fa fa-file-image"></i>
+                </button>
+                <button class="btn" ejs-button *ngIf="InitiatorSignature.UserSignature==null || InitiatorSignature.IsSignaturePadOpen==true" (click)="ResetSignaturePad()" title="Reset Signature pad">
+                    <i class="fa fa-trash-alt"></i>
+                </button>
+                <button class="btn" ejs-button *ngIf="InitiatorSignature.UserSignature==null || InitiatorSignature.IsSignaturePadOpen==true" (click)="UndoSignaturePad()" title="Undo Signature pad">
+                    <i class="fa fa-undo"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-3 " *ngFor="let userSign of UserSignatureList">
+            <div class="col-md-12 text-center">
+                <span>{{userSign.UserType}}</span>
+            </div>
+            <div class="col-md-12 p-l-0 p-r-0" [ngSwitch]="userSign.AllowSignature && (userSign.UserSignature==null || userSign.IsSignaturePadOpen==true)">
+                <signature-pad *ngSwitchCase="true" [options]="signaturePadOptions" (onEndEvent)="drawComplete()"></signature-pad>
+                <div *ngSwitchCase="false" class="user-sign-box">
+                    <img [src]="loadFile(userSign.UserSignature) | secure | async" *ngIf="userSign.UserSignature!=null" alt="Signature" class="img-signature">
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <label>{{userSign.FullName}} <small *ngIf="userSign.SignatureOnDate">on {{userSign.SignatureOnDate|date:'dd-MMM-yyyy'}}</small></label>
+            </div>
+            <div class="col-md-12 text-center" *ngIf="userSign.AllowSignature">
+                <button class="btn" ejs-button (click)="SaveApproval(userSign)">
+                    <i class="fa fa-check p-r-5"></i>I Approve
+                </button>
+                <button class="btn" ejs-button *ngIf="userSign.UserSignature!=null && userSign.IsSignaturePadOpen!=true" (click)="userSign.IsSignaturePadOpen=true" title="Add new signature">
+                    <i class="fa fa-pencil-alt"></i>
+                </button>
+                <button class="btn" ejs-button *ngIf="userSign.IsSignaturePadOpen" (click)="userSign.IsSignaturePadOpen=false" title="Load saved signature">
+                    <i class="fa fa-file-image"></i>
+                </button>
+                <button class="btn" ejs-button *ngIf="userSign.UserSignature==null || userSign.IsSignaturePadOpen==true" (click)="ResetSignaturePad()" title="Reset Signature pad">
+                    <i class="fa fa-trash-alt"></i>
+                </button>
+                <button class="btn" ejs-button *ngIf="userSign.UserSignature==null||userSign.IsSignaturePadOpen==true" (click)="UndoSignaturePad()" title="Undo Signature pad">
+                    <i class="fa fa-undo"></i>
+                </button>
+                <!--<i class="fa fa-comment-dots"></i>-->
+            </div>
+        </div>
+    </div>
+    <ng-template #addReworkModal let-modal>
+        <div class="modal_header">
+            <h5 class="modal-title">Rework</h5>
+            <button type="button" class="close" aria-label="close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row" [formGroup]="ReworkForm">
+                <div class="col-md-12 form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="Date" class="control-label mandatoryfield col-form-label">Date:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <ejs-datepicker [format]="'dd-MMM-yyyy'"  formControlName="Date" placeholder='Enter date'></ejs-datepicker>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="Reason" class="control-label mandatoryfield col-form-label">Reason:</label>
+                        </div>
+                        <div class="col-md-10">
+                            <textarea class="form-control" formControlName="Reason" row="3">
+                        </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="addmodal_style" ejs-button (click)="AddRework()">Respond</button>
+            <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>cancel</button>
+        </div>
+    </ng-template>
+</div>
+
+<div class="col-lg-12 confirmationDialog">
+    <ng-template #approvalModel let-modal>
+        <div class="modal_header">
+            <h5 class="modal-title">Acknowledgement</h5>
+            <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+        </div>
+        <div class="modal-body">
+            <span>Your Approval Saved successfully.</span>
+            <p>You can still add rework. once rework is added approval will get removed</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn_frmsubmit float-right" ejs-button (click)="modal.close(false)">&nbsp;OK</button>
+            <button type="button" class="btn_frmcancel float-right" title="Back to listing" ejs-button 
+            [routerLink]="'/elnhome'" (click)="modal.close()">&nbsp;Back</button>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,9 @@
+.Border-bottom{
+    border-bottom: solid;
+    border-width: thin;
+}
+@media (min-width: 768px)
+.col-md-9 {
+    flex: 0 0 75%;
+    max-width: 100% !important;
+}

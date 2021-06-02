@@ -1,0 +1,216 @@
+<div class="col-md-12 text-right">
+        <div class="custom-control " style="padding-bottom: 5px;">
+                <button type="submit" class="btn_frmsubmit" ejs-button>
+                        Save
+                    </button>
+            <button type="submit" class="btn_frmsubmit" ejs-button>
+                Back
+            </button>
+            <button type="button" class="btn_frmsubmit"  ejs-button>
+                Next 
+            </button>
+            <button type="button" class="btn_frmcancel" ejs-button >
+                Cancel
+            </button>
+        </div>
+    </div>
+<div class="col-md-12 frm_tabpanel">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="Risk">Initial Impact Assessment:</label>
+                </div>
+                <div class="col-md-10">
+                    <textarea name="message" rows="4" cols="125">Type Here </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 frm_tabpanel">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="Risk">Justification for Continuation:</label>
+                </div>
+                <div class="col-md-10">
+                    <textarea name="message" rows="4" cols="125">Type Here </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 frm_tabpanel">
+    <div class="row">
+            <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <label for="Patients">Any Patients:</label>
+                      </div>
+  
+                      <div class="col-md-1">
+                       
+                        <input type="radio" id="customRadio1" name="IsCalibrationRequired" class="custom-control-input"
+                          [value]="true" formControlName="IsCalibrationRequired" (click)="EnableFrequency()" />
+                        <label class="custom-control-label" for="customRadio1">Yes</label>
+                      </div>
+                      <div class="col-md-3">
+                        <input type="radio" id="customRadio2" name="IsCalibrationRequired" class="custom-control-input"
+                          [value]="false" formControlName="IsCalibrationRequired" (change)="DisableFrequency($event)"
+                           />
+                        <label class="custom-control-label" for="customRadio2">No</label>
+                      </div>
+                    </div>
+                  </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Browse">Attachments:</label>
+                </div>
+                <div class="col-md-7">
+                    <ejs-uploader #defaultupload [autoUpload]="false" [dropArea]="dropEle" [asyncSettings]="path"
+                        (success)="onUploadSuccess($event)" (failure)="onUploadFailure($event)"></ejs-uploader>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 frm_tabpanel">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="Risk">Any Containment Action Taken:</label>
+                </div>
+                <div class="col-md-10">
+                    <textarea name="message" rows="4" cols="125">Type Here </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 frm_tabpanel">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="Risk">Summary / Conclusion:</label>
+                </div>
+                <div class="col-md-10">
+                    <textarea name="message" rows="4" cols="125">Type Here </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="InitiatedBy">Initiated By:</label>
+                </div>
+                <div class="col-md-7">
+                    <input ype="text" name="InitiatedBy" class="form-control" placeholder="Auto" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-actions pull-right">
+                <div class="d-flex no-block align-items-center">
+                    <div class="ml-auto">
+                      
+
+                        <button type="button" class="btn_frmsubmit" ejs-button>
+                            Sign and Submit 
+                        </button>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ejs-accordion>
+    <e-accordionitems>
+        <e-accordionitem expanded='true'>
+            <ng-template #header>
+                <div > Function Head-Employee Name </div>
+            </ng-template>
+            <ng-template #content>
+                <ejs-grid width='100%' [dataSource]='data1' [editSettings]='editSettings' [toolbar]='toolbar'
+                    height='200px' [gridLines]="lines">
+                    <e-columns>
+                        <!-- <e-column field='EmpList' headerText='Employee List' editType='dropdownedit' [edit]='deptlist'
+                            width=50 textAlign='Center'></e-column> -->
+                        <e-column field='ChooseAction' headerText='Choose Action' editType='dropdownedit'
+                            [edit]='action' width=50 textAlign='Center'>
+                        </e-column>
+                        <e-column field='Comments' headerText='Comments' width=120 textAlign='Center'>
+                        </e-column>
+                    </e-columns>
+                </ejs-grid>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-actions pull-right">
+                                <div class="d-flex no-block align-items-center">
+                                    <div class="ml-auto">
+                                      
+                                        <button type="button" class="btn_frmsubmit" ejs-button>
+                                            Sign and Submit 
+                                        </button>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </e-accordionitem>
+        <e-accordionitem expanded='true'>
+            <ng-template #header>
+                <div >QA Designee Approval-Employee Name</div>
+            </ng-template>
+            <ng-template #content>
+                <ejs-grid width='100%' [dataSource]='data1' [editSettings]='editSettings' [toolbar]='toolbar'
+                    height='200px' [gridLines]="lines">
+                    <e-columns>
+                        <!-- <e-column field='EmpList' headerText='Employee List' editType='dropdownedit' [edit]='deptlist'
+                            width=50 textAlign='Center'></e-column> -->
+                        <e-column field='ChooseAction' headerText='Choose Action' editType='dropdownedit'
+                            [edit]='action' width=50 textAlign='Center'>
+                        </e-column>
+                        <e-column field='Comments' headerText='Comments' width=120 textAlign='Center'>
+                        </e-column>
+                    </e-columns>
+                </ejs-grid>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-actions pull-right">
+                                <div class="d-flex no-block align-items-center">
+                                    <div class="ml-auto">
+                                      
+                                        <button type="button" class="btn_frmsubmit" ejs-button>
+                                            Sign and Submit 
+                                        </button>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </e-accordionitem>
+    </e-accordionitems>
+</ejs-accordion>

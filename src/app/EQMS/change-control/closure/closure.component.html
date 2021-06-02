@@ -1,0 +1,453 @@
+<form class="form-horizontal" [formGroup]='EQMSClosureFHformData'>
+<div class="col-md-12 text-right">
+        <div class="custom-control " style="padding-bottom: 5px;">
+                <button type="submit" *ngIf="FHSubmitbtn" class="btn_frmsubmit" ejs-button>
+                        Save
+                    </button>
+            <button type="submit" class="btn_frmsubmit"   (click)="moveToTab('tab-selectbyid4');" ejs-button>
+                Back
+            </button>
+           
+            <button type="button" class="btn_frmcancel" ejs-button >
+                Cancel
+            </button>
+        </div>
+    </div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <label style="font-size: 14px;">Date of Change Implementation:</label>
+                </div>
+                <div class="col-md-4">
+                    <ejs-datepicker [readonly]="FHReadOnly" formControlName="EqmsCcDateofChangeImplementaion" placeholder='Enter date'>
+                    </ejs-datepicker>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <label style="font-size: 14px;">List of Planned Action:</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <ejs-grid #grid id="Grid" [dataSource]="ObjChangeDetailsList" allowFiltering="true" [filterSettings]="filterOptions"
+      [gridLines]="lines" [enableHover]="false"  [allowSorting]="true" e-gridheader="" 
+      allowTextWrap='true' [textWrapSettings]='wrapSettings' [toolbar]="toolbarOptions" [allowExcelExport]="true"
+      (toolbarClick)="toolbarClick($event)" (commandClick)="commandClick($event)">
+      <e-columns>
+        <e-column headerText="Action" textAlign="center" width="170">
+          <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <ng-template #template let-data>
+                    <div class="row">
+                      <div class="col-md-6">
+                          <button class="addbtn1_style" [disabled]="!FHSubmitbtn"  (click)="OpenaddparameterModal(addParameterModal,data)" ejs-button >
+                              <i class="fa fa-edit"></i>   
+                            </button>
+                      </div>
+                      <div class="col-md-6">
+                          <button class="addbtn1_style" [disabled]="FHSubmitbtn" (click)="OpenaddparameterModal(addParameterModal,data)" ejs-button >
+                              <i class="fa fa-eye"></i>  
+                            </button>
+                        </div>
+                    </div>
+                    </ng-template>
+                  </div>
+            </div>
+          </div>
+        </e-column>  
+        <e-column field='SrNo' headerText='Sr.No.' width=120 textAlign='Center'>
+            <ng-template #template let-ObjChangeDetailsList>
+                <div>{{ +ObjChangeDetailsList.index+1 }}</div>
+            </ng-template>
+        </e-column>
+        <e-column field="EqmsCcActionPlan" headerText="Action Plan" textAlign="center" width="210" ></e-column>
+        <e-column field='Status' headerText='Status' width=120 textAlign='Center'>
+            <ng-template #template let-ObjChangeDetailsList>
+                <div *ngIf="ObjChangeDetailsList.EqmsCcStatus">Completed</div>
+                <div *ngIf="!ObjChangeDetailsList.EqmsCcStatus">Non-Completed</div>
+            </ng-template>
+        </e-column>
+        <e-column field="Attach" headerText="Attach" textAlign="center" width="210">
+            <ng-template #template let-data>
+                <div><a  (click)="openAddModal(content4);setRowId(data);"><i [ngClass]="(data.EqmsCcAttachment===true)?'far fa-folder-open':'far fa-folder'"></i><p ></p></a></div>
+            </ng-template>
+        </e-column>
+      </e-columns>
+    </ejs-grid>
+  </div>
+
+
+<br>
+<div class="col-md-12 frm_tabpanel">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="DocTitle">Justification for Delay in Closure:</label>
+                </div>
+                <div class="col-md-10">
+                    <textarea name="message" [readonly]="FHReadOnly" formControlName="EqmsCcJustificationForDelay" rows="3" cols="125">Title </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 frm_tabpanel">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <label style="font-size: 14px;">Verified By [ Function Head Name ]:</label>
+                </div>
+                <div class="col-md-10">
+                    <textarea name="message" [readonly]="FHReadOnly" formControlName="EqmsCcFuncHeadComment" rows="3" cols="125">Comments if any </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <div class="form-actions pull-right">
+                <div class="d-flex no-block align-items-center">
+                    <div class="ml-auto">
+
+                        <button type="button" *ngIf="FHSubmitbtn" (click)="SaveFunctionHead()" class="btn_frmsubmit" ejs-button>
+                            Sign and Submit
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+
+
+
+
+<form class="form-horizontal" [formGroup]='EQMSClosureQHformData'>
+
+<ejs-accordion>
+        <e-accordionitems>
+            <e-accordionitem expanded='true'>
+                <ng-template #header>
+                    <div > Quality Head/QA Designee Approval <b>{{QualityHeadLevelApprovalName}}</b></div>
+                    <div>Approval Status: <b
+                      [ngClass]="(boolQualityHeadApproval===true)?'btn btn-success':'btn btn-danger'">{{QualityHeadApprovalStatusText}}</b>
+              </div>
+                </ng-template>
+                <ng-template #content>
+                    <div class="col-md-12" *ngIf="!FHSubmitbtn">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label style="font-size: 14px;">Verified by Concerned Department:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <ejs-dropdownlist id='reason' #sample [dataSource]='ReasonData' [value]='value' [fields]='fields1'
+                                        formControlName="EqmsCcClosureisVerifiedByDept" [readonly]="QHReadOnly" [placeholder]='waterMark' [popupHeight]='height'></ejs-dropdownlist>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label style="font-size: 14px;">Change Control Stand Closed:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <ejs-dropdownlist id='reason' #sample [dataSource]='ReasonData' [value]='value' [fields]='fields1'
+                                        formControlName="EqmsCcStandClosed" [placeholder]='waterMark' [readonly]="QHReadOnly" [popupHeight]='height'></ejs-dropdownlist>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-md-12" *ngIf="!FHSubmitbtn">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                                <label style="font-size: 14px;">Audit trails Verified:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                                <ejs-dropdownlist id='reason' #sample [dataSource]='ReasonData' [value]='value' [fields]='fields1'
+                                                formControlName="EqmsCcJustificationForDelayisValid" [readonly]="QHReadOnly" [placeholder]='waterMark' [popupHeight]='height'></ejs-dropdownlist>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                                <label style="font-size: 14px;">Valid Justification Provided  For Delayed in Closure:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                                <ejs-dropdownlist id='reason' #sample [dataSource]='ReasonData' [value]='value' [fields]='fields1'
+                                                formControlName="EqmsCcAuditTrailsisValid" [placeholder]='waterMark' [readonly]="QHReadOnly" [popupHeight]='height'></ejs-dropdownlist>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    <div class="col-md-12" *ngIf="!FHSubmitbtn">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="row"  *ngIf="QHSubmitbtn">
+                                    <ul>
+    
+                                      <div class="col-md-2">
+                                        <ejs-radiobutton label="Rework Required" name="custom"
+                                        value="1" formControlName="EqmsCQHStatus"  cssClass="e-warning">
+                                        </ejs-radiobutton>
+                                    </div>
+
+
+                                    <div class="col-md-2">
+                                        <ejs-radiobutton label="Rejected" name="custom"
+                                        value="2" formControlName="EqmsCQHStatus" cssClass="e-danger">
+                                        </ejs-radiobutton>
+                                    </div>
+
+
+                                    <div class="col-md-2">
+                                        <ejs-radiobutton label="Approved" name="custom"
+                                        value="3" formControlName="EqmsCQHStatus" cssClass="e-success">
+                                        </ejs-radiobutton>
+
+                                    </div>
+    
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="Comments">Comments:</label>
+    
+                                    </div>
+                                    <div class="col-md-4">
+                                        <textarea rows="5" cols="105" [readonly]="QHReadOnly" name="Comments"
+                                        formControlName="EqmsCQHComment"></textarea>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                    <!-- <ejs-grid width='100%' [dataSource]='data' [editSettings]='editSettings'
+                        [toolbar]='toolbar' height='200px' [gridLines]="lines">
+                        <e-columns>
+                            <e-column field='ChooseAction' headerText='Choose Action'
+                                editType='dropdownedit' [edit]='ddParams' width=50 textAlign='Center'>
+                            </e-column>
+                            <e-column field='Comment' headerText='Comment' width=120 textAlign='Center'>
+                            </e-column>
+                        </e-columns>
+                    </ejs-grid> -->
+    
+                    <div class="col-md-12 text-right"  *ngIf="QHSubmitbtn">
+                        <div class="custom-control " style="padding-bottom: 5px;">
+                          <button type="button" (click)="SaveQualityHead()" class="btn_frmsubmit" ejs-button>
+                            Sign and Submit
+                        </button>
+                        </div>
+                    </div>
+                </ng-template>
+            </e-accordionitem>
+          
+        </e-accordionitems>
+    </ejs-accordion>
+  </form>
+    <ng-template #content4 let-modal>
+        <div class="modal_header">
+          <!-- <h5 class="modal-title">Attachments</h5>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+          <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                    <h5 class="modal-title">Attachments</h5>
+                </div>
+                <div class="col-md-6" class="Close_Popup" (click)="modal.dismiss('Cross click')">
+                  <i class="fas fa-times"></i>
+                </div>
+      
+              </div>
+            </div>
+        </div>
+        <div class="modal-body">
+       
+          <ejs-filemanager id='overview' #fileManagerCtrl [ajaxSettings]='ajaxSettings' [searchSettings]='searchSettings' (beforeDownload)="beforeSend($event)"
+              (beforeImageLoad)="beforeSend($event)" [rootAliasName]="'Attachments'" (beforeSend)="beforeSend($event)" [contextMenuSettings]='contextMenuSettings' [toolbarSettings]='toolbarSettings' view='Details'>
+          </ejs-filemanager>
+        </div>
+      </ng-template>
+      <ng-template #addParameterModal let-modal>
+        <div class="modal_header">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="modal-title">Add </h5>
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                            <i class="fas fa-times" (click)="modal.dismiss('Cross click')" ></i>
+                    </div>
+      
+                </div>
+            </div>
+         
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" [formGroup]='EQMSAddChangeDetailsformData'>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="ChangeControlNumber">Change Control Number:</label>
+                    </div>
+                    <div class="col-md-7">
+                        {{ ChangeControlNumber }}
+                    </div>
+                </div>
+          <!-- <div class="col-md-12 frm_tabpanel">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="EqmsCcProcedure">Current / Existing System / Procedure:</label>
+                  </div>
+                  <div class="col-md-6">
+                    <textarea name="EqmsCcProcedure" formControlName="EqmsCcProcedure" rows="5" cols="75">Title </textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 frm_tabpanel">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="EqmsCcProposedChange">Changes Proposed:</label>
+                    </div>
+                    <div class="col-md-6">
+                      <textarea  name="EqmsCcProposedChange" formControlName="EqmsCcProposedChange" rows="5" cols="75">Title </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="col-md-12 frm_tabpanel">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="EqmsCcJustification">Justification for Change:</label>
+                  </div>
+                  <div class="col-md-6">
+                    <textarea formControlName="EqmsCcJustification" name="EqmsCcJustification" rows="5" cols="75">Title </textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+         
+          <div class="col-md-12 frm_tabpanel">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="EqmsCcActionPlan">Action Plan:</label>
+                  </div>
+                  <div class="col-md-6">
+                    <textarea formControlName="EqmsCcActionPlan" name="EqmsCcActionPlan" rows="5" cols="75">Title </textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 frm_tabpanel">
+            <div class="row">
+              <!-- <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="ResponsibleDept">Responsible Department:</label>
+                  </div>
+                  <div class="col-md-6">
+                    <ejs-dropdownlist id="Department" [dataSource]="objDepartmentList"
+                    [fields]="fieldsforDept" (filtering)="onFiltering($event)" [popupHeight]="height"
+                    [allowFiltering]="true" [placeholder]="watermark" name="DepartmentId"
+                    formControlName="DepartmentId">
+                </ejs-dropdownlist>
+                  </div>
+                </div>
+              </div> -->
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="ResponsibleDept">Status:</label>
+                  </div>
+                  <div class="col-md-6">
+                    <ejs-dropdownlist id="status" 
+                    [fields]="fieldsforstatus" [dataSource]='StatusData' (filtering)="onFiltering($event)" [popupHeight]="height"
+                    [allowFiltering]="true" [placeholder]="watermark" name="EqmsCcStatus"
+                    formControlName="EqmsCcStatus">
+                </ejs-dropdownlist>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="Attach">Attach:</label>
+                  </div>
+                  <div class="col-md-6">
+                      <ejs-uploader #defaultupload [autoUpload]="false" [dropArea]="dropEle" [asyncSettings]="path"
+                      (success)="onUploadSuccess($event)" (failure)="onUploadFailure($event)" (selected)="onFileSelect($event)" formArrayName='AttachmentList'></ejs-uploader>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         </form>
+        </div>
+        <div class="modal-footer">
+          <button class="addmodal_style" *ngIf="FHSubmitbtn" (click)="UpdateEqmsChangeDetails()" ejs-button>
+            Add
+          </button>
+      
+          <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+            cancel
+          </button>
+        </div>
+      
+      </ng-template>

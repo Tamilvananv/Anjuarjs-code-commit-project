@@ -1,0 +1,724 @@
+<div class="col-md-12 text-right">
+    <div class="custom-control " style="padding-bottom: 5px;">
+        <button type="submit" class="btn_frmsubmit" ejs-button>
+            Save
+        </button>
+        <button type="submit" class="btn_frmsubmit" ejs-button>
+            Back
+        </button>
+      
+        <button type="button" class="btn_frmsubmit" ejs-button>
+            Next
+        </button>
+        <button type="button" class="btn_frmcancel" ejs-button>
+            Cancel
+        </button>
+    </div>
+</div>
+<div class="col-md-12 frm_tabpanel">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="AuditNumber"> Audit Number:</label>
+                </div>
+                <div class="col-md-7">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="AuditScope">Scope of Audit:</label>
+                </div>
+                <div class="col-md-7">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <ejs-grid #grid id='Grid' [dataSource]='data' [gridLines]="lines" e-gridheader='' height='100px'>
+
+        <e-columns>
+            <e-column headerText='Action' textAlign='center' width='90'>
+                <ng-template #template let-data>
+                        <button type="submit" class="btn_frmsubmit"(click)="OpenModal(addModal)" ejs-button>
+                                Create Report
+                            </button>
+                   
+                </ng-template>
+            </e-column>
+            <e-column field='LinkedAuditNumber' headerText='Linked Audit Number' headerTextAlign="center"
+                textAlign="left" width=60>
+            </e-column>
+            <e-column field='AuditReportNumber' headerText='Audit Report Number' headerTextAlign='center'
+                textAlign='left' width=80>
+            </e-column>
+            <e-column field='Department' headerText='Department' headerTextAlign='center' textAlign='left' width=80>
+            </e-column>
+            <e-column field='Status' headerText='Status' headerTextAlign='center' textAlign='left' width=80>
+                </e-column>
+            <e-column field='PlannedStartDate' headerText=' Planned Start Date' headerTextAlign='center' textAlign='left'
+                width=80>
+            </e-column>
+            <e-column field='PlannedEndDate' headerText='Planned End Date' headerTextAlign='center' textAlign='left'
+                width=80>
+            </e-column>
+            <e-column field='ActutalStartDate' headerText='Actual Start Date' headerTextAlign='center' textAlign='left'
+                width=80>
+            </e-column>
+        </e-columns>
+    </ejs-grid>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #addModal let-modal>
+    <div class="modal_header">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="modal-title">Add</h5>
+
+                </div>
+                <div class="col-md-6" class="Close_Popup">
+                    <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-body">
+
+            <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="AuditReportNumber"> Audit Report Number:</label>
+                                </div>
+                                <div class="col-md-7">
+                
+                                </div>
+                
+                            </div>
+                        </div>
+                
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="AuditScope">Audit Scope:</label>
+                                </div>
+                                <div class="col-md-7">
+                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="AuditNumber">Audit Number:</label>
+                                </div>
+                                <div class="col-md-7">
+                
+                                </div>
+                
+                            </div>
+                        </div>
+                
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="AuditReason">Audit Reason:</label>
+                                </div>
+                                <div class="col-md-7">
+                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="AuditType">Type of Audit:</label>
+                                </div>
+                                <div class="col-md-7">
+                
+                                </div>
+                
+                            </div>
+                        </div>
+                
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="Auditlang">Audit Language:</label>
+                                </div>
+                                <div class="col-md-7">
+                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ProposedDateofAudit"> Proposed Date of Audit:</label>
+                                </div>
+                                <div class="col-md-7">
+                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="Dept">Department:</label>
+                                </div>
+                                <div class="col-md-7">
+                
+                                </div>
+                
+                            </div>
+                        </div>
+                
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="Auditee"> Auditee:</label>
+                                </div>
+                                <div class="col-md-7">
+                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ActualDateofAudit"> Actual Date of Audit:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <ejs-datepicker [value]="dateValue" placeholder="Enter date">
+                                    </ejs-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="AuditTeam"> Audit Team:</label>
+                                </div>
+                                <div class="col-md-7">
+                
+                                </div>
+                
+                            </div>
+                        </div>
+                
+                
+                    </div>
+                </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="OtherDetails">Other Details:</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input type="text" name="OtherDetails" class="form-control" placeholder="OtherDetails" />
+                                </div>
+                
+                            </div>
+                        </div>
+                
+                
+                    </div>
+                </div>
+                <div class="col-md-12 text-right">
+                        <div class="custom-control " style="padding-bottom: 5px;">
+                    
+                            <button type="submit" class="btn_frmsubmit" (click)="AddObservation(addObservation)" ejs-button>
+                                Add Observation
+                            </button>
+                    
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <ejs-grid #grid id='Grid' [dataSource]='data' [gridLines]="lines" e-gridheader='' height='100px'>
+                    
+                            <e-columns>
+                                <e-column headerText='Action' textAlign='center' width='70'>
+                                </e-column>
+                                <e-column field='Observation' headerText='Observation' headerTextAlign="center" textAlign="left" width=60>
+                                </e-column>
+                                <e-column field='Category' headerText='Category' headerTextAlign='center' textAlign='left' width=80>
+                                </e-column>
+                                <e-column field='FirstActionSuggested' headerText='First Action Suggested' headerTextAlign='center'
+                                    textAlign='left' width=80>
+                                </e-column>
+                                <e-column field='ImpactAssessment' headerText='Impact Assessment' headerTextAlign='center' textAlign='left'
+                                    width=80>
+                                </e-column>
+                                <e-column field='Migration' headerText='Migration' headerTextAlign='center' textAlign='left' width=80>
+                                </e-column>
+                                <e-column field='Comments' headerText='Comments' headerTextAlign='center' textAlign='left' width=80>
+                                </e-column>
+                            </e-columns>
+                        </ejs-grid>
+                    </div>
+                    <ejs-accordion>
+                            <e-accordionitems>
+                                <e-accordionitem expanded="true">
+                                    <ng-template #header>
+                                        <div>Audit Lead</div>
+                                    </ng-template>
+                                    <ng-template #content>
+                                        <ejs-grid width="100%" [dataSource]="data1" height="200px" [gridLines]="lines">
+                                            <e-columns>
+                        
+                                                <e-column field="EmpList" headerText="Employee List" editType="dropdownedit" [edit]="deptlist"
+                                                    width="50" textAlign="Center"></e-column>
+                                                <e-column field="ChooseAction" headerText="Choose Action" editType="dropdownedit"
+                                                    [edit]="action" width="50" textAlign="Center">
+                                                </e-column>
+                                                <e-column field="Comments" headerText="Comments" width="120" textAlign="Center">
+                                                </e-column>
+                                            </e-columns>
+                                        </ejs-grid>
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6"></div>
+                                                <div class="col-md-6">
+                                                    <div class="form-actions pull-right">
+                                                        <div class="d-flex no-block align-items-center">
+                                                            <div class="ml-auto">
+                                                                <button type="submit" class="btn_frmsubmit" ejs-button>
+                                                                    Sign
+                                                                </button>
+                        
+                                                                <button type="button" class="btn_frmcancel" ejs-button>
+                                                                    Close
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </e-accordionitem>
+                                <e-accordionitem expanded="true">
+                                    <ng-template #header>
+                                        <div>Quality Head</div>
+                                    </ng-template>
+                                    <ng-template #content>
+                                        <ejs-grid width="100%" [dataSource]="data1" height="100px" [gridLines]="lines">
+                                            <e-columns>
+                        
+                                                <e-column field="EmpList" headerText="Employee List" editType="dropdownedit" [edit]="deptlist"
+                                                    width="50" textAlign="Center"></e-column>
+                                                <e-column field="ChooseAction" headerText="Choose Action" editType="dropdownedit"
+                                                    [edit]="action" width="50" textAlign="Center">
+                                                </e-column>
+                                                <e-column field="Comments" headerText="Comments" width="120" textAlign="Center">
+                                                </e-column>
+                                            </e-columns>
+                                        </ejs-grid>
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6"></div>
+                                                <div class="col-md-6">
+                                                    <div class="form-actions pull-right">
+                                                        <div class="d-flex no-block align-items-center">
+                                                            <div class="ml-auto">
+                                                                <button type="submit" class="btn_frmsubmit" ejs-button>
+                                                                    Sign
+                                                                </button>
+                        
+                                                                <button type="button" class="btn_frmcancel" ejs-button>
+                                                                    Close
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </e-accordionitem>
+                            </e-accordionitems>
+                        </ejs-accordion>
+    </div>
+
+    <div class="modal-footer">
+            <button type="button" class="btn_frmsubmit float-right"(click)="PrintReport(printModel)" ejs-button
+                >Generate Report</button>
+            <button type="button" class="btn_frmcancel float-right" ejs-button
+                (click)="modal.close()">&nbsp;Back</button>
+        </div>
+</ng-template>
+
+
+
+
+
+
+
+
+<div class="col-lg-12 ">
+    <ng-template #addObservation let-modal>
+        <div class="modal_header">
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="modal-title">Add Observation</h5>
+
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                        <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-body">
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="Observation">Observation:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <ejs-textbox [multiline]='true'
+                                    value='Mr. Dodsworth Dodsworth, System Analyst, Studio 103, The Business Center'>
+                                </ejs-textbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="Category">Category:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <ejs-dropdownlist id="A" [value]="value" [dataSource]="Category" [fields]="fields"
+                                    [placeholder]="waterMark" [popupHeight]="height">
+                                </ejs-dropdownlist>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="FirstActionSuggested">Final Action Suggested:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <ejs-dropdownlist id="A" [value]="value" [dataSource]="Action" [fields]="fields1"
+                                    [placeholder]="waterMark" [popupHeight]="height">
+                                </ejs-dropdownlist>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="ImpactAssessment">Impact Assessment:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <ejs-textbox [multiline]='true'
+                                    value='Mr. Dodsworth Dodsworth, System Analyst, Studio 103, The Business Center'>
+                                </ejs-textbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="Migration">Mitigation:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <ejs-textbox [multiline]='true'
+                                    value='Mr. Dodsworth Dodsworth, System Analyst, Studio 103, The Business Center'>
+                                </ejs-textbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="Comments">Comments:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <ejs-textbox [multiline]='true'
+                                    value='Mr. Dodsworth Dodsworth, System Analyst, Studio 103, The Business Center'>
+                                </ejs-textbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn_frmsubmit float-right" ejs-button>Add</button>
+            <button type="button" class="btn_frmcancel float-right" ejs-button (click)="modal.close()">Cancel
+            </button>
+        </div>
+    </ng-template>
+</div>
+<div class="col-lg-12 confirmationDialog">
+    <ng-template #printModel let-modal>
+        <div class="modal_header">
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="modal-title">Preview PDF</h5>
+
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                        <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-body">
+            <!-- <tr style="border-bottom: 2px solid black;">
+                <td colspan="4" style="padding-bottom: 5px;">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <img class="light-logo" src="{{applicationUrl}}/content/images/immuneel_logo.png">
+                            </td>
+
+                        </tr>
+                    </table>
+                </td>
+            </tr> -->
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="AuditNumber"> Audit Number:</label>
+                            </div>
+                            <div class="col-md-7">
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="Department">Department Name:</label>
+                            </div>
+                            <div class="col-md-7">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="AuditTitle"> Audit Title:</label>
+                            </div>
+                            <div class="col-md-7">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="AuditScope"> Audit Scope:</label>
+                            </div>
+                            <div class="col-md-7">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="AuditLanguage"> Audit Language:</label>
+                            </div>
+                            <div class="col-md-7">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="AuditLanguage">Date of Audit:</label>
+                            </div>
+                            <div class="col-md-7">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="AuditTeam"> Audit Team:</label>
+                            </div>
+                            <div class="col-md-7">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="Observations">Observations:</label>
+                            </div>
+                            <div class="col-md-7">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-12 frm_tabpanel">
+                <div class="row">
+
+                    <div class="table-responsive">
+                        <ejs-grid #grid id='Grid' [dataSource]='data' [gridLines]="lines" e-gridheader=''
+                            height='100px'>
+
+                            <e-columns>
+                                <e-column headerText='Action' textAlign='center' width='70'>
+                                </e-column>
+                                <e-column field='Observation' headerText='Observation' headerTextAlign="center"
+                                    textAlign="left" width=60>
+                                </e-column>
+                                <e-column field='Category' headerText='Category' headerTextAlign='center'
+                                    textAlign='left' width=80>
+                                </e-column>
+                                <e-column field='FirstActionSuggested' headerText='Final Action Suggested'
+                                    headerTextAlign='center' textAlign='left' width=80>
+                                </e-column>
+                                <e-column field='ImpactAssessment' headerText='Impact Assessment'
+                                    headerTextAlign='center' textAlign='left' width=80>
+                                </e-column>
+                                <e-column field='Migration' headerText='Mitigation' headerTextAlign='center'
+                                    textAlign='left' width=80>
+                                </e-column>
+                                <e-column field='Comments' headerText='Comments' headerTextAlign='center'
+                                    textAlign='left' width=80>
+                                </e-column>
+                            </e-columns>
+                        </ejs-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+                <button type="button" class="btn_frmsubmit float-right" ejs-button
+                (click)="PrintPDF(printModel)">&nbsp;Send To Auditee</button>
+            <button type="button" class="btn_frmsubmit float-right" ejs-button
+                (click)="PrintPDF(printModel)">&nbsp;Export</button>
+            <button type="button" class="btn_frmcancel float-right" ejs-button
+                (click)="modal.close()">&nbsp;Back</button>
+        </div>
+    </ng-template>
+</div>

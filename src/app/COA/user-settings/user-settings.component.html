@@ -1,0 +1,140 @@
+<div class="" style="padding-top: 30px">
+  <ngb-tabset #t="ngbTabset" class="tabset2">
+    <ngb-tab id="tab-test" title=" Test ">
+      <ng-template ngbTabContent> </ng-template>
+    </ngb-tab>
+
+    <ngb-tab id="tab-assayType" title=" Assay Type ">
+      <ng-template ngbTabContent> </ng-template>
+    </ngb-tab>
+
+    <ngb-tab id="tab-unit" title=" Unit ">
+      <ng-template ngbTabContent> </ng-template>
+    </ngb-tab>
+
+    <ngb-tab id="tab-Specifications" title=" Set Specifications">
+      <ng-template ngbTabContent>
+        <ejs-accordion>
+          <e-accordionitems>
+            <e-accordionitem>
+              <ng-template #header>
+                <div>Digital Test results</div>
+              </ng-template>
+              <ng-template #content>
+                <div class="no-block align-items-center">
+                  <h4 class="card-title"></h4>
+                  <div class="ml-auto mb-2 buttons_padding">
+                    <button
+                      class="addbtn_style"
+                      ejs-button
+                      (click)="addDigitalRecords(addDigitalRecordsModal)"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+
+                      &nbsp;&nbsp;Add Record
+                    </button>
+                  </div>
+                </div>
+
+                <ejs-grid [dataSource]="" height="200px" [gridLines]="lines">
+                  <e-columns>
+                    <e-column
+                      field=""
+                      headerText="Action"
+                      width="120"
+                      textAlign="Center"
+                    >
+                    </e-column>
+                    <e-column
+                      field=""
+                      headerText="Test Name"
+                      width="50"
+                      textAlign="Center"
+                    ></e-column>
+                    <e-column
+                      field=""
+                      headerText="Unit"
+                      width="120"
+                      textAlign="Center"
+                    >
+                    </e-column>
+                    <e-column
+                      field=""
+                      headerText="Upper specification limit"
+                      width="120"
+                      textAlign="Center"
+                    >
+                    </e-column>
+                    <e-column
+                      field=""
+                      headerText="Lower specification Limit"
+                      width="120"
+                      textAlign="Center"
+                    >
+                    </e-column>
+                  </e-columns>
+                </ejs-grid>
+
+           
+              </ng-template>
+            </e-accordionitem>
+
+            <e-accordionitem>
+              <ng-template #header>
+                <div>Descriptive Test Results</div>
+              </ng-template>
+              <ng-template #content>
+                <div class="no-block align-items-center">
+                  <h4 class="card-title"></h4>
+                  <div class="ml-auto mb-2 buttons_padding">
+                    <button
+                      class="addbtn_style"
+                      ejs-button
+                      (click)="addparameter(addParameterModal)"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+
+                      &nbsp;&nbsp;Add Record
+                    </button>
+                  </div>
+                </div>
+                <ejs-grid [dataSource]="" height="200px" [gridLines]="lines">
+                  <e-columns>
+                    <e-column
+                      field=""
+                      headerText="Action"
+                      width="120"
+                      textAlign="Center"
+                    >
+                    </e-column>
+                    <e-column
+                      field=""
+                      headerText="Test Name"
+                      width="50"
+                      textAlign="Center"
+                    ></e-column>
+
+                    <e-column
+                      field=""
+                      headerText="If True"
+                      width="120"
+                      textAlign="Center"
+                    >
+                    </e-column>
+                    <e-column
+                      field=""
+                      headerText="If False"
+                      width="120"
+                      textAlign="Center"
+                    >
+                    </e-column>
+                  </e-columns>
+                </ejs-grid>
+              </ng-template>
+            </e-accordionitem>
+          </e-accordionitems>
+        </ejs-accordion>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

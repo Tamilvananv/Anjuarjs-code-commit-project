@@ -1,0 +1,96 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="d-flex no-block align-items-center">
+        <h4 class="card-title"></h4>
+        <div class="ml-auto mb-2" style="padding-top: 28px;">
+          <button class="addbtn_style" ejs-button (click)="CreateTeplateModal(createTemplateModal)">
+            <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Create Template
+          </button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <ejs-grid [dataSource]="data" [gridLines]="lines" e-gridheader="" height="410px">
+          <e-columns>
+            <e-column headerText="Action" textAlign="center" width="30">
+            </e-column>
+            <e-column field="SrNo" headerText="Sr No" headerTextAlign='center' textAlign='left' width="60">
+            </e-column>
+            <e-column field="TemplateID" headerText="Template ID" headerTextAlign='center' textAlign='left' width="80">
+            </e-column>
+            <e-column field="TemplateName" headerText="Template Name" headerTextAlign='center' textAlign='left'
+              width="80"></e-column>
+            <e-column field="Description" headerText="Description" headerTextAlign='center' textAlign='left' width="80">
+            </e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #createTemplateModal let-modal>
+  <div class="modal_header">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="modal-title">Add Template</h5>
+        </div>
+        <div class="col-md-6" class="Close_Popup">
+          <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+      <div class="col-md-12 ">
+      <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="TemplateId" class="control-label col-form-label">Template ID:</label>
+              </div>
+              <div class="col-md-7">
+                <input type="text" class="form-control" id="TemplateId" placeholder="" name="NumberOfDays"
+              />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="Template Name" class="control-label col-form-label">Template Name:</label>
+              </div>
+              <div class="col-md-7">
+                  <input type="text" class="form-control" id="TemplateId" placeholder="" name="NumberOfDays"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+    <div class="col-md-12 ">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-2">
+              <label for="Description">Template Description:</label>
+            </div>
+            <div class="col-md-10">
+              <textarea name="message" rows="3" cols="85">
+  Type Here </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="addmodal_style" ejs-button>
+      Add
+    </button>
+
+    <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+      cancel
+    </button>
+  </div>
+</ng-template>

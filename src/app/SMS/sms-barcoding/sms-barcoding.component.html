@@ -1,0 +1,39 @@
+ <div class="row">
+  <div class="col-md-12"  style="padding-top: 30px;"> 
+    <div class="card">
+      <ngb-tabset #t="ngbTabset" class="tabset1">
+
+        <ngb-tab id="tab-New" title="New">
+          <ng-template ngbTabContent>          
+            <app-new-barcode></app-new-barcode>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-list" title="List">
+          <ng-template ngbTabContent>
+           <app-list></app-list>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-Issue" title="Issue">
+          <ng-template ngbTabContent>
+           <app-issue></app-issue>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-History" title="History">
+          <ng-template ngbTabContent>
+           <app-history></app-history>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-settings" title="Settings">
+          <ng-template ngbTabContent>
+           <app-settings></app-settings>
+          </ng-template>
+        </ngb-tab>
+
+      </ngb-tabset>
+    </div>
+  </div>
+</div> 

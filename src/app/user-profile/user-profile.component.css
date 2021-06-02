@@ -1,0 +1,159 @@
+/*.wrapper{
+  margin-top: 40px;
+}*/
+
+.boxModule {
+  float: left;
+  margin-bottom: 50px;
+  padding: 0 20px;
+}
+
+.cards {
+  line-height: 3;
+}
+
+.icon_1 {
+  width: 30%;
+  float: left;
+  font-size: 35px;
+  color: white;
+  text-align: center;
+  text-shadow: 5px 3px 6px rgb(110, 110, 110);
+  background-color: #087a7a;
+}
+
+.text2 {
+  text-align: center;
+  color: white;
+  float: right;
+  padding: 0 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 10px;
+  width: 70%;
+  height: 105px;
+  background-color: #09ada8;
+  word-break: break-word;
+}
+
+.second_row {
+  margin-top: 8%;
+}
+
+.first_row {
+  margin-top: 8%;
+}
+
+.cursorHand :hover {
+  cursor: pointer;
+}
+
+.modulelink {
+  margin: 2%;
+}
+
+.text2:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.text2 h5 {
+  line-height: 1.5;
+  display: inline-block;
+  vertical-align: middle;
+}
+.signimg {
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding: 15px;
+  width: 250px;
+  height: 100px;
+}
+
+input.field_custom {
+	border: solid #e1e1e1 1px;
+	width: 100%;
+	background: #f8f8f8;
+	min-height: 50px;
+	padding: 5px 20px;
+	line-height: normal;
+	border-radius: 0px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #737373;
+}
+
+textarea.field_custom {
+	border: solid #e1e1e1 1px;
+	width: 100%;
+	background: #f8f8f8;
+	min-height: 150px;
+	padding: 15px 20px;
+	line-height: normal;
+	border-radius: 0px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #737373;
+}
+
+.field {
+	padding: 0 5px;
+}
+
+.blog_section {
+	margin-bottom: 50px;
+	float: left;
+	width: 100%;
+}
+.padding_layout_1 {
+	padding-top: 45px;
+	padding-bottom: 45px;
+}
+.text_align_center {
+	text-align: center;
+}
+.main_heading {
+	position: relative;
+	margin-bottom: 65px;
+}
+
+.edit_popup{
+    padding: 0px 0px 0px 30%;
+
+}
+.cancel1_style{
+    margin: 5px 20px 10px 0px;
+    font-size: 14px;
+    background-color: #333d4d;
+    color: white;
+  width: 125px; 
+  float: left;
+  }
+  .btn_frmeqs{
+    margin-left:80px;
+
+     background-color: red; 
+}
+:host ::ng-deep .tabset1 a.nav-link {
+    color: #5f6971;
+  }
+  :host ::ng-deep .tabset1 a.nav-link:hover{
+   
+    color: #08a1a1;
+  }
+  :host ::ng-deep .tabset1 a.nav-link.active {
+    color: #5f6971 ;
+    font-weight: 700;
+    font-size: 14px;
+    background-color: #f1f5f8;
+    border-top:2px solid #08a1a1;
+    border: 0px 1px 0px 1px solid #cacaca;
+  }
+  :host ::ng-deep.tab-content > .active {
+    display: block;
+     background-color:#f1f5f8; 
+    border-top: none;
+    height: 500px;
+} 
+

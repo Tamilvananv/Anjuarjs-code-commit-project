@@ -1,0 +1,123 @@
+<div class="col-md-12 text-right">
+        <div class="custom-control " style="padding-bottom: 5px;">
+                <button type="submit" class="btn_frmsubmit" ejs-button>
+                        Save
+                    </button>
+            <button type="submit" class="btn_frmsubmit" ejs-button>
+                Back
+            </button>
+            <button type="button" class="btn_frmsubmit"  (click)="gotoDev()"  ejs-button>
+                Next 
+            </button>
+            <button type="button" class="btn_frmcancel" ejs-button >
+                Cancel
+            </button>
+        </div>
+    </div>
+<div class="col-md-12 ">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="ProposedCAPA">Proposed CAPA:</label>
+                </div>
+                <div class="col-md-6">
+                    <ejs-dropdownlist id='ProposedCAPAt' #sample [dataSource]='ProposedCAPAt' [value]='value'
+                        [fields]='fields' [placeholder]='' [popupHeight]='height'>
+                    </ejs-dropdownlist>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Comments">Comments:</label>
+                </div>
+                <div class="col-md-8">
+                    <textarea name="message" rows="3" cols="57">Type Here </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ejs-accordion>
+        <e-accordionitems>
+            <e-accordionitem expanded='true'>
+                <ng-template #header>
+                    <div > QA Review-Employee Name</div>
+                </ng-template>
+                <ng-template #content>
+                    <ejs-grid width='100%' [dataSource]='data1' [editSettings]='editSettings' [toolbar]='toolbar'
+                        height='200px' [gridLines]="lines">
+                        <e-columns>
+                            <!-- <e-column field='EmpList' headerText='Employee List' editType='dropdownedit' [edit]='deptlist'
+                                width=50 textAlign='Center'></e-column> -->
+                            <e-column field='ChooseAction' headerText='Choose Action' editType='dropdownedit'
+                                [edit]='action' width=50 textAlign='Center'>
+                            </e-column>
+                            <e-column field='Comments' headerText='Comments' width=120 textAlign='Center'>
+                            </e-column>
+                        </e-columns>
+                    </ejs-grid> 
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-actions pull-right">
+                                    <div class="d-flex no-block align-items-center">
+                                        <div class="ml-auto">
+                                          
+                                            <button type="button" class="btn_frmsubmit" ejs-button>
+                                                Sign and Submit 
+                                            </button>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </e-accordionitem>
+            <e-accordionitem expanded='true'>
+                    <ng-template #header>
+                        <div > Quality Head-Employee Name</div>
+                    </ng-template>
+                    <ng-template #content>
+                        <ejs-grid width='100%' [dataSource]='data1' [editSettings]='editSettings' [toolbar]='toolbar'
+                            height='200px' [gridLines]="lines">
+                            <e-columns>
+                                <!-- <e-column field='EmpList' headerText='Employee List' editType='dropdownedit' [edit]='deptlist'
+                                    width=50 textAlign='Center'></e-column> -->
+                                <e-column field='ChooseAction' headerText='Choose Action' editType='dropdownedit'
+                                    [edit]='action' width=50 textAlign='Center'>
+                                </e-column>
+                                <e-column field='Comments' headerText='Comments' width=120 textAlign='Center'>
+                                </e-column>
+                            </e-columns>
+                        </ejs-grid> 
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-actions pull-right">
+                                        <div class="d-flex no-block align-items-center">
+                                            <div class="ml-auto">
+                                               
+                                                <button type="button" class="btn_frmsubmit" ejs-button>
+                                                    Sign and Submit 
+                                                </button>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </e-accordionitem>
+          
+        </e-accordionitems>
+    </ejs-accordion>

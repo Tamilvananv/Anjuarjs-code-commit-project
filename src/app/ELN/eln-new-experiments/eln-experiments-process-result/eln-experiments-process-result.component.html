@@ -1,0 +1,15 @@
+<ngb-tabset #tabset="ngbTabset" [destroyOnHide]="false" (tabChange)="tabChanged($event)">
+    <ngb-tab id="{{item.ContentType}}" *ngFor="let item of list">
+        <ng-template ngbTabTitle>
+            <span title="{{item.ContentType}}">{{item.ContentType}}</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <div id="default_title_bar{{item.ContentType}}" class="e-de-ctn-title"></div>
+            <div *ngIf="item.IsRefreshView">
+                <app-document-editor [id]="'docEditor'+item.ContentType" #documentEditor [title]="item.ContentType"
+                    (onContentChange)="onContentChanged($event)" [content]="item.ContentBody"
+                    [configuration]="configSetting"></app-document-editor>
+            </div>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

@@ -1,0 +1,614 @@
+<div class="row" style="padding-top: 30px;">
+  <div class="col-md-12">
+    <div class="card">
+
+      <ngb-tabset #tabset class="tabset1">
+        <ngb-tab id="tab-selectbyid1" title="Manufacturer">
+          <ng-template ngbTabContent>
+            <div class="col-md-6" style="padding-bottom: 5px;">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox">
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="addmfgmaster(addmfgmasterModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ng-template #addmfgmasterModal let-modal>
+              <div class="modal_header">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title" *ngIf="!ManufacturerEdit">Add Manufacturer </h5>
+                      <h5 class="modal-title" *ngIf="ManufacturerEdit">Edit Manufacturer </h5>
+
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">
+
+                <form [formGroup]="ImsManufacturerForm">
+
+                  <div class="form-group row">
+                    <label for="Name" class="col-sm-4 control-label col-form-label">
+                      Name:
+                    </label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="ImsManufacturerName" name="ImsManufacturerName"
+                        formControlName="ImsManufacturerName" placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="Address" class="col-sm-4 control-label col-form-label">
+                      Address:
+                    </label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="ImsManufacturerAddress" name="ImsManufacturerAddress"
+                        formControlName="ImsManufacturerAddress" placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="ContactNo" class="col-sm-4 control-label col-form-label">
+                      Contact No:
+                    </label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="ImsManufacturerContact" name="ImsManufacturerContact"
+                        formControlName="ImsManufacturerContact" placeholder="">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" (click)="SaveManufacturer()" *ngIf="!ManufacturerEdit" ejs-button>
+                  Add
+                </button>
+                <button class="addmodal_style" (click)="updateManufacturer()" *ngIf="ManufacturerEdit" ejs-button>
+                  Update
+                </button>
+
+
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+
+            <ejs-grid #grid id="Grid" [dataSource]="objManufacturerList" [allowSelection]="true" allowFiltering="true"
+              [filterSettings]="filterOptions" [gridLines]="lines" [enableHover]="false" [allowSorting]="true"
+              e-gridheader="" height="350px" (commandClick)="actionManufacturer($event)">
+              <e-columns>
+                <e-column headerText='Action' textAlign='center' [commands]="commands" width='70'></e-column>
+                <e-column field='ImsManufacturerName' headerText='Name' textAlign='Center' width=100>
+                </e-column>
+                <e-column field='ImsManufacturerAddress' headerText='Address' textAlign='Center' width=100>
+                </e-column>
+                <e-column field='ImsManufacturerContact' headerText='Contact Number' textAlign='Center' width=100>
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+          </ng-template>
+        </ngb-tab>
+
+
+        <ngb-tab id="tab-selectbyid2" title="Vendor Master">
+          <ng-template ngbTabContent>
+            <div class="col-md-6" style="padding-bottom: 5px;">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox">
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="addvendormaster(addvendormasterModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ng-template #addvendormasterModal let-modal>
+              <div class="modal_header">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 class="modal-title" *ngIf="!VendorEdit">Add Manufacturer </h5>
+                      <h5 class="modal-title" *ngIf="VendorEdit">Edit Manufacturer </h5>
+
+                    </div>
+                    <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="ImsVendorForm">
+                  <div class="form-group row">
+                    <label for="ImsVendorName" class="col-sm-4 control-label col-form-label">
+                      Vendor Name:
+                    </label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="ImsVendorName" id="ImsVendorName"
+                        formControlName="ImsVendorName" placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="ImsVendorAddress" class="col-sm-4 control-label col-form-label">
+                      Address:
+                    </label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="ImsVendorAddress" formControlName="ImsVendorAddress"
+                        id="ImsVendorAddress" placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="ImsVendorContactNumber" class="col-sm-4 control-label col-form-label">
+                      Contact No:
+                    </label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="ImsVendorContactNumber" id="ImsVendorContactNumber"
+                        formControlName="ImsVendorContactNumber" placeholder="">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="addmodal_style" (click)="SaveVendor()" *ngIf="!VendorEdit" ejs-button>
+                  Add
+                </button>
+                <button class="addmodal_style" (click)="updateVendor()" *ngIf="VendorEdit" ejs-button>
+                  Update
+                </button>
+                <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+                  cancel
+                </button>
+              </div>
+            </ng-template>
+            <ejs-grid #grid id="Grid" [dataSource]="objVendorList" [allowSelection]="true" allowFiltering="true"
+              [filterSettings]="filterOptions" [gridLines]="lines" [enableHover]="false" [allowSorting]="true"
+              e-gridheader="" height="350px" (commandClick)="actionVendor($event)">
+
+
+              <e-columns>
+
+                <e-column headerText='Action' textAlign='center' [commands]="commands" width='70'></e-column>
+                <e-column field='ImsVendorName' headerText='Vendor Name' textAlign='Center' width=180>
+                </e-column>
+
+                <e-column field='ImsVendorAddress' headerText='Vendor Address' textAlign='Center' width=100>
+                </e-column>
+
+                <e-column field='ImsVendorContactNumber' headerText='Contact Number' textAlign='Center' width=100>
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-selectbyid3" title="Inventory Category Master">
+          <ng-template ngbTabContent>
+            <button class="addbtn_style" ejs-button (click)="addcategory(addcategoryModal)"> <i
+                class="fas fa-plus-circle"></i>&nbsp;&nbsp;Add Category</button>
+            <button class="addbtn_style" ejs-button (click)="addsubcategory(addsubcategoryModal)"> <i
+                class="fas fa-plus-circle"></i>&nbsp;&nbsp;Add Subcategory</button>
+            <button class="addbtn_style" ejs-button (click)="addmaterial(addmaterialModal)"> <i
+                class="fas fa-plus-circle"></i>&nbsp;&nbsp;Add Material</button>
+
+                <div class="table-responsive" style="padding-top: 10px;">
+                  <ejs-grid  [dataSource]="ObjInvMatList" [allowSelection]="true" allowFiltering="true"
+                    [filterSettings]="filterOptions" [gridLines]="lines" [enableHover]="false" [allowSorting]="true"
+                    e-gridheader="" height="363px" [pageSettings]='pageSettings'  allowPaging='true'
+                    [showColumnMenu]="true" [allowGrouping]="true"  [groupSettings]="groupOptions" 
+                  >
+                    <e-columns>
+                    <e-column
+                    headerText="Inventory Category"
+                    field="ImsInventoryCategoryName"
+                    headerTextAlign='center' textAlign='left'
+                    width="200"
+                  ></e-column>
+                  <e-column
+                  headerText="Inventory Sub Cateogory"
+                  field="ImsInventorySubcategoryName"
+                  headerTextAlign='center' textAlign='left'
+                  width="200"
+                ></e-column>
+                <e-column
+                headerText="Material Name"
+                field="ImsInventoryMaterialName"
+                headerTextAlign='center' textAlign='left'
+                width="200"
+              ></e-column>
+              <e-column
+              headerText="Description"
+              field="ImsInventoryMaterialDescription"
+              headerTextAlign='center' textAlign='left'
+              width="200"
+            ></e-column>
+            </e-columns>
+                  </ejs-grid>
+      
+      </div>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-selectbyid4" title="Storage Location">
+          <ng-template ngbTabContent>
+            <div class="col-md-6" style="padding-bottom: 5px;">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="">
+                    <div class="">
+                      <div class="mr-2">
+                        <div class="custom-control custom-checkbox">
+                          <button type="submit" class="addbtn_style" ejs-button
+                            (click)="addlocation(addstoragelocationModal)">
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <ejs-grid #grid id="Grid" [dataSource]="objStorageLocList" [allowSelection]="true" allowFiltering="true"
+              [filterSettings]="filterOptions" [gridLines]="lines" [enableHover]="false" [allowSorting]="true"
+              e-gridheader="" height="350px" (commandClick)="actionStorageLocation($event)">
+              <e-columns>
+                <e-column headerText='Action' textAlign='center' [commands]="commands" width='70'></e-column>
+                <e-column field='ImsStorageLocationName' headerText='Location' textAlign='Center' width=180> </e-column>
+                <e-column field='ImsStorageTemperatureMinValue' headerText='Min Temp' textAlign='Center' width=180>
+                </e-column>
+                <e-column field='ImsStorageTemperatureMaxValue' headerText='Max temp' textAlign='Center' width=180>
+                </e-column>
+                <e-column field='ImsStorageLocationDescription' headerText='Description' textAlign='Center' width=150>
+                </e-column>
+
+              </e-columns>
+            </ejs-grid>
+
+          </ng-template>
+        </ngb-tab>
+
+
+      </ngb-tabset>
+
+    </div>
+  </div>
+</div>
+
+<ng-template #addstoragelocationModal let-modal>
+  <div class="modal_header">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="modal-title" *ngIf="!StorageLocationEdit">Add Storage Location</h5>
+          <h5 class="modal-title" *ngIf="StorageLocationEdit">Edit Storage Location</h5>
+
+        </div>
+        <div class="col-md-6" class="Close_Popup">
+          <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="ImsStorageLocationForm">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="ImsStorageLocationName" class="control-label col-form-label">Storage Location:</label>
+              </div>
+              <div class="col-md-7">
+                <input type="text" class="form-control" id="ImsStorageLocationName" placeholder=""
+                  name="ImsStorageLocationName" formControlName="ImsStorageLocationName" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="ImsStorageLocationDescription" class="control-label col-form-label">Description:</label>
+              </div>
+              <div class="col-md-7">
+                <input type="text" class="form-control" id="ImsStorageLocationDescription" placeholder=""
+                  name="ImsStorageLocationDescription" formControlName="ImsStorageLocationDescription" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <br>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="ImsStorageTemperatureMinValue" class="control-label col-form-label">Min Value:</label>
+              </div>
+              <div class="col-md-7">
+                <input type="text" class="form-control" id="ImsStorageTemperatureMinValue" placeholder=""
+                  name="ImsStorageTemperatureMinValue" formControlName="ImsStorageTemperatureMinValue" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="StorageTemperatureMaxValue" class="control-label col-form-label">Max range :</label>
+              </div>
+              <div class="col-md-7">
+                <input type="text" class="form-control" id="ImsStorageTemperatureMaxValue" placeholder=""
+                  name="ImsStorageTemperatureMaxValue" formControlName="ImsStorageTemperatureMaxValue" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="ImsStorageTemperatureUnit" class="control-label col-form-label">Unit:</label>
+                <span class="text-danger">*</span>
+              </div>
+              <div class="col-md-7" print-error [control]="ImsStorageLocationForm.get('ImsStorageTemperatureUnit')">
+                <input type="text" class="form-control" id="ImsStorageTemperatureUnit" placeholder=""
+                  name="ImsStorageTemperatureUnit" formControlName="ImsStorageTemperatureUnit" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="addmodal_style" (click)="addStorageLocation()" *ngIf="!StorageLocationEdit" ejs-button>
+      Add
+    </button>
+    <button class="addmodal_style" (click)="updateStorageLocation()" *ngIf="StorageLocationEdit" ejs-button>
+      Update
+    </button>
+    <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>cancel
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #addcategoryModal let-modal>
+  <div class="modal_header">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="modal-title">Add Category</h5>
+
+        </div>
+        <div class="col-md-6" class="Close_Popup">
+          <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="ImsInventoryCategoryForm">
+      <div class="col-md-12">
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="ImsInventoryCategoryName" class="control-label col-form-label">
+                  Add Inventory Category:
+                </label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control frm_tabtxtbox" name="ImsInventoryCategoryName"
+                  formControlName="ImsInventoryCategoryName" id="ImsInventoryCategoryName" placeholder="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="addmodal_style" (click)="addInventoryCategory()" ejs-button>
+      Add
+    </button>
+    <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+      cancel
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #addsubcategoryModal let-modal>
+  <div class="modal_header">
+
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="modal-title">Add SubCategory</h5>
+
+        </div>
+        <div class="col-md-6" class="Close_Popup">
+          <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="InventorySubCategoryTabForm">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="ImsInventorycategoryId" class="control-label col-form-label">
+                  Select Inventory Category:
+                </label>
+              </div>
+              <div class="col-md-6">
+                <ejs-combobox [dataSource]='objInventoryCategoryType' [fields]='fields' name="ImsInventoryCategoryId"
+                  [popupHeight]='height' formControlName="ImsInventoryCategoryId" id="ImsInventoryCategoryId"
+                  [placeholder]='watermark' (change)="loadSubCategory($event)"></ejs-combobox>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="ImsInventorySubcategoryName" class="control-label col-form-label">
+                  Add Subcategory:
+                </label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control frm_tabtxtbox" id="ImsInventorySubcategoryName"
+                  formControlName="ImsInventorySubcategoryName" name="ImsInventorySubcategoryName" placeholder="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="addmodal_style mr-2 float-right" (click)="addInventorySubCategory()" ejs-button>
+      Add</button>
+    <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>
+      cancel
+    </button>
+  </div>
+</ng-template>
+
+
+<ng-template #addmaterialModal let-modal>
+  <div class="modal_header">
+
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="modal-title">Add Material Details</h5>
+
+        </div>
+        <div class="col-md-6" class="Close_Popup">
+          <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="ImsCategoryMaterialForm">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="ImsInventorycategoryId" class="control-label col-form-label">Select Inventory
+                  Category:</label>
+              </div>
+              <div class="col-md-6">
+                <ejs-combobox [dataSource]='objInventoryCategoryType' [fields]='fields' name="ImsInventoryCategoryId"
+                  id="ImsInventoryCategoryId" formControlName="ImsInventoryCategoryId" [popupHeight]='height'
+                  [placeholder]='watermark' (change)="loadSubCategory($event)"></ejs-combobox>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="selectsubcategory" class="control-label col-form-label">Select Subcategory:</label>
+              </div>
+              <div class="col-md-6">
+
+                <ejs-combobox [dataSource]='objInventorySubCategoryType' [fields]='fields'
+                  (filtering)='onFiltering($event)' name="ImsInventorySubcategoryId" id="ImsInventorySubcategoryId"
+                  formControlName="ImsInventorySubcategoryId" [popupHeight]='height' [allowFiltering]='true'
+                  [placeholder]='watermark' (change)="loadMaterial($event)"></ejs-combobox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="ImsInventoryMaterialName" class="control-label col-form-label">Add Material Name:</label>
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control frm_tabtxtbox" name="ImsInventoryMaterialName"
+              id="ImsInventoryMaterialName" formControlName="ImsInventoryMaterialName" placeholder="">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="margin-top: 10px;">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="col-md-12">
+                <label for="Description" class="control-label col-form-label">Description:</label>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="col-md-12">
+                <input type="text" class="form-control frm_tabtxtbox" name="ImsInventoryMaterialDescription"
+                  id="ImsInventoryMaterialDescription" formControlName="ImsInventoryMaterialDescription" placeholder="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+
+    <button class="addmodal_style mr-2 float-right" (click)="addImsCategoryMaterial()" ejs-button>
+      Add</button>
+    <button class="cancel_style" (click)="modal.close('Close click')" ejs-button>cancel</button>
+
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+

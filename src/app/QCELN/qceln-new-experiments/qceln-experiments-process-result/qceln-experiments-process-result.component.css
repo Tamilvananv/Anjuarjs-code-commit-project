@@ -1,0 +1,11 @@
+.e-dropdown-btn,
+.e-dropdown-btn.e-btn {
+    box-shadow: none;
+    text-transform: none;
+    white-space: normal;
+    background-color: transparent;
+}
+
+.e-toolbar-wrapper {
+    height: 42px !important;
+}

@@ -1,0 +1,293 @@
+<div class="">
+    <ngb-tabset #t="ngbTabset" class="tabset2">
+        <ngb-tab id="tab-selectbyid1" title=" Requisition Details">
+            <ng-template ngbTabContent>
+                    <div class="col-md-12 text-right">
+                            <div class="custom-control " style="padding-bottom: 5px;">
+                                    <button type="button" class="btn_frmsubmit"  ejs-button>
+                                            Save 
+                                        </button>
+                                <button type="button" class="btn_frmsubmit"  ejs-button>
+                                    Next 
+                                </button>
+                                <button type="button" class="btn_frmcancel" ejs-button >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CAPANumber">CAPA Number:</label>
+                                </div>
+                                <div class="col-md-7">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="InitiatedDate">Initiated On:</label>
+                                </div>
+                                <div class="col-md-7">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form [formGroup]="EqmsAuditDetailsForm">
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ReasonData">CAPA Related To:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <!-- <ejs-dropdownlist id='reason' #sample [dataSource]='ReasonData' [value]='value'
+                                        [fields]='fields1' [placeholder]='waterMark' [popupHeight]='height'>
+                                    </ejs-dropdownlist> -->
+
+                                    <ejs-dropdownlist id='reason'  [dataSource]='ReasonData' [value]='value' [fields]='fields1'
+                                    (change)="onChange1($event)"    formControlName="AuditEnt"  [placeholder]='waterMark' [popupHeight]='height'>
+                                    </ejs-dropdownlist>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="DeptName">Department List:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <ejs-dropdownlist id='dept' #sample [dataSource]='DeptName' [value]='value'
+                                        [fields]='fields' [placeholder]='waterMark' [popupHeight]='height'>
+                                    </ejs-dropdownlist>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="visible">
+                        <div class="form-group">
+                                <div class="col-md-12 frm_tabpanel">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <label for="Others">Details, if others:</label>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <textarea name="Others" rows="5" cols="125">Type Here </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                        </div>
+                        </div>
+                        
+                       </form>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DateOfaudit">Date of Audit/Deviation:</label>
+                                </div>
+                                <div class="col-md-7">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="AuditNumber">Audit/Deviation Number:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <ejs-dropdownlist id='' #sample [dataSource]='' [value]='value'
+                                        [fields]='fields' [placeholder]='waterMark' [popupHeight]='height'>
+                                    </ejs-dropdownlist>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        
+                       
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="Attachments">Attachments If Any:</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <ejs-uploader #defaultupload [autoUpload]="false" [dropArea]="dropEle"
+                                        [asyncSettings]="path" (success)="onUploadSuccess($event)"
+                                        (failure)="onUploadFailure($event)"></ejs-uploader>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="Description">Brief Description/Audit Observation:</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <textarea name="message" rows="5" cols="125">Type Here </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="InitiatedBy">Initiated By:</label>
+                                </div>
+                                <div class="col-md-7">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-actions pull-right">
+                                <div class="d-flex no-block align-items-center">
+                                    <div class="ml-auto">
+                                      
+
+                                        <button type="button" class="btn_frmsubmit" ejs-button>
+                                            Sign and Submit 
+                                        </button>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ejs-accordion>
+                    <e-accordionitems>
+                        <e-accordionitem expanded='true'>
+                            <ng-template #header>
+                                <div>First Level Approval-Employee Name</div>
+                            </ng-template>
+                            <ng-template #content>
+                                <ejs-grid width='100%' [dataSource]='data' [editSettings]='editSettings'
+                                    [toolbar]='toolbar' height='200px' [gridLines]="lines">
+                                    <e-columns>
+                                          
+                                        <e-column field='ChooseAction' headerText='Choose Action'
+                                            editType='dropdownedit' [edit]='ddParams' width=50 textAlign='Center'>
+                                        </e-column>
+                                        <e-column field='Comment' headerText='Comment' width=120 textAlign='Center'>
+                                        </e-column>
+                                    </e-columns>
+                                </ejs-grid>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-actions pull-right">
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div class="ml-auto">
+                                                       
+                                                       
+                                                        <button type="button" class="btn_frmsubmit" ejs-button>
+                                                            Sign and Submit 
+                                                        </button>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </e-accordionitem>
+                        <e-accordionitem expanded='true'>
+                            <ng-template #header>
+                                <div>Second Level Approval-Employee Name</div>
+                            </ng-template>
+                            <ng-template #content>
+                                <ejs-grid width='100%' [dataSource]='data' [editSettings]='editSettings'
+                                    [toolbar]='toolbar' height='200px' [gridLines]="lines">
+                                    <e-columns>
+                                          
+                                        <e-column field='ChooseAction' headerText='Choose Action'
+                                            editType='dropdownedit' [edit]='ddParams' width=50 textAlign='Center'>
+                                        </e-column>
+                                        <e-column field='Comment' headerText='Comment' width=120 textAlign='Center'>
+                                        </e-column>
+                                    </e-columns>
+                                </ejs-grid>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-actions pull-right">
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div class="ml-auto">
+                                                       
+                                                        <button type="button" class="btn_frmsubmit" ejs-button>
+                                                            Sign and Submit 
+                                                        </button>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </e-accordionitem>
+                    </e-accordionitems>
+                </ejs-accordion>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid2" title=" CAPA Details">
+            <ng-template ngbTabContent>
+                <app-capa-details></app-capa-details>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid3" title=" Quality Assurance">
+            <ng-template ngbTabContent>
+                <app-capa-quality-assurance></app-capa-quality-assurance>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab id="tab-selectbyid4" title="Function Closure">
+            <ng-template ngbTabContent>
+                <app-deviation-capa></app-deviation-capa>
+                  <!-- <app-capa-closure></app-capa-closure>   -->
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid5" title="QA Closure">
+                <ng-template ngbTabContent>
+                  
+                       <app-capa-closure></app-capa-closure>   
+                </ng-template>
+            </ngb-tab>
+
+
+    </ngb-tabset>
+</div>

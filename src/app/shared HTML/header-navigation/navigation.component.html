@@ -1,0 +1,90 @@
+<!-- ============================================================== -->
+<!-- toggle and nav items -->
+<!-- ============================================================== -->
+<ul class="navbar-nav float-left mr-auto">
+    <li class="nav-item d-none d-md-block">
+        <a (click)="toggleSidebar.emit()" *ngIf="!isLanding" class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" style="padding-left:25px;">
+              <!-- <i class="mdi mdi-menu font-24" style="color: #0881a9;" ></i>   -->
+              <i class="mdi mdi-menu font-24" style="color: white;" ></i>  
+        </a>
+    </li>
+    <!-- ============================================================== -->
+</ul>
+<ul class="navbar-nav float-left">
+    <ng-template ngFor let-url [ngForOf]="pageInfo?.urls" let-last="last">
+        <li *ngIf="last" [routerLink]="url.url">
+             <!-- <h5 class="header_url" style="color: #0881a9;">{{url.title}}</h5>   -->
+              <h5 class="header_url" style="color: white;">{{url.title}}</h5>  
+        </li>
+    </ng-template>
+
+</ul>
+
+<!-- ============================================================== -->
+<!-- Right side toggle and nav items -->
+<!-- ============================================================== -->
+<ul class="navbar-nav float-right">
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Comment -->
+    <!-- ============================================================== -->
+    <li class="nav-item" ngbDropdown placement="bottom-right">
+            <a ngbDropdownToggle class="nav-link text-muted waves-effect waves-dark pro-pic" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <!-- <i class="far fa-question-circle" style="color: #0881a9;" width="50" (click)="help()"></i>   -->
+                      <i class="far fa-question-circle" style="color: white;" width="50" (click)="help()"></i>  
+            </a>
+           
+        </li>
+    <li class="nav-item dropdown" >
+        <app-push-notification ></app-push-notification>        
+    </li>
+    <!-- ============================================================== -->
+    <!-- End Comment -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- User profile and search -->
+    <!-- ============================================================== -->
+    <li class="nav-item" ngbDropdown placement="bottom-right">
+        <a ngbDropdownToggle class="nav-link text-muted waves-effect waves-dark pro-pic" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <!-- <img src="assets/images/users/1.png" alt="user" class="rounded-circle" style="background-color: #0881a9;" width="24">  -->
+             <img src="assets/images/users/1.png" alt="user" class="rounded-circle"  width="24"> 
+        </a>
+        <div class="dropdown-menu-right user-dd" ngbDropdownMenu>
+            <span class="with-arrow">
+                        <span class="bg-primary"></span>
+            </span>
+            <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
+                <div class="">
+                    <img src="assets/images/users/1.png" alt="user" class="img-circle" width="40">
+                </div>
+                <div class="m-l-10">
+                    <h4 class="m-b-0 profile_menu">{{UserInfo.UserFullName}}</h4>
+                    <small >{{UserInfo.UserEmail}}</small>
+                    <!-- <p class=" m-b-0">varun@gmail.com</p> -->
+                </div>
+              
+            </div>
+             <a class="dropdown-item profile-menu profile_menu" href="javascript:void(0)"  [routerLink]="['/UserProfile']">
+                <i class="ti-user m-r-5 m-l-5"></i> My Profile</a> 
+            <!-- <a class="dropdown-item profile-menu profile_menu" href="javascript:void(0)" >
+                <i class="ti-user m-r-5 m-l-5"></i> My Profile</a> -->
+            <!-- <a class="dropdown-item" href="javascript:void(0)">
+                    <i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                    <i class="ti-email m-r-5 m-l-5"></i> Inbox</a> -->
+            <div class="dropdown-divider"></div>
+            <!-- <a class="dropdown-item profile-menu profile_menu" href="javascript:void(0)">
+                <i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a> -->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item profile-menu profile_menu" [routerLink]="" (click)="logOut()">
+                <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+            <div class="dropdown-divider"></div>
+            <!-- <div class="p-l-30 p-10">
+                        <a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a>
+                    </div> -->
+        </div>
+    </li>
+    <!-- ============================================================== -->
+    <!-- User profile and search -->
+    <!-- ============================================================== -->
+</ul>

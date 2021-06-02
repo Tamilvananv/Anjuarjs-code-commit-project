@@ -1,0 +1,343 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="d-flex no-block align-items-center" *ngIf="PageAccessRight.HasWriteAccess">
+        <h4 class="card-title"></h4>
+        <div class="ml-auto mb-2" style="padding-top: 28px;">
+          <button
+            class="addbtn_style"
+            ejs-button
+            (click)="openAddModal(qualificationModal)"
+          >
+            <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Add Qualification
+          </button>
+        </div>
+      </div>
+<div *ngIf="!PageAccessRight.HasWriteAccess"><br /> <br /></div>
+
+      <div class="table-responsive">
+        <ejs-grid
+          #grid
+          id="Grid"
+          [dataSource]="ObjQualificationList"
+          [allowSelection]="true"
+          allowFiltering="true"
+          [filterSettings]="filterOptions"
+          [toolbar]="toolbarOptions"
+          [allowExcelExport]="true"
+          (toolbarClick)="toolbarClick($event)"
+          [gridLines]="lines"
+          [enableHover]="false"
+          [allowSorting]="true"
+          e-gridheader=""
+          height="363px"
+          allowPaging='true'
+          [pageSettings]='pageSettings'
+          [toolbar]='toolbar'   [showColumnMenu]="true" [allowGrouping]="true"
+         (commandClick)="actionQualification($event)"
+           (excelExportComplete)='excelExportComplete()'
+           (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)' [allowPdfExport]="true"
+           (created)="created($event)" >
+          <e-columns>
+            <e-column
+              headerText="Action"
+              textAlign="center"
+              width="120"
+              [commands]="commands"
+            >
+            </e-column>
+            <e-column
+              field="InstrumentId"
+              headerText="Instrument Id"
+              headerTextAlign='center' textAlign='left'
+              width="150"
+            ></e-column>
+            <e-column
+              field="InstrumentTypeName"
+              headerText="Instrument Name"
+              headerTextAlign='center' textAlign='left'
+              format="C2"
+              width="150"
+            ></e-column>
+            <e-column
+              field="ICSQualificationDate"
+              headerText="Date of Qualification"
+              headerTextAlign='center' textAlign='left'
+              width="160"
+              [format]='Dateformat' [filter]='filter'
+            >
+            </e-column>
+            <e-column
+              field="QualificationTypeName"
+              headerText="Type of Qualification"
+              headerTextAlign='center' textAlign='left'
+              width="160"
+            >
+            </e-column>
+            <e-column headerText="Attachment" textAlign="center" width="150">
+              <ng-template #template let-data>
+                  <div><a (click)="openAddModal(content4);setRowId(data);"><i [ngClass]="(data.HasAttachments===true)?'far fa-folder-open':'far fa-folder'"></i></a></div>
+              </ng-template>
+            </e-column>
+            <e-column
+              field="ICSQualificationPerformedByName"
+              headerText="Performed By"
+              headerTextAlign='center' textAlign='left'
+              width="140"
+            >
+            </e-column>
+            <e-column
+              field="ICSQualificationDescription"
+              headerText="Description"
+              headerTextAlign='center' textAlign='left'
+              format="yMd"
+              width="140"
+            ></e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #qualificationModal let-modal>
+  <div class="modal_header">
+      <div class="col-md-12">
+          <div class="row">
+              <div class="col-md-6">
+                <h5 class="modal-title" *ngIf="!IsQualificationEdit">Add Qualification</h5>
+                <h5 class="modal-title" *ngIf="IsQualificationEdit">Edit Qualification</h5>
+              </div>
+              <div class="col-md-6" class="Close_Popup">
+                      <i class="fas fa-times" (click)="modal.dismiss('Cross click')" ></i>
+              </div>
+
+          </div>
+      </div>
+    <!-- <h5 class="modal-title" *ngIf="!IsQualificationEdit">Add Qualification</h5>
+    <h5 class="modal-title" *ngIf="IsQualificationEdit">Edit Qualification</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="QualificationForm">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="InstId" class="control-label col-form-label"
+                  >Instrument ID:</label
+                ><span class="text-danger">*</span>
+              </div>
+              <div class="col-md-6" print-error [control]="QualificationForm.get('IcsInstrumentId')">
+                <ejs-dropdownlist
+                  id="InstId"
+                  [dataSource]="ObjInstrumentList"
+                  [fields]="fields"
+                  [popupHeight]="height"
+                  [allowFiltering]="true"
+                  [placeholder]="watermark"
+                  (change)="GetInstrumentTypeById($event)"
+                  name="IcsInstrumentId"
+                  [disableControl]="IsQualificationEdit"
+                  formControlName="IcsInstrumentId"
+                >  </ejs-dropdownlist>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="PerformedBy" class="control-label col-form-label"
+                  >Performed By:</label
+                ><span class="text-danger">*</span>
+              </div>
+              <div class="col-md-6" print-error [control]="QualificationForm.get('QualificationPerformedByName')">
+                <input
+                  type="text"
+                  class="form-control frm_tabtxtbox"
+                  id="PerformedBy"
+                  placeholder=""
+                  name="ICSQualificationPerformedByName"
+                  formControlName="QualificationPerformedByName"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="InstType" class="control-label col-form-label">Instrument Name:</label>
+              </div>
+              <div  class="col-md-6 UnderLine_Type">
+                <!-- <label class="col-form-label">{{objInstrumentType['Name']}}</label> -->
+                 <label class="col-form-label">{{ObjInstrumentTypeName}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="Qtype" class="control-label col-form-label"
+                  >Qualification Type:</label
+                ><span class="text-danger">*</span>
+              </div>
+              <div class="col-md-6" print-error [control]="QualificationForm.get('QualificationTypeId')">
+                <ejs-dropdownlist
+                  id="QualificationType"
+                  [dataSource]="objIcsQualificationTypeList"
+                  [fields]="fields"
+                  (filtering)="onFiltering($event)"
+                  [popupHeight]="height"
+                  [allowFiltering]="true"
+                  [placeholder]="watermark"
+                  name="QualificationType"
+                  formControlName="QualificationTypeId"
+                ></ejs-dropdownlist>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr style="background-color: #a9a9a9" />
+      <div class="col-md-12" style="margin-top: 10px">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <label
+                  for="DateOfQualification"
+                  class="control-label col-form-label"
+                  >Date of Qualification:</label
+                ><span class="text-danger">*</span>
+              </div>
+              <div class="col-md-6" print-error [control]="QualificationForm.get('QualificationDate')">
+                <ejs-datepicker
+                  [value]="dateValue"
+                  placeholder="Enter date"
+                  name="ICSQualificationDate"
+                  formControlName="QualificationDate"
+                ></ejs-datepicker>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-3">
+                <label  style="padding-top: 20px;" for="Attachment" class="control-label col-form-label"
+                  >Attachment:</label
+                >
+              </div>
+              <!-- <div class="col-md-9">
+                <ejs-uploader #defaultupload [autoUpload]='false' formControlName="ICSQualificationLink" (selected)="onFileSelect($event)" [dropArea]='dropEle'></ejs-uploader>
+                <small class="form-text text-cyan">* multiple attachment</small>
+              </div> -->
+              <div class="col-md-9">
+                <ejs-uploader
+                  #defaultupload
+                  [autoUpload]="false"
+                  [dropArea]="dropEle"
+                  formArrayName='AttachmentList'
+                  (selected)="onFileSelect($event)"
+                ></ejs-uploader>
+                <small class="form-text text-cyan">* multiple attachment</small>
+                <div *ngFor="let item of AttachmentList">
+                  <label class="link" (click)="DownLoadFile(item.AttachmentPath)">{{item.ImageName}}</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="margin-top: 10px">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="col-md-12">
+                <label for="Description" class="control-label col-form-label"
+                  >Description:</label
+                >
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="col-md-12">
+                <textarea
+                  class="form-control frm_tabtxtarea cye-lf-tag"
+                  rows="5"
+                  name="ICSQualificationDescription"
+                  formControlName="QualificationDescription"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      class="addmodal_style"
+      (click)="SaveQualification()"
+      *ngIf="!IsQualificationEdit"
+      ejs-button
+    >
+      Add
+    </button>
+    <button
+      class="addmodal_style"
+      (click)="UpdateQualification()"
+      *ngIf="IsQualificationEdit"
+      ejs-button
+    >
+      Update
+    </button>
+    <button
+      class="cancel_style"
+      (click)="modal.close('Close click')"
+      ejs-button
+    >
+      cancel
+    </button>
+  </div>
+</ng-template>
+<ng-template #content4 let-modal>
+  <div class="modal_header">
+    <!-- <h5 class="modal-title">Attachments</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+    <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+              <h5 class="modal-title">Attachments</h5>
+          </div>
+          <div class="col-md-6" class="Close_Popup">
+            <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+          </div>
+
+        </div>
+      </div>
+  </div>
+  <div class="modal-body">
+    <ejs-filemanager id='overview' #fileManagerCtrl [ajaxSettings]='ajaxSettings' [searchSettings]='searchSettings' (beforeDownload)="beforeSend($event)"
+        (beforeImageLoad)="beforeSend($event)" [rootAliasName]="'Attachments'" (beforeSend)="beforeSend($event)" [contextMenuSettings]='contextMenuSettings' [toolbarSettings]='toolbarSettings' view='Details'>
+    </ejs-filemanager>
+  </div>
+</ng-template>

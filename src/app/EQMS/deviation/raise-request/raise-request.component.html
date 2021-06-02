@@ -1,0 +1,339 @@
+
+<div class="" style="padding-top: 28px;">
+            <ngb-tabset #tabset class="tabset2" >
+        <ngb-tab id="tab-selectbyid1" title=" Requisition Details">
+            <ng-template ngbTabContent>
+                    <div class="col-md-12 text-right">
+                            <div class="custom-control " style="padding-bottom: 5px;">
+                                    <button type="submit" class="btn_frmsubmit" ejs-button>
+                                            Save
+                                        </button>
+                                <button type="button" class="btn_frmsubmit"  ejs-button>
+                                    Next 
+                                </button>
+                                <button type="button" class="btn_frmcancel" ejs-button >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DeviationNumber">Deviation Number:</label>
+                                </div>
+                                <div class="col-md-7">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="InitiatedDate">Initiated On:</label>
+                                </div>
+                                <div class="col-md-7">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="Reason">Deviation Related To:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <ejs-dropdownlist id='reason' #sample [dataSource]='ReasonData' [value]='value'
+                                        [fields]='fields1' [placeholder]='waterMark' [popupHeight]='height'>
+                                    </ejs-dropdownlist>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="DeptName">Department List:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <ejs-dropdownlist id='dept' #sample [dataSource]='DeptName' [value]='value'
+                                        [fields]='fields' [placeholder]='waterMark' [popupHeight]='height'>
+                                    </ejs-dropdownlist>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DateOfdeviation">Date of Deviation:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input ype="text" name="DateOfdeviation" class="form-control" placeholder="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="TimeOfdeviation">Time of Deviation:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="text" name="TimeOfdeviation" class="form-control"
+                                        placeholder="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DateOfdeviationObserved">Date of Deviation Observed:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <ejs-datepicker [value]='dateValue' placeholder='Enter date'>
+                                    </ejs-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="TimeOfdeviationObserved">Time of Deviation Observed:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="text" name="TimeOfdeviationObserved" class="form-control"
+                                        placeholder="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="Reason">Deviation Observed By:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <ejs-dropdownlist id='EmpList' #sample [dataSource]='EmpList' [value]='value'
+                                        [fields]='fields2' [placeholder]='waterMark' [popupHeight]='height'>
+                                    </ejs-dropdownlist>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="Classification">Deviation Clasification:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <ejs-dropdownlist id='Classification' #sample [dataSource]='Classification'
+                                        [value]='value' [fields]='fields3' [placeholder]='waterMark'
+                                        [popupHeight]='height'>
+                                    </ejs-dropdownlist>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="Risk">Risk and Impact of Deviation:</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <textarea name="message" rows="5" cols="125">Type Here </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="Action">Immediate Action Taken:</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <textarea name="message" rows="5" cols="125">Type Here  </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 frm_tabpanel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="Description">Brief Description of Deviation:</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <textarea name="message" rows="5" cols="125">Type Here </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="InitiatedBy">Initiated By:</label>
+                                </div>
+                                <div class="col-md-7">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-actions pull-right">
+                                <div class="d-flex no-block align-items-center">
+                                    <div class="ml-auto">
+                                      
+
+                                        <button type="button" class="btn_frmsubmit" ejs-button>
+                                            Sign and Submit 
+                                        </button>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ejs-accordion>
+                    <e-accordionitems>
+                        <e-accordionitem expanded='true'>
+                            <ng-template #header>
+                                <div>First Level Approval - Initiation</div>
+                            </ng-template>
+                            <ng-template #content>
+                                <ejs-grid width='100%' [dataSource]='data' [editSettings]='editSettings'
+                                    [toolbar]='toolbar' height='200px' [gridLines]="lines">
+                                    <e-columns>
+                                           
+                                        <e-column field='ChooseAction' headerText='Choose Action'
+                                            editType='dropdownedit' [edit]='ddParams' width=50 textAlign='Center'>
+                                        </e-column>
+                                        <e-column field='Comment' headerText='Comment' width=120 textAlign='Center'>
+                                        </e-column>
+                                    </e-columns>
+                                </ejs-grid>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-actions pull-right">
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div class="ml-auto">
+                                                      
+                                                        <button type="button" class="btn_frmsubmit" ejs-button>
+                                                            Sign and Submit 
+                                                        </button>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </e-accordionitem>
+                        <e-accordionitem expanded='true'>
+                            <ng-template #header>
+                                <div>Second Level Approval - Initiation</div>
+                            </ng-template>
+                            <ng-template #content>
+                                <ejs-grid width='100%' [dataSource]='data' [editSettings]='editSettings'
+                                    [toolbar]='toolbar' height='200px' [gridLines]="lines">
+                                    <e-columns>
+                                           
+                                        <e-column field='ChooseAction' headerText='Choose Action'
+                                            editType='dropdownedit' [edit]='ddParams' width=50 textAlign='Center'>
+                                        </e-column>
+                                        <e-column field='Comment' headerText='Comment' width=120 textAlign='Center'>
+                                        </e-column>
+                                    </e-columns>
+                                </ejs-grid>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-actions pull-right">
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div class="ml-auto">
+                                                      
+                                                        <button type="button" class="btn_frmsubmit" ejs-button>
+                                                            Sign and Submit 
+                                                        </button>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </e-accordionitem>
+                    </e-accordionitems>
+                </ejs-accordion>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid2" title=" Priliminary Assessment">
+            <ng-template ngbTabContent>
+                <app-deviation-priliminary></app-deviation-priliminary>
+
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid3" title=" Detailed Assessment">
+            <ng-template ngbTabContent>
+                <app-deviation-details></app-deviation-details>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid4" title=" QA Assessment">
+                <ng-template ngbTabContent>
+                    <app-qa-assessment></app-qa-assessment>
+                </ng-template>
+            </ngb-tab>
+
+        <ngb-tab id="tab5" title="Investigation Closure by QA">
+            <ng-template ngbTabContent>
+                <app-deviation-quality-assurance></app-deviation-quality-assurance>
+            </ng-template>
+        </ngb-tab>
+        <!-- <ngb-tab id="tab-selectbyid5" title="CAPA Closure">
+            <ng-template ngbTabContent>
+                <app-deviation-capa></app-deviation-capa>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid6" title="Final Closure">
+            <ng-template ngbTabContent>
+                <app-deviation-final-closure></app-deviation-final-closure>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid7" title="Report">
+            <ng-template ngbTabContent>
+            </ng-template>
+        </ngb-tab> -->
+
+    </ngb-tabset>
+</div>

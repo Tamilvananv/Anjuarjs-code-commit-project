@@ -1,0 +1,90 @@
+ <div class="row">
+  <div class="col-md-12"  style="padding-top: 30px;"> 
+    <div class="card">
+      <ngb-tabset #t="ngbTabset" class="tabset1">
+        <ngb-tab id="tab-selectbyid1" title="Open Request">
+          <ng-template ngbTabContent>
+              <div class="col-md-12 text-right">
+                  <div class="custom-control " style="padding-bottom: 5px;">
+                      <button class="addbtn_style" ejs-button [routerLink]="['raiserequest']">
+                          <i class="fas fa-plus-circle"></i>
+                         Raise New Request
+                       </button>
+                  </div>
+              </div>
+              
+              <div class="table-responsive">
+                  <ejs-grid id="grid" #grid [dataSource]="ObjChangeControlList"
+                  [allowExcelExport]='true'
+                     [allowSorting]="true" (toolbarClick)="toolbarClick($event)" [toolbar]="toolbar"
+                      [allowPaging]="true"  [allowGrouping]="true"  [allowResizing]="true"  (commandClick)="commandClick($event)" 
+                      [groupSettings]="groupOptions">
+                      <e-columns>
+                        <e-column headerText="Action" textAlign="center" [commands]="commands" width="70" >
+                        </e-column>
+                          <e-column field="EqmsCcChangeControlNumber" headerText="Change Control No." textAlign="Center" width="150"></e-column>
+                          <!-- <e-column field="EqmsCcDocumentTitle" allowGrouping="false" headerText="Title" textAlign="Center" width="100">
+                          </e-column> -->
+                          <e-column field="EqmsCcRelatedTo" headerText="CC Related To" textAlign="Center" width="150"></e-column>
+                          <!-- <e-column field="LinkedAuditNumber" headerText="Linked Audit No." textAlign="Center" width="140"></e-column> -->
+                           <e-column field="UName" headerText="Initiated By" textAlign="Center" width="140"></e-column> 
+                          <e-column field="EqmsCcInitiatedDate" headerText="Initiated On" textAlign="Center" width="150"></e-column>  
+                          <e-column field="EqmsCcMediumForChange" headerText="Medium For Change" textAlign="Center" width="150"></e-column>
+                           <e-column field="EqmsCcMedium" headerText="Medium ID" textAlign="Center" width="100"></e-column> 
+                          <e-column field="DepartmentName" headerText="Department" textAlign="Center" width="100"></e-column>
+                          <e-column field="EqmsCcDocumentTitle" headerText="Document Title" textAlign="Center" width="140"></e-column>
+                          <e-column field="EqmsCcBriefDescription" headerText="Description" textAlign="Center" width="140"></e-column>
+                         
+                        
+                          <!-- <e-column headerText="Requisition" [columns]="requisitionColumns" textAlign="Center" width="5000">
+                          </e-column>
+                          <e-column headerText="Impact Assessment " [columns]="impactassessmentColumns" textAlign="Center " width="300">
+                          </e-column>
+                          <e-column headerText="QA Approval" [columns]="qaapprovalColumns" textAlign="Center " width="300">
+                          </e-column>
+                          <e-column headerText="Closure " [columns]="closureColumns" textAlign="Center " width="300">
+                            </e-column>
+                         -->
+                      </e-columns>
+                    
+                  </ejs-grid>
+              </div>
+          </ng-template>
+        </ngb-tab>
+        <!-- <ngb-tab id="tab-selectbyid2" title="Raise New Request">
+          <ng-template ngbTabContent>
+
+           <app-raise-new-request></app-raise-new-request>
+          </ng-template>
+        </ngb-tab> -->
+        <ngb-tab id="tab-selectbyid2" title="Summary">
+          <ng-template ngbTabContent>
+            <div class="table-responsive">
+              <ejs-grid id="grid" #grid [dataSource]=""
+              [allowExcelExport]='true'
+                 [allowSorting]="true" (toolbarClick)="toolbarClick($event)" [toolbar]="toolbar"
+                  [allowPaging]="true"  [allowGrouping]="true"  [allowResizing]="true"
+                  [groupSettings]="groupOptions" (commandClick)="commandClick($event)">
+                  <e-columns>
+                    <e-column headerText="Action" textAlign="center"  width="70" [commands]="commands">
+                    </e-column>
+                      <e-column field="ChangeControlNumber" headerText="Change Control No." textAlign="Center" width="150"></e-column>
+                      <e-column field="CCRelatedTo" headerText="CC Related To" textAlign="Center" width="150"></e-column>
+                      <e-column field="LinkedAuditNumber" headerText="Linked Audit No." textAlign="Center" width="140"></e-column>
+                      <e-column field="InitiatedOn" headerText="Initiated On" textAlign="Center" width="150"></e-column>
+                      <e-column field="MediumForChange" headerText="Medium For Change" textAlign="Center" width="150"></e-column>
+                      <e-column field="MediumId" headerText="Medium ID" textAlign="Center" width="100"></e-column>
+                      <e-column field="Department" headerText="Department" textAlign="Center" width="100"></e-column>
+                      <e-column field="DocTitle" headerText="Document Title" textAlign="Center" width="140"></e-column>
+                      <e-column field="InitiatedBy" headerText="Initiated By" textAlign="Center" width="140"></e-column>
+                      <e-column field="DateofClosure" headerText="Date of Closure" textAlign="Center" width="140"></e-column>
+                      <e-column field="Attachment" headerText="Attachment " textAlign="Center" width="140"></e-column>
+                  </e-columns>
+              </ejs-grid>
+          </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div> 

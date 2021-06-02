@@ -1,0 +1,190 @@
+<div class="col-md-12 text-right">
+        <div class="custom-control " style="padding-bottom: 5px;">
+                <button type="submit" class="btn_frmsubmit" ejs-button>
+                        Save
+                    </button>
+            <button type="submit" class="btn_frmsubmit" ejs-button>
+                Back
+            </button>
+            <button type="button" class="btn_frmsubmit" ejs-button>
+                Next 
+            </button>
+            <button type="button" class="btn_frmcancel" ejs-button >
+                Cancel
+            </button>
+        </div>
+    </div>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            <label>Detailed Investigation:</label>
+        </div>
+        <div class="col-md-2">
+            <ejs-checkbox label="Completed" [checked]="true"></ejs-checkbox>
+        </div>
+        <div class="col-md-8">
+                <ejs-textbox [multiline]='true' value= 'Mr. Dodsworth Dodsworth, System Analyst, Studio 103, The Business Center' ></ejs-textbox>
+        </div>
+
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            <label>Audit Trail Verified:</label>
+        </div>
+        <div class="col-md-2">
+            <ejs-checkbox label="Completed" [checked]="true"></ejs-checkbox>
+        </div>
+        <div class="col-md-8">
+                <ejs-textbox [multiline]='true' value= 'Mr. Dodsworth Dodsworth, System Analyst, Studio 103, The Business Center' ></ejs-textbox>
+        </div>
+
+    </div>
+</div>
+<!-- <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            <label>QA Designee</label>
+        </div>
+        <div class="col-md-2">
+            <ejs-dropdownlist id='emp' #sample [dataSource]='EmpName' [value]='value' [fields]='fields'
+                [placeholder]='waterMark' [popupHeight]='height'>
+            </ejs-dropdownlist>
+        </div>
+        <div class="col-md-2">
+            <ejs-dropdownlist id='Rev' #sample [dataSource]='Review' [value]='value' [fields]='fields1'
+                [placeholder]='waterMark' [popupHeight]='height'>
+            </ejs-dropdownlist>
+        </div>
+        <div class="col-md-6">
+            <input ype="text" name="Comment" class="form-control" placeholder="Multiline Comment" />
+        </div>
+        
+    </div>
+</div> -->
+<div class="col-md-12 frm_tabpanel">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Event Classification</label>
+                </div>
+                <div class="col-md-4">
+                    <ejs-dropdownlist id='Crit' #sample [dataSource]='Critical' [value]='value' [fields]='fields2'
+                        [placeholder]='waterMark' [popupHeight]='height'>
+                    </ejs-dropdownlist>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Deviation Stands Closed:</label>
+                </div>
+                <div class="col-md-4">
+                    <ejs-checkbox label="Yes" [checked]="true"></ejs-checkbox>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            <label>Quality Head</label>
+        </div>
+        <div class="col-md-2">
+            <label>Shruti Metkar</label>
+        </div>
+        <div class="col-md-2">
+            <ejs-dropdownlist id='Stat' #sample [dataSource]='Status' [value]='value' [fields]='fields3'
+                [placeholder]='waterMark' [popupHeight]='height'>
+            </ejs-dropdownlist>
+        </div>
+        <div class="col-md-6">
+            <input ype="text" name="Comment" class="form-control" placeholder="Multiline Comment" />
+        </div>
+       
+    </div>
+</div> -->
+<ejs-accordion>
+        <e-accordionitems>
+            <e-accordionitem expanded='true'>
+                <ng-template #header>
+                    <div > QA Designee-Employee Name</div>
+                </ng-template>
+                <ng-template #content>
+                    <ejs-grid width='100%' [dataSource]='data1' [editSettings]='editSettings' [toolbar]='toolbar'
+                        height='100px' [gridLines]="lines">
+                        <e-columns>
+                            <!-- <e-column field='EmpList' headerText='Employee List' editType='dropdownedit' [edit]='deptlist'
+                                width=50 textAlign='Center'></e-column> -->
+                            <e-column field='ChooseAction' headerText='Choose Action' editType='dropdownedit'
+                                [edit]='action' width=50 textAlign='Center'>
+                            </e-column>
+                            <e-column field='Comments' headerText='Comments' width=120 textAlign='Center'>
+                            </e-column>
+                        </e-columns>
+                    </ejs-grid>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-actions pull-right">
+                                    <div class="d-flex no-block align-items-center">
+                                        <div class="ml-auto">
+                                           
+                                            <button type="button" class="btn_frmsubmit" ejs-button>
+                                                Sign and Submit
+                                            </button>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </e-accordionitem>
+            <e-accordionitem expanded='true'>
+                <ng-template #header>
+                    <div >Quality Head-Employee Name</div>
+                </ng-template>
+                <ng-template #content>
+                    <ejs-grid width='100%' [dataSource]='data1' [editSettings]='editSettings' [toolbar]='toolbar'
+                        height='100px' [gridLines]="lines">
+                        <e-columns>
+                            <!-- <e-column field='EmpList' headerText='Employee List' editType='dropdownedit' [edit]='deptlist'
+                                width=50 textAlign='Center'></e-column> -->
+                            <e-column field='ChooseAction' headerText='Choose Action' editType='dropdownedit'
+                                [edit]='action' width=50 textAlign='Center'>
+                            </e-column>
+                            <e-column field='Comments' headerText='Comments' width=120 textAlign='Center'>
+                            </e-column>
+                        </e-columns>
+                    </ejs-grid>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-actions pull-right">
+                                    <div class="d-flex no-block align-items-center">
+                                        <div class="ml-auto">
+                                            
+                                            <button type="button" class="btn_frmsubmit" ejs-button>
+                                                Sign and Submit 
+                                            </button>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </e-accordionitem>
+        </e-accordionitems>
+    </ejs-accordion>

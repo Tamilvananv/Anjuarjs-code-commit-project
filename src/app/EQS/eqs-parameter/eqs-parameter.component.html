@@ -1,0 +1,316 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="no-block align-items-center">
+        <h4 class="card-title"></h4>
+        <div
+          class="ml-auto mb-2 buttons_padding"
+          *ngIf="PageAccessRight.HasWriteAccess"
+        >
+          <button
+            class="addbtn_style"
+            ejs-button
+            (click)="addparameter(addParameterModal)"
+          >
+            <i class="fas fa-plus-circle"></i>
+            <!-- <img src="assets/images/Add_Ico.ico"   />   -->
+            &nbsp;&nbsp;Add Parameter
+          </button>
+        </div>
+      </div>
+      <div *ngIf="!PageAccessRight.HasWriteAccess"><br /></div>
+
+      <div class="table-responsive">
+        <ejs-grid
+          #grid
+          id="Grid"
+          [dataSource]="ObjParameterList"
+          [allowSelection]="true"
+          (toolbarClick)="toolbarClick($event)"
+          allowFiltering="true"
+          allowTextWrap="true"
+          [textWrapSettings]="wrapSettings"
+          [toolbar]="toolbarOptions"
+          [allowExcelExport]="true"
+          [filterSettings]="filterOptions"
+          [gridLines]="lines"
+          [enableHover]="false"
+          [allowSorting]="true"
+          [allowPaging]="true"
+          [pageSettings]="pageSettings"
+          e-gridheader=""
+          height="363px"
+          (commandClick)="
+            EditParameter($event); addparameter(addParameterModal)
+          "
+          [showColumnMenu]="true"
+          [allowGrouping]="true"
+          [allowPdfExport]="true"
+          (created)="created($event)"  >
+          <e-columns>
+            <e-column
+              headerText="Action"
+              textAlign="center"
+              [commands]="commands"
+              width="70"
+            >
+              <ng-template #template let-data>
+                <div class="loc">
+                  <e-column
+                    headerText="Action"
+                    textAlign="center"
+                    width="5"
+                    [commands]="commands"
+                  >
+                  </e-column>
+                </div>
+              </ng-template>
+            </e-column>
+            <e-column
+              field="EquipmentId"
+              headerText="Equipment Id"
+              headerTextAlign="center"
+              textAlign="left"
+              width="60"
+            >
+            </e-column>
+            <e-column
+              field="EqsParameterName"
+              headerText="Parameter Name"
+              headerTextAlign="center"
+              textAlign="left"
+              width="80"
+            >
+            </e-column>
+            <e-column
+              field="EqsParameterTargetValue"
+              headerText="Target Value"
+              headerTextAlign="center"
+              textAlign="left"
+              width="80"
+            >
+            </e-column>
+            <e-column
+              field="EqsParameterUpperValue"
+              headerText="Upper Value"
+              headerTextAlign="center"
+              textAlign="left"
+              width="80"
+            >
+            </e-column>
+            <e-column
+              field="EqsParameterLowerValue"
+              headerText="Lower Value"
+              headerTextAlign="center"
+              textAlign="left"
+              width="80"
+            >
+            </e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #addParameterModal let-modal>
+  <div class="modal_header">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="modal-title" *ngIf="!IsParameterEdit">Add Parameter</h5>
+          <h5 class="modal-title" *ngIf="IsParameterEdit">Edit Parameter</h5>
+        </div>
+        <div class="col-md-6" class="Close_Popup">
+          <i class="fas fa-times" (click)="modal.dismiss('Cross click')"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="EqsParameterForm">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="EquipmentId" class="control-label col-form-label"
+                  >Equipment Id:</label
+                ><span class="text-danger">*</span>
+              </div>
+              <div
+                class="col-md-7"
+                print-error
+                [control]="EqsParameterForm.get('EqsEquipmentId')"
+              >
+                <ejs-dropdownlist
+                  id="EqsEquipmentId"
+                  [dataSource]="ObjEquipmentList"
+                  placeholder="Select Equipment"
+                  [fields]="fields"
+                  name="EqsEquipmentId"
+                  (change)="GetEquipmentType($event)"
+                  formControlName="EqsEquipmentId"
+                  [disableControl]="IsParameterEdit"
+                >
+                </ejs-dropdownlist>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="EquipmentType" class="control-label col-form-label"
+                  >Equipment Name:</label
+                >
+              </div>
+              <div class="col-md-7">
+               <label class="col-form-label">{{
+                  ObjEquipmentTypeName
+                }}</label> 
+
+               
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="ParameterName" class="control-label col-form-label"
+                  >Parameter Name:</label
+                ><span class="text-danger">*</span>
+              </div>
+              <div
+                class="col-md-7"
+                print-error
+                [control]="EqsParameterForm.get('EqsParameterName')"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="EqsParameterName"
+                  placeholder=""
+                  name="EqsParameterName"
+                  formControlName="EqsParameterName"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="Unit" class="control-label col-form-label"
+                  >Unit:</label
+                >
+                <span class="text-danger">*</span>
+              </div>
+              <div
+                class="col-md-7"
+                print-error
+                [control]="EqsParameterForm.get('Unit')"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Unit"
+                  placeholder=""
+                  name="Unit"
+                  formControlName="Unit"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="TargetValue" class="control-label col-form-label"
+                  >Target Value:</label
+                >
+              </div>
+              <div class="col-md-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="EqsParameterTargetValue"
+                  placeholder=""
+                  name="EqsParameterTargetValue"
+                  formControlName="EqsParameterTargetValue"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="UpperRange" class="control-label col-form-label"
+                  >Upper range :</label
+                >
+              </div>
+              <div class="col-md-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="UpperRange"
+                  placeholder=""
+                  name="EqsParameterUpperValue"
+                  formControlName="EqsParameterUpperValue"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-5">
+                <label for="LowerRange" class="control-label col-form-label"
+                  >Lower range :</label
+                >
+              </div>
+              <div class="col-md-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="LowerRange"
+                  placeholder=""
+                  name="EqsParameterLowerValue"
+                  formControlName="EqsParameterLowerValue"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="addmodal_style"
+      ejs-button
+      (click)="SaveParameter()"
+      *ngIf="!IsParameterEdit"
+    >
+      Add
+    </button>
+    <button
+      class="addmodal_style"
+      (click)="UpdateParameter()"
+      *ngIf="IsParameterEdit"
+      ejs-button
+    >
+      Update
+    </button>
+    <button
+      class="cancel_style"
+      (click)="modal.close('Close click')"
+      ejs-button
+    >
+      cancel
+    </button>
+  </div>
+</ng-template>

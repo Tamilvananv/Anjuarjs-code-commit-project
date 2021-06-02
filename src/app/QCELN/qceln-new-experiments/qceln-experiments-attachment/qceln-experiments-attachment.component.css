@@ -1,0 +1,14 @@
+.e-filemanager .e-layout {
+    height: 89% !important;
+}
+.e-grid .e-columnheader .e-headercell{
+    color: #484848 !important;
+    background-color: #08A1A1;
+    
+}
+.e-headercell{
+    min-width:50px;
+}
+.e-filemanager .e-large-icons .e-list-icon {
+    margin: 0!important;
+}

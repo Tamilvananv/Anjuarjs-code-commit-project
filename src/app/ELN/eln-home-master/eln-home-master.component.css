@@ -1,0 +1,62 @@
+.dashboardBox {
+    width: 25% !important;
+    padding:0 10px;
+}
+
+.card {
+    background-size: cover;
+    background: no-repeat;
+    color: black;
+    background-position: center;
+}
+
+.card_info {
+    text-align: center;
+    color: #FFF;
+}
+
+.card_info h4 {
+    opacity: 0.5;
+    height: 50px;
+    padding: 15px 0;
+}
+
+.cardheader {
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}
+
+.card_head {
+    font-size: 35px;
+    padding: 40px;
+    padding-top: -15%;
+    text-align: center;
+    margin: 75px 0px 0px 0px;
+    color: #FFF;
+    padding: 0px 15px;
+}
+
+.divider {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    z-index: 4;
+}
+
+.div-transparent:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    height: 2px;
+    /* background-color: white; */
+    background-image: linear-gradient(to right, transparent, rgb(235, 238, 243), transparent);
+}
+.horizontalDivider{
+    background-color: rgb(147 237 146);
+    height: 3px;
+}

@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card " style="padding-top: 28px;">
+            <!-- <div class="c_header">
+                <h4>List Of Equipment</h4>
+                                </div> -->
+            <div class="card-body">
+                <div class="d-flex no-block align-items-center">
+                    <!-- <h4 class="card-title">List of Equipments</h4> -->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <!-- <div class="col-md-3">
+                                <label for="EquipmentId" class="control-label col-form-label">Equipment Id:</label>
+                            </div> -->
+                            <div class="col-md-3">
+                                <!-- <ejs-combobox id="EqsEquipmentId" [dataSource]="ObjEquipmentList" [fields]='fields'
+                                    (change)="GetEquipmentReportById($event)" placeholder="Select"
+                                    [popupHeight]='height' [allowFiltering]='true' name="EqsEquipmentId" required>
+                                </ejs-combobox>
+ -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <label class="">Equipment Name: </label>
+            <button class="mr-2 dropdown_style" ejs-dropdownbutton [items]='items' content='Select'></button>
+            <hr> -->
+                <div class="table-responsive">
+                    <ejs-grid #grid id='Grid' [dataSource]='ObjEquipmentReportList' [allowPaging]='true'  [pageSettings]='pageSettings' [allowSelection]='true'
+                        allowFiltering='true' [filterSettings]='filterOptions' [toolbar]='toolbarOptions'  allowTextWrap='true'  [textWrapSettings]='wrapSettings'
+                        [allowExcelExport]='true' (toolbarClick)='toolbarClick($event)' [gridLines]="lines"
+                        [enableHover]='false' [allowSorting]='true' e-gridheader='' height='350px'  [showColumnMenu]="true" [allowGrouping]="true"
+                         (pdfHeaderQueryCellInfo)='pdfHeaderQueryCellInfo($event)' [allowPdfExport]="true"
+                         (created)="created($event)">
+                        <e-columns>
+                            <e-column field='EquipmentId' headerText='Equipment Id' headerTextAlign="center" textAlign="left" width=80>
+                            </e-column>
+                            <e-column field='EquipmentTypeName' headerText='Equipment Name'
+                            headerTextAlign='center' textAlign='left' width=100></e-column>
+                            <!--  <e-column field='LastCalibrationPerformedBy' headerText='Last Calibration Performed By'
+                                textAlign='center' format='yMd' width=300></e-column> -->
+                            <e-column field='LastCalibrationPerformedDate' headerText='Last Performed Calibration Date'
+                            headerTextAlign='center' textAlign='left' [format]='Dateformat' [filter]='filter' width=160></e-column>
+                            <!--  <e-column field='LastPerformedQualification' headerText='Last Performed Qualification'
+                                textAlign='center' format='yMd' width=300></e-column> -->
+                            <e-column field='LastQualificationPerformedDate'
+                                headerText='Last Performed Qualification Date' headerTextAlign='center' textAlign='left'  [format]='Dateformat'
+                            [filter]='filter'    width=160></e-column>
+                            <!-- <e-column field='LastPerformedMaintenance' headerText='Last Performed Maintenance'
+                                textAlign='center' format='yMd' width=300></e-column> -->
+                            <e-column field='LastMaintenancePerformedDate' headerText='Last Performed Maintenance Date'
+                            headerTextAlign='center' textAlign='left' [format]='Dateformat' [filter]='filter' width=160></e-column>
+
+                        </e-columns>
+                    </ejs-grid>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

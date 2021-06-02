@@ -1,0 +1,289 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" style="padding-top: 22px;">
+            <div class="c_header col-md-12">
+                <label class="m-0" style="font-size: 16px">{{tabHeader?.elnHeaderForm.get('Title').value}}</label>
+            </div>
+            <div class="col-md-12">
+                <label style="font-size: 16px" *ngIf="expVersionObj.VersionId>0">
+                    <span>User Experiment No. {{expVersionObj.ExperimentNo}}</span>,
+                    <span>Version - {{expVersionObj.VersionNo}}</span>,
+                    <span> By {{expVersionObj.CreatedBy}}</span>
+                    <small class="p-l-5" *ngIf="expVersionObj.PublishDate"> on
+                        {{expVersionObj.PublishDate|date:'dd-MMM-yyyy'}}</small>
+                </label>
+                <!-- <button
+                    *ngIf="expVersionObj.VersionId>0 && expVersionObj.IsDiscontinue==false && expVersionObj.IsAllowDiscontinue==true"
+                    style="margin-top: -5px" type="submit" class="btn_frmcommit float-right" ejs-button
+                    (click)="openPopup(confirmCommitModel)">Discontinue</button> -->
+                <button *ngIf="expVersionObj.VersionId>0 && expVersionObj.IsAllowDiscontinue==true"
+                    style="margin-top: -5px" type="submit" class="btn_frmcommit float-right" ejs-button
+                    (click)="CreateNewVersion()">New Version</button>
+                <i class="fas fa-star mr-2 float-right" style="-webkit-text-stroke: 1px rgb(151, 142, 142);"
+                    title="{{expVersionObj.IsFavourite?'Favourite':'Not Favourite'}}"
+                    [ngStyle]="{'color':expVersionObj.IsFavourite? 'yellow':'white'}"
+                    *ngIf="expVersionObj.VersionId>0" (click)="SaveFavouriteVersion()"></i>
+                <i class="fas fa-print mr-2 float-right" (click)="PrintReport(printModel)"
+                    *ngIf="expVersionObj.VersionId>0" title="View PDF"></i>
+                <label class="mr-2 float-right" style="color: #80a1a1;">Status :
+                    {{expVersionObj.VersionId>0?expVersionObj.StatusName:'New'}}</label>
+            </div>
+            <div class="panel" style="padding-top: 5px;">
+                <ngb-tabset #tabset="ngbTabset" class="tabset1" (tabChange)="tabChanged($event)" [destroyOnHide]="false"
+                    tab>
+
+                    <ngb-tab id="tabHeader">
+                        <ng-template ngbTabTitle><span title="Header">Header</span></ng-template>
+                        <ng-template ngbTabContent>
+                            <app-eln-header #tabHeaderComponent (callback)="ManageTabChange($event)"
+                                (ApproverChanged)="onApproverChanged($event)" (goToTab)="moveToTab($event)">
+                            </app-eln-header>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab id="tabICEQ">
+                        <ng-template ngbTabTitle>
+                            <span title="EQ/IC/IM">EQ/IC/IM</span>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <app-eln-iceqim-details #tabICEQComponent (goToTab)="moveToTab($event)">
+                            </app-eln-iceqim-details>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab id="tabSOP">
+                        <ng-template ngbTabTitle>
+                            <span title="SOP">SOP</span>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <app-eln-sop #tabSOPComponent (goToTab)="moveToTab($event)"></app-eln-sop>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab id="tabPrecautions">
+                        <ng-template ngbTabTitle>
+                            <span title="Precautions">Precautions</span>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <app-eln-precautions #tabPrecautionsComponent (callback)="ManageTabChange($event)"
+                                (goToTab)="moveToTab($event)"></app-eln-precautions>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab id="tabProcedure">
+                        <ng-template ngbTabTitle>
+                            <span title="Procedure">Procedure</span>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <div class="col-md-12 text-right">
+                                <div class="custom-control custom-checkbox">
+                                    <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabPrecautions')"
+                                        *ngIf="tabProcedureComponent.tabset!=undefined && tabProcedureComponent.tabset.activeId=='Procedure'"
+                                        ejs-button>
+                                        <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+                                        Back
+                                    </button>
+                                    <button type="button" class="btn_frmsubmit"
+                                        (click)="tabProcedureComponent.tabset.select('Procedure')"
+                                        *ngIf="tabProcedureComponent.tabset!=undefined && tabProcedureComponent.tabset.activeId=='Comments'"
+                                        ejs-button>
+                                        <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+                                        Back
+                                    </button>
+                                    <button type="submit" class="btn_frmsubmit"
+                                        *ngIf="tabProcedureComponent.processSummaryForm!=undefined &&tabProcedureComponent.processSummaryForm.dirty"
+                                        (click)="tabProcedureComponent.SaveProcessResult()" ejs-button>
+                                        <!-- <i class="fa fa-check"></i> &nbsp; -->
+                                        Save
+                                    </button>
+                                    <button type="button" class="btn_frmsubmit"
+                                        (click)="tabProcedureComponent.tabset.select('Comments')"
+                                        *ngIf="tabProcedureComponent.tabset!=undefined && tabProcedureComponent.tabset.activeId=='Procedure'"
+                                        ejs-button>
+                                        Next
+                                        <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+                                    </button>
+                                    <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabAttachment')"
+                                        *ngIf="tabProcedureComponent.tabset!=undefined && tabProcedureComponent.tabset.activeId=='Comments'"
+                                        ejs-button>
+                                        Next
+                                        <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+                                    </button>
+                                    <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/elnhome'">
+                                        <!-- <i class="fas fa-times"></i> &nbsp; -->
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <app-eln-experiments-process-result #tabProcedureComponent [list]='ProcedureComment'
+                                    (callback)="ManageTabChange($event)"></app-eln-experiments-process-result>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab id="tabAttachment">
+                        <ng-template ngbTabTitle>
+                            <span title="Attachment">Attachment</span>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <app-eln-experiments-attachment #tabAttachmentComponent (goToTab)="moveToTab($event)">
+                            </app-eln-experiments-attachment>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab id="tabResultRemark">
+                        <ng-template ngbTabTitle>
+                            <span title="Results & Remarks">Results & Remarks</span>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <div class="col-md-12 text-right">
+                                <div class="custom-control custom-checkbox">
+                                    <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabAttachment')"
+                                        *ngIf="tabResultRemarkComponent.tabset!=undefined && tabResultRemarkComponent.tabset.activeId=='Result'"
+                                        ejs-button>
+                                        <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+                                        Back
+                                    </button>
+                                    <button type="button" class="btn_frmsubmit"
+                                        (click)="tabResultRemarkComponent.tabset.select('Result')"
+                                        *ngIf="tabResultRemarkComponent.tabset!=undefined && tabResultRemarkComponent.tabset.activeId=='Remarks'"
+                                        ejs-button>
+                                        <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+                                        Back
+                                    </button>
+                                    <button type="submit" class="btn_frmsubmit"
+                                        *ngIf="tabResultRemarkComponent.processSummaryForm!=undefined && tabResultRemarkComponent.processSummaryForm.dirty"
+                                        (click)="tabResultRemarkComponent.SaveProcessResult()" ejs-button>
+                                        <!-- <i class="fa fa-check"></i> &nbsp; -->
+                                        Save
+                                    </button>
+                                    <button type="button" class="btn_frmsubmit"
+                                        *ngIf="tabResultRemarkComponent.tabset!=undefined && tabResultRemarkComponent.tabset.activeId=='Result'"
+                                        (click)="tabResultRemarkComponent.tabset.select('Remarks')" ejs-button>
+                                        Next
+                                        <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+                                    </button>
+                                    <button type="button" class="btn_frmsubmit"
+                                        *ngIf="tabResultRemarkComponent.tabset!=undefined && tabResultRemarkComponent.tabset.activeId=='Remarks'"
+                                        (click)="moveToTab('tabConclusionSummary')" ejs-button>
+                                        Next
+                                        <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+                                    </button>
+                                    <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/elnhome'">
+                                        <!-- <i class="fas fa-times"></i> &nbsp; -->
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                            <app-eln-experiments-process-result #tabResultRemarkComponent [list]='ResultRemarks'
+                                (callback)="ManageTabChange($event)"></app-eln-experiments-process-result>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab id="tabConclusionSummary">
+                        <ng-template ngbTabTitle>
+                            <span title="Conclusion & Summary">Conclusion & Summary</span>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <div class="col-md-12 text-right">
+                                <div class="custom-control custom-checkbox">
+                                    <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabResultRemark')"
+                                        *ngIf="tabConclusionSummaryComponent.tabset!=undefined && tabConclusionSummaryComponent.tabset.activeId=='Conclusion'"
+                                        ejs-button>
+                                        <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+                                        Back
+                                    </button>
+                                    <button type="button" class="btn_frmsubmit"
+                                        (click)="tabConclusionSummaryComponent.tabset.select('Conclusion')"
+                                        *ngIf="tabConclusionSummaryComponent.tabset!=undefined && tabConclusionSummaryComponent.tabset.activeId=='Summary'"
+                                        ejs-button>
+                                        <!-- <i class="ti-arrow-left"></i>&nbsp; -->
+                                        Back
+                                    </button>
+                                    <button type="submit" class="btn_frmsubmit"
+                                        *ngIf="tabConclusionSummaryComponent.processSummaryForm!=undefined && tabConclusionSummaryComponent.processSummaryForm.dirty"
+                                        (click)="tabConclusionSummaryComponent.SaveProcessResult()" ejs-button>
+                                        <!-- <i class="fa fa-check"></i> &nbsp; -->
+                                        Save
+                                    </button>
+                                    <button type="button" class="btn_frmsubmit"
+                                        (click)="tabConclusionSummaryComponent.tabset.select('Summary')"
+                                        *ngIf="tabConclusionSummaryComponent.tabset!=undefined && tabConclusionSummaryComponent.tabset.activeId=='Conclusion'"
+                                        ejs-button>
+                                        Next
+                                        <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+                                    </button>
+                                    <button type="button" class="btn_frmsubmit" (click)="moveToTab('tabSigning')"
+                                        *ngIf="tabConclusionSummaryComponent.tabset!=undefined && tabConclusionSummaryComponent.tabset.activeId=='Summary'"
+                                        ejs-button>
+                                        Next
+                                        <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+                                    </button>
+                                    <button type="button" class="btn_frmcancel" ejs-button [routerLink]="'/elnhome'">
+                                        <!-- <i class="fas fa-times"></i> &nbsp; -->
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                            <app-eln-experiments-process-result #tabConclusionSummaryComponent
+                                [list]='ConclusionSummary' (callback)="ManageTabChange($event)">
+                            </app-eln-experiments-process-result>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab id="tabSigning">
+                        <ng-template ngbTabTitle>
+                            <span title="Sign & Submit">Sign & Submit</span>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <app-eln-sign-submits #tabSigningComponent (callback)="ManageTabChange($event)"
+                                (goToTab)="moveToTab($event)"></app-eln-sign-submits>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12 confirmationDialog">
+    <ng-template #confirmCommitModel let-modal>
+        <div class="modal_header">
+            <h5 class="modal-title">Please confirm..</h5>
+            <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Are you sure to discontinue this version?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn_frmcommit float-right" ejs-button
+                (click)="modal.close(false)">&nbsp;Discontinue Only</button>
+            <button type="button" class="btn_frmcommit float-right" ejs-button
+                (click)="modal.close(true)">&nbsp;Discontinue and Create New Version</button>
+            <button type="button" class="btn_frmcancel float-right" ejs-button
+                (click)="modal.close()">&nbsp;Back</button>
+        </div>
+    </ng-template>
+</div>
+<div class="col-lg-12 confirmationDialog">
+    <ng-template #printModel let-modal>
+        <div class="modal_header">
+            <h5 class="modal-title">Preview PDF</h5>
+            <button type="button" class="close" aria-label="close" (click)="modal.dismiss()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+            <app-elnpdf [pdfData]="pdfData"></app-elnpdf>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn_frmsubmit float-right" ejs-button
+                (click)="PrintPDF(printModel)">&nbsp;Export</button>
+            <button type="button" class="btn_frmcancel float-right" ejs-button
+                (click)="modal.close()">&nbsp;Back</button>
+        </div>
+    </ng-template>
+</div>
